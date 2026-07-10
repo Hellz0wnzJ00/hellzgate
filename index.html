@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HellzGate C5 — 10-Node Passive Wireless Survey Array</title>
+<meta name="description" content="HellzGate C5 is a custom multi-node wireless survey platform built for wardriving and RF research. One master, up to nine ESP32-C5 scanner nodes. Local. Offline. No cloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080809; --bg2:#0f0f11; --card:#121214; --line:#1e1e22;
+    --red:#ff2233; --red-dim:#c81826; --red-glow:rgba(255,34,51,.35);
+    --white:#f4f4f5; --gray:#a1a1aa; --dim:#6b6b73; --green:#39d353;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.head{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .red{color:var(--red)}
+  section{padding:96px 0;position:relative}
+  .eyebrow{font-family:'Oswald';text-transform:uppercase;letter-spacing:.25em;color:var(--red);font-size:.82rem;font-weight:600;margin-bottom:14px}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(8,8,9,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:'Anton';font-size:1.5rem;letter-spacing:.03em;display:flex;align-items:center;gap:9px}
+  .logo .c5{color:var(--red)}
+  .logo .wv{color:var(--red);font-size:1.1rem;transform:translateY(-2px)}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-family:'Oswald';text-transform:uppercase;font-size:.9rem;letter-spacing:.08em;color:var(--gray);transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .btn{display:inline-block;font-family:'Oswald';text-transform:uppercase;letter-spacing:.09em;font-weight:600;font-size:.92rem;padding:12px 26px;border-radius:4px;cursor:pointer;transition:.2s;border:1px solid transparent}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 0 0 var(--red-glow)}
+  .btn-red:hover{background:var(--red-dim);box-shadow:0 6px 26px var(--red-glow);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--white)}
+  .btn-ghost:hover{border-color:var(--red);color:var(--red)}
+  .nav-cta{padding:9px 20px}
+  .burger{display:none;background:none;border:0;color:var(--white);font-size:1.6rem;cursor:pointer}
+
+  /* HERO */
+  .hero{padding:120px 0 100px;text-align:center;position:relative;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 500px at 50% -8%, rgba(255,34,51,.13), transparent 62%),var(--bg)}
+  .hero h1{font-family:'Anton';font-size:clamp(3rem,11vw,7.4rem);letter-spacing:.01em}
+  .hero h1 .c5{color:var(--red);text-shadow:0 0 34px var(--red-glow)}
+  .hero .tag{font-family:'Oswald';text-transform:uppercase;letter-spacing:.32em;color:var(--gray);font-size:clamp(.72rem,2.4vw,1.05rem);margin-top:6px}
+  .hero p.lead{max-width:640px;margin:26px auto 0;color:var(--gray);font-size:1.08rem}
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .skull{color:var(--red);font-size:1.4rem;margin:0 6px}
+  .fangs{margin-top:40px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.18em;color:var(--dim);font-size:.9rem}
+
+  /* WHAT */
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  h2{font-size:clamp(1.8rem,4.5vw,2.9rem)}
+  .lead-p{color:var(--gray);font-size:1.06rem;margin-top:18px}
+  .spec-list{list-style:none;margin-top:26px;display:grid;gap:12px}
+  .spec-list li{display:flex;gap:12px;align-items:flex-start;color:var(--white)}
+  .spec-list li::before{content:"";width:8px;height:8px;background:var(--red);margin-top:9px;flex:none;transform:rotate(45deg)}
+  .panel{background:linear-gradient(160deg,var(--card),#0c0c0e);border:1px solid var(--line);border-radius:12px;padding:34px;position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0,rgba(255,34,51,.1),transparent 60%)}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative}
+  .stat b{font-family:'Anton';display:block;font-size:2.4rem;color:var(--red);line-height:1}
+  .stat span{font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-size:.82rem}
+
+  /* FEATURES STRIP */
+  .features{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .feat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center}
+  .feat{padding:22px 12px}
+  .feat .ic{width:46px;height:46px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--red)}
+  .feat h4{font-family:'Oswald';text-transform:uppercase;letter-spacing:.06em;font-size:1rem}
+  .feat p{color:var(--dim);font-size:.85rem;margin-top:4px}
+
+  /* KITS */
+  .kits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;align-items:stretch}
+  .kit{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 22px;display:flex;flex-direction:column;position:relative;transition:.25s}
+  .kit:hover{transform:translateY(-4px);border-color:#33333a}
+  .kit.feature{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 10px 40px var(--red-glow)}
+  .kit .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .kit .kname{font-family:'Oswald';text-transform:uppercase;font-size:1.28rem;font-weight:700}
+  .kit .ktier{font-family:'Oswald';text-transform:uppercase;letter-spacing:.05em;color:var(--red);font-size:.72rem;font-weight:600;margin-top:2px}
+  .kit .price{font-family:'Anton';font-size:3rem;margin:16px 0 6px}
+  .kit .price small{font-size:1.1rem;color:var(--dim);vertical-align:super}
+  .kit .soon{font-family:'Oswald';text-transform:uppercase;letter-spacing:.14em;font-size:1.05rem;font-weight:600;color:var(--red);margin:18px 0 8px;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .kit ul{list-style:none;margin:16px 0 22px;display:grid;gap:9px;flex:1}
+  .kit ul li{color:var(--gray);font-size:.88rem;padding-left:20px;position:relative}
+  .kit ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+  .kit .btn{width:100%;text-align:center}
+
+  /* STORY */
+  .story{background:radial-gradient(900px 400px at 100% 0,rgba(255,34,51,.08),transparent 60%),var(--bg)}
+  .story .lead-p{max-width:760px}
+  .credit{margin-top:24px;color:var(--dim);font-size:.92rem;border-left:2px solid var(--red);padding-left:16px}
+
+  /* CTA */
+  .cta{background:var(--bg2);border-top:1px solid var(--line);text-align:center}
+  .cta h2{font-size:clamp(2rem,6vw,3.4rem)}
+  .cta p{color:var(--gray);margin-top:14px;max-width:560px;margin-inline:auto}
+  .cta .btn{margin-top:30px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:48px 0 40px;text-align:center}
+  .foot-logo{font-family:'Anton';font-size:1.6rem;letter-spacing:.03em}
+  .foot-logo .c5{color:var(--red)}
+  .disclaimer{color:var(--dim);font-size:.82rem;max-width:560px;margin:18px auto 0}
+  .foot-meta{color:#4a4a52;font-size:.78rem;margin-top:22px;font-family:'Oswald';letter-spacing:.06em;text-transform:uppercase}
+  .socials{display:flex;gap:14px;justify-content:center;margin-top:22px}
+  .socials a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--gray);transition:.2s}
+  .socials a:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px var(--red-glow)}
+
+  @media(max-width:900px){
+    .two{grid-template-columns:1fr;gap:36px}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .kits-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    .burger{display:block}
+    section{padding:72px 0}
+  }
+  @media(max-width:560px){
+    .kits-grid{grid-template-columns:1fr}
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .stat-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">HELLZGATE <span class="c5">C5</span><span class="wv">))</span></a>
+    <div class="nav-links">
+      <a href="#what">Platform</a>
+      <a href="#features">Specs</a>
+      <a href="#kits">Kits</a>
+      <a href="#story">Story</a>
+      <a href="#notify" class="btn btn-red nav-cta">Get Notified</a>
+    </div>
+    <button class="burger" onclick="document.querySelector('.nav-links').style.display='flex';this.style.display='none'">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">10-Node Passive Wireless Survey Array</div>
+    <h1>HELLZGATE <span class="c5">C5</span></h1>
+    <div class="tag">One Master · Up to Nine Nodes · Wi-Fi + BLE</div>
+    <p class="lead">A custom multi-node wireless survey platform built for wardriving and RF research. Local logging. GPS ready. No subscriptions. No cloud. Just raw data in your hands.</p>
+    <div class="cta-row">
+      <a href="#kits" class="btn btn-red">See the Kits</a>
+      <a href="#notify" class="btn btn-ghost">Get Notified</a>
+    </div>
+    <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
+  </div>
+</header>
+
+<section id="what">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow">What it is</div>
+      <h2>A fully local, offline survey <span class="red">array</span>.</h2>
+      <p class="lead-p">HellzGate C5 is a passive, multi-node wireless survey platform. One master coordinates up to nine ESP32-C5 scanner nodes that listen across Wi-Fi and Bluetooth, aggregate to the master, geo-tag, and log — all on your own local network.</p>
+      <ul class="spec-list">
+        <li>Passive Wi-Fi (2.4 / 5 GHz) and BLE scanning</li>
+        <li>GPS-tagged, timestamped records exported in WiGLE-ready format</li>
+        <li>Local dashboard + companion app — no cloud, no servers, no account</li>
+        <li>Dedicated wired I²C backplane keeps every radio free for the capture</li>
+        <li>Passive and listen-only, start to finish</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="stat-grid">
+        <div class="stat"><b>10</b><span>Nodes max<br>(1 master + 9)</span></div>
+        <div class="stat"><b>2</b><span>Bands<br>2.4 / 5 GHz</span></div>
+        <div class="stat"><b>USB-C</b><span>Single-port<br>power</span></div>
+        <div class="stat"><b>0</b><span>Cloud<br>dependencies</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Built In</div>
+    <h2 style="text-align:center">Everything on board.</h2>
+    <div class="feat-grid" style="margin-top:44px">
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div>
+        <h4>USB-C Power</h4><p>Single-port. No batteries.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+        <h4>Dual-Band Wi-Fi</h4><p>2.4 &amp; 5 GHz.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></div>
+        <h4>BLE</h4><p>Bluetooth LE scanning.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h4>GPS Ready</h4><p>Per-record geo-tagging.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4M12 12l-5.2 5M12 12l5.2 5"/></svg></div>
+        <h4>Up to 10 Nodes</h4><p>1 master, 9 scanners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kits">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Our Kits</div>
+    <h2 style="text-align:center">Build it your way.</h2>
+    <div class="kits-grid">
+
+      <div class="kit">
+        <div class="kname">Core</div>
+        <div class="ktier">Board-Only Builder</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× HellzGate C5 PCB</li>
+          <li>Multi-node + I²C backplane design</li>
+          <li>Power distribution layout</li>
+          <li>For makers who build their way</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+      <div class="kit">
+        <div class="kname">Ignition</div>
+        <div class="ktier">First-Spark Starter</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× HellzGate C5 PCB</li>
+          <li>2× Seeed XIAO ESP32-C5</li>
+          <li>2× antenna pigtails</li>
+          <li>Get your first nodes online</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+      <div class="kit feature">
+        <div class="badge">Recommended</div>
+        <div class="kname">Full Gate</div>
+        <div class="ktier">Flagship Kit</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× PCB + 10× XIAO ESP32-C5</li>
+          <li>1× GPS module</li>
+          <li>11× antenna pigtails</li>
+          <li>Cooling fan + required hardware</li>
+        </ul>
+        <a href="#notify" class="btn btn-red">Notify Me</a>
+      </div>
+
+      <div class="kit">
+        <div class="kname">Built &amp; Tested</div>
+        <div class="ktier">Assembled Tier</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>Everything in Full Gate</li>
+          <li>Assembly labor</li>
+          <li>Hardware inspection</li>
+          <li>Power-on / node check</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--dim);font-size:.85rem;margin-top:26px">All kits powered via a single USB-C port. Antennas &amp; enclosure not included. See kit details for exact contents.</p>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="eyebrow">Going Independent</div>
+    <h2>Our board. Our firmware. <span class="red">Our direction.</span></h2>
+    <p class="lead-p">HellzGate is moving to clean-room firmware written from scratch for our own custom hardware — plus a dedicated companion app, both built from the ground up. No more forks. No more someone else's roadmap. Built in phases, with more landing as we hit milestones.</p>
+    <p class="credit">HellzGate started on Piglet, created by Hamspiced. Huge thanks to Ham for the foundation, the inspiration, and the support along the way. From here forward, HellzGate stands on its own.</p>
+  </div>
+</section>
+
+<section class="cta" id="notify">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">First Look</div>
+    <h2>The gate is becoming real.</h2>
+    <p>Units and builds will follow as the project moves forward. Drop a line to get on the list for the first drop, build updates, and availability.</p>
+    <a href="mailto:hello@hellzgate.com?subject=HellzGate%20C5%20—%20Notify%20Me" class="btn btn-red">Get on the List</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">HELLZGATE <span class="c5">C5</span></div>
+    <div class="socials">
+      <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a href="https://discord.com/users/370298706991251457" target="_blank" rel="noopener" aria-label="Discord" title="Discord">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.9a.07.07 0 0 0-.08.03c-.2.38-.44.87-.6 1.25a18.3 18.3 0 0 0-5.46 0c-.16-.39-.4-.87-.61-1.25a.08.08 0 0 0-.08-.03 19.7 19.7 0 0 0-4.9 1.47.07.07 0 0 0-.03.03C.53 9.09-.32 13.68.1 18.22a.08.08 0 0 0 .03.05 19.9 19.9 0 0 0 5.99 3 .08.08 0 0 0 .08-.02c.46-.63.87-1.29 1.23-1.99a.08.08 0 0 0-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.92 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08 0l.37.3a.08.08 0 0 1-.01.13c-.6.34-1.22.64-1.87.89a.08.08 0 0 0-.04.11c.36.7.78 1.36 1.23 1.99a.08.08 0 0 0 .08.02 19.8 19.8 0 0 0 6-3 .08.08 0 0 0 .03-.05c.5-5.25-.84-9.8-3.55-13.82a.06.06 0 0 0-.03-.03ZM8.02 15.45c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+      </a>
+    </div>
+    <p class="disclaimer">All kits are for educational and research purposes only. Not for use in any illegal activities. Passive, listen-only. You are responsible for lawful operation and compliance with applicable privacy and data-protection laws.</p>
+    <div class="foot-meta">© 2026 HellzGate · The gate is getting fangs ☠</div>
+  </div>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HellzGate C5 — 10-Node Passive Wireless Survey Array</title>
+<meta name="description" content="HellzGate C5 is a custom multi-node wireless survey platform built for wardriving and RF research. One master, up to nine ESP32-C5 scanner nodes. Local. Offline. No cloud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080809; --bg2:#0f0f11; --card:#121214; --line:#1e1e22;
+    --red:#ff2233; --red-dim:#c81826; --red-glow:rgba(255,34,51,.35);
+    --white:#f4f4f5; --gray:#a1a1aa; --dim:#6b6b73; --green:#39d353;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.head{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .red{color:var(--red)}
+  section{padding:96px 0;position:relative}
+  .eyebrow{font-family:'Oswald';text-transform:uppercase;letter-spacing:.25em;color:var(--red);font-size:.82rem;font-weight:600;margin-bottom:14px}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(8,8,9,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:'Anton';font-size:1.5rem;letter-spacing:.03em;display:flex;align-items:center;gap:9px}
+  .logo .c5{color:var(--red)}
+  .logo .wv{color:var(--red);font-size:1.1rem;transform:translateY(-2px)}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-family:'Oswald';text-transform:uppercase;font-size:.9rem;letter-spacing:.08em;color:var(--gray);transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .btn{display:inline-block;font-family:'Oswald';text-transform:uppercase;letter-spacing:.09em;font-weight:600;font-size:.92rem;padding:12px 26px;border-radius:4px;cursor:pointer;transition:.2s;border:1px solid transparent}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 0 0 var(--red-glow)}
+  .btn-red:hover{background:var(--red-dim);box-shadow:0 6px 26px var(--red-glow);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--white)}
+  .btn-ghost:hover{border-color:var(--red);color:var(--red)}
+  .nav-cta{padding:9px 20px}
+  .burger{display:none;background:none;border:0;color:var(--white);font-size:1.6rem;cursor:pointer}
+
+  /* HERO */
+  .hero{padding:120px 0 100px;text-align:center;position:relative;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 500px at 50% -8%, rgba(255,34,51,.13), transparent 62%),var(--bg)}
+  .hero h1{font-family:'Anton';font-size:clamp(3rem,11vw,7.4rem);letter-spacing:.01em}
+  .hero h1 .c5{color:var(--red);text-shadow:0 0 34px var(--red-glow)}
+  .hero .tag{font-family:'Oswald';text-transform:uppercase;letter-spacing:.32em;color:var(--gray);font-size:clamp(.72rem,2.4vw,1.05rem);margin-top:6px}
+  .hero p.lead{max-width:640px;margin:26px auto 0;color:var(--gray);font-size:1.08rem}
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .skull{color:var(--red);font-size:1.4rem;margin:0 6px}
+  .fangs{margin-top:40px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.18em;color:var(--dim);font-size:.9rem}
+
+  /* WHAT */
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  h2{font-size:clamp(1.8rem,4.5vw,2.9rem)}
+  .lead-p{color:var(--gray);font-size:1.06rem;margin-top:18px}
+  .spec-list{list-style:none;margin-top:26px;display:grid;gap:12px}
+  .spec-list li{display:flex;gap:12px;align-items:flex-start;color:var(--white)}
+  .spec-list li::before{content:"";width:8px;height:8px;background:var(--red);margin-top:9px;flex:none;transform:rotate(45deg)}
+  .panel{background:linear-gradient(160deg,var(--card),#0c0c0e);border:1px solid var(--line);border-radius:12px;padding:34px;position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0,rgba(255,34,51,.1),transparent 60%)}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative}
+  .stat b{font-family:'Anton';display:block;font-size:2.4rem;color:var(--red);line-height:1}
+  .stat span{font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-size:.82rem}
+
+  /* FEATURES STRIP */
+  .features{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .feat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center}
+  .feat{padding:22px 12px}
+  .feat .ic{width:46px;height:46px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--red)}
+  .feat h4{font-family:'Oswald';text-transform:uppercase;letter-spacing:.06em;font-size:1rem}
+  .feat p{color:var(--dim);font-size:.85rem;margin-top:4px}
+
+  /* KITS */
+  .kits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;align-items:stretch}
+  .kit{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 22px;display:flex;flex-direction:column;position:relative;transition:.25s}
+  .kit:hover{transform:translateY(-4px);border-color:#33333a}
+  .kit.feature{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 10px 40px var(--red-glow)}
+  .kit .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .kit .kname{font-family:'Oswald';text-transform:uppercase;font-size:1.28rem;font-weight:700}
+  .kit .ktier{font-family:'Oswald';text-transform:uppercase;letter-spacing:.05em;color:var(--red);font-size:.72rem;font-weight:600;margin-top:2px}
+  .kit .price{font-family:'Anton';font-size:3rem;margin:16px 0 6px}
+  .kit .price small{font-size:1.1rem;color:var(--dim);vertical-align:super}
+  .kit .soon{font-family:'Oswald';text-transform:uppercase;letter-spacing:.14em;font-size:1.05rem;font-weight:600;color:var(--red);margin:18px 0 8px;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .kit ul{list-style:none;margin:16px 0 22px;display:grid;gap:9px;flex:1}
+  .kit ul li{color:var(--gray);font-size:.88rem;padding-left:20px;position:relative}
+  .kit ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+  .kit .btn{width:100%;text-align:center}
+
+  /* STORY */
+  .story{background:radial-gradient(900px 400px at 100% 0,rgba(255,34,51,.08),transparent 60%),var(--bg)}
+  .story .lead-p{max-width:760px}
+  .credit{margin-top:24px;color:var(--dim);font-size:.92rem;border-left:2px solid var(--red);padding-left:16px}
+
+  /* CTA */
+  .cta{background:var(--bg2);border-top:1px solid var(--line);text-align:center}
+  .cta h2{font-size:clamp(2rem,6vw,3.4rem)}
+  .cta p{color:var(--gray);margin-top:14px;max-width:560px;margin-inline:auto}
+  .cta .btn{margin-top:30px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:48px 0 40px;text-align:center}
+  .foot-logo{font-family:'Anton';font-size:1.6rem;letter-spacing:.03em}
+  .foot-logo .c5{color:var(--red)}
+  .disclaimer{color:var(--dim);font-size:.82rem;max-width:560px;margin:18px auto 0}
+  .foot-meta{color:#4a4a52;font-size:.78rem;margin-top:22px;font-family:'Oswald';letter-spacing:.06em;text-transform:uppercase}
+  .socials{display:flex;gap:14px;justify-content:center;margin-top:22px}
+  .socials a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--gray);transition:.2s}
+  .socials a:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px var(--red-glow)}
+
+  @media(max-width:900px){
+    .two{grid-template-columns:1fr;gap:36px}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .kits-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    .burger{display:block}
+    section{padding:72px 0}
+  }
+  @media(max-width:560px){
+    .kits-grid{grid-template-columns:1fr}
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .stat-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">HELLZGATE <span class="c5">C5</span><span class="wv">))</span></a>
+    <div class="nav-links">
+      <a href="#what">Platform</a>
+      <a href="#features">Specs</a>
+      <a href="#kits">Kits</a>
+      <a href="#story">Story</a>
+      <a href="#notify" class="btn btn-red nav-cta">Get Notified</a>
+    </div>
+    <button class="burger" onclick="document.querySelector('.nav-links').style.display='flex';this.style.display='none'">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">10-Node Passive Wireless Survey Array</div>
+    <h1>HELLZGATE <span class="c5">C5</span></h1>
+    <div class="tag">One Master · Up to Nine Nodes · Wi-Fi + BLE</div>
+    <p class="lead">A custom multi-node wireless survey platform built for wardriving and RF research. Local logging. GPS ready. No subscriptions. No cloud. Just raw data in your hands.</p>
+    <div class="cta-row">
+      <a href="#kits" class="btn btn-red">See the Kits</a>
+      <a href="#notify" class="btn btn-ghost">Get Notified</a>
+    </div>
+    <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
+  </div>
+</header>
+
+<section id="what">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow">What it is</div>
+      <h2>A fully local, offline survey <span class="red">array</span>.</h2>
+      <p class="lead-p">HellzGate C5 is a passive, multi-node wireless survey platform. One master coordinates up to nine ESP32-C5 scanner nodes that listen across Wi-Fi and Bluetooth, aggregate to the master, geo-tag, and log — all on your own local network.</p>
+      <ul class="spec-list">
+        <li>Passive Wi-Fi (2.4 / 5 GHz) and BLE scanning</li>
+        <li>GPS-tagged, timestamped records exported in WiGLE-ready format</li>
+        <li>Local dashboard + companion app — no cloud, no servers, no account</li>
+        <li>Dedicated wired I²C backplane keeps every radio free for the capture</li>
+        <li>Passive and listen-only, start to finish</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="stat-grid">
+        <div class="stat"><b>10</b><span>Nodes max<br>(1 master + 9)</span></div>
+        <div class="stat"><b>2</b><span>Bands<br>2.4 / 5 GHz</span></div>
+        <div class="stat"><b>USB-C</b><span>Single-port<br>power</span></div>
+        <div class="stat"><b>0</b><span>Cloud<br>dependencies</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Built In</div>
+    <h2 style="text-align:center">Everything on board.</h2>
+    <div class="feat-grid" style="margin-top:44px">
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div>
+        <h4>USB-C Power</h4><p>Single-port. No batteries.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+        <h4>Dual-Band Wi-Fi</h4><p>2.4 &amp; 5 GHz.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></div>
+        <h4>BLE</h4><p>Bluetooth LE scanning.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h4>GPS Ready</h4><p>Per-record geo-tagging.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4M12 12l-5.2 5M12 12l5.2 5"/></svg></div>
+        <h4>Up to 10 Nodes</h4><p>1 master, 9 scanners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kits">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Our Kits</div>
+    <h2 style="text-align:center">Build it your way.</h2>
+    <div class="kits-grid">
+
+      <div class="kit">
+        <div class="kname">Core</div>
+        <div class="ktier">Board-Only Builder</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× HellzGate C5 PCB</li>
+          <li>Multi-node + I²C backplane design</li>
+          <li>Power distribution layout</li>
+          <li>For makers who build their way</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+      <div class="kit">
+        <div class="kname">Ignition</div>
+        <div class="ktier">First-Spark Starter</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× HellzGate C5 PCB</li>
+          <li>2× Seeed XIAO ESP32-C5</li>
+          <li>2× antenna pigtails</li>
+          <li>Get your first nodes online</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+      <div class="kit feature">
+        <div class="badge">Recommended</div>
+        <div class="kname">Full Gate</div>
+        <div class="ktier">Flagship Kit</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>1× PCB + 10× XIAO ESP32-C5</li>
+          <li>1× GPS module</li>
+          <li>11× antenna pigtails</li>
+          <li>Cooling fan + required hardware</li>
+        </ul>
+        <a href="#notify" class="btn btn-red">Notify Me</a>
+      </div>
+
+      <div class="kit">
+        <div class="kname">Built &amp; Tested</div>
+        <div class="ktier">Assembled Tier</div>
+        <div class="soon">Pricing Soon</div>
+        <ul>
+          <li>Everything in Full Gate</li>
+          <li>Assembly labor</li>
+          <li>Hardware inspection</li>
+          <li>Power-on / node check</li>
+        </ul>
+        <a href="#notify" class="btn btn-ghost">Notify Me</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--dim);font-size:.85rem;margin-top:26px">All kits powered via a single USB-C port. Antennas &amp; enclosure not included. See kit details for exact contents.</p>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="eyebrow">Going Independent</div>
+    <h2>Our board. Our firmware. <span class="red">Our direction.</span></h2>
+    <p class="lead-p">HellzGate C5 is our own hardware running clean-room firmware we wrote from scratch — plus a dedicated companion app, built from the ground up. Independent by design: our board, our code, our roadmap. Built in phases, with more landing as we hit milestones.</p>
+    <p class="credit">From the first prototype to the boards in hand today, HellzGate has grown into a platform of its own. From here forward, it stands entirely on its own.</p>
+  </div>
+</section>
+
+<section class="cta" id="notify">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">First Look</div>
+    <h2>The gate is becoming real.</h2>
+    <p>Units and builds will follow as the project moves forward. Drop a line to get on the list for the first drop, build updates, and availability.</p>
+    <a href="mailto:hello@hellzgate.com?subject=HellzGate%20C5%20—%20Notify%20Me" class="btn btn-red">Get on the List</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">HELLZGATE <span class="c5">C5</span></div>
+    <div class="socials">
+      <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a href="https://discord.com/users/370298706991251457" target="_blank" rel="noopener" aria-label="Discord" title="Discord">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.9a.07.07 0 0 0-.08.03c-.2.38-.44.87-.6 1.25a18.3 18.3 0 0 0-5.46 0c-.16-.39-.4-.87-.61-1.25a.08.08 0 0 0-.08-.03 19.7 19.7 0 0 0-4.9 1.47.07.07 0 0 0-.03.03C.53 9.09-.32 13.68.1 18.22a.08.08 0 0 0 .03.05 19.9 19.9 0 0 0 5.99 3 .08.08 0 0 0 .08-.02c.46-.63.87-1.29 1.23-1.99a.08.08 0 0 0-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.92 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08 0l.37.3a.08.08 0 0 1-.01.13c-.6.34-1.22.64-1.87.89a.08.08 0 0 0-.04.11c.36.7.78 1.36 1.23 1.99a.08.08 0 0 0 .08.02 19.8 19.8 0 0 0 6-3 .08.08 0 0 0 .03-.05c.5-5.25-.84-9.8-3.55-13.82a.06.06 0 0 0-.03-.03ZM8.02 15.45c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+      </a>
+    </div>
+    <p class="disclaimer">All kits are for educational and research purposes only. Not for use in any illegal activities. Passive, listen-only. You are responsible for lawful operation and compliance with applicable privacy and data-protection laws.</p>
+    <div class="foot-meta">© 2026 HellzGate · The gate is getting fangs ☠</div>
+  </div>
+</footer>
+
+</body>
+</html>
