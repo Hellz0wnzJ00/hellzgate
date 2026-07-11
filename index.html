@@ -72,6 +72,10 @@
   /* IMAGE FRAMES */
   .shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#141416,#0b0b0d);position:relative}
   .shot img{display:block;width:100%;height:auto}
+  .showcase .shot img{max-height:680px;object-fit:contain;background:var(--bg)}
+  .board-main .shot img{max-height:560px;object-fit:contain;background:var(--bg)}
+  .board-sub .shot img{max-height:420px;object-fit:cover}
+  .journey-shot .shot img{max-height:500px;object-fit:cover}
   /* graceful placeholder if an image file isn't present yet */
   .shot.imgph,.oled-card.imgph{min-height:300px;display:flex;align-items:center;justify-content:center}
   .shot.imgph::before,.oled-card.imgph::before{content:"⬡  Render coming online";font-family:'Oswald';text-transform:uppercase;letter-spacing:.16em;color:var(--dim);font-size:.82rem}
@@ -254,8 +258,8 @@
     </div>
     <div class="showcase">
       <div class="shot">
-        <img src="board_persp.jpg" alt="The HellzGate C5 board — a master node plus ESP32-C5 scanner nodes in a custom enclosure with the lid lifted off">
-        <div class="cap"><b>HellzGate C5</b> — one master + a full bank of ESP32-C5 nodes on a single custom board</div>
+        <img src="board_persp.jpg" alt="HellzGate C5 — the board next to an iPhone 16 Pro for scale, 155mm x 55mm, fully populated with 10 ESP32-C5 nodes">
+        <div class="cap"><b>HellzGate C5</b> — 10 nodes, one board. 155 × 55mm. Fits in your hand.</div>
       </div>
     </div>
     <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
@@ -373,15 +377,15 @@
         <li><b>Passive and listen-only</b> by design. It watches the air; it never transmits into it.</li>
       </ul>
       <div class="shot">
-        <img src="board_top.jpg" alt="Top-down view of the HellzGate C5 board fully populated with ESP32-C5 nodes, GPS, microSD and USB-C inside its enclosure">
+        <img src="board_top.jpg" alt="HellzGate C5 red PCB fully populated — master node, ESP32-C5 scanner nodes, GPS, microSD and USB-C on one custom carrier">
         <div class="cap"><b>Fully populated</b> — the master, the node bank, GPS, microSD and USB-C laid out on one carrier</div>
       </div>
     </div>
 
     <div class="board-sub">
       <div class="shot">
-        <img src="case_ext.jpg" alt="The finished HellzGate C5 enclosure — antenna ports, microSD and USB-C along the front, vents and OLED window on top">
-        <div class="cap"><b>The enclosure</b> — antenna ports, microSD &amp; USB-C up front, vents and screen up top</div>
+        <img src="case_ext.jpg" alt="HellzGate C5 assembled top-down — all 10 ESP32-C5 nodes populated on the red PCB">
+        <div class="cap"><b>Fully loaded</b> — every node slot filled, board ready to scan</div>
       </div>
       <div class="avail" style="align-self:center">
         <div class="t">Availability</div>
@@ -397,8 +401,8 @@
     <h2 style="text-align:center">The gate, from every angle.</h2>
     <div class="gal-grid">
       <div class="shot tall">
-        <img src="board_persp.jpg" alt="Perspective render of the HellzGate C5 with the lid lifted, showing the full node bank inside">
-        <div class="cap"><b>Lid off</b> — the full node bank, master, and I²C backplane</div>
+        <img src="board_persp.jpg" alt="HellzGate C5 marketing render — board with iPhone 16 Pro for scale, HellzGate C5 branding, 10-node passive wireless survey array">
+        <div class="cap"><b>HellzGate C5</b> — 10-node passive wireless survey array. 155 × 55mm.</div>
       </div>
       <div class="oled-card">
         <img src="oled.jpg" alt="The HellzGate C5 OLED status screen showing temperature, Wi-Fi and BLE hit counts, GPS and SD status, and node health dots">
@@ -461,7 +465,7 @@
 
     <div class="journey-shot">
       <div class="shot">
-        <img src="case_ext.jpg" alt="The finished HellzGate C5 in its enclosure — the endpoint of the journey from sketch to hardware">
+        <img src="case_ext.jpg" alt="HellzGate C5 assembled and fully populated — from napkin sketch to a real working board">
         <div class="cap"><b>Where it landed</b> — from a napkin doodle to a board you can hold</div>
       </div>
     </div>
