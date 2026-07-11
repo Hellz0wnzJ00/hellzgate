@@ -139,6 +139,20 @@
   .journey-shot{margin-top:52px}
   .journey-shot .shot{max-width:900px;margin:0 auto}
 
+  /* WHAT'S NEXT */
+  .whatsnext{background:radial-gradient(900px 420px at 100% 0,rgba(255,34,51,.08),transparent 58%),var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .next-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .next-grid .panel{padding:30px}
+  .badge-dev{display:inline-flex;align-items:center;gap:7px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:600;color:var(--red);border:1px solid var(--red);border-radius:20px;padding:4px 12px;position:relative}
+  .badge-dev::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red)}
+  .next-h{font-family:'Oswald';text-transform:uppercase;font-size:1.7rem;margin-top:16px;position:relative}
+  .next-sub{color:var(--gray);font-size:.98rem;margin-top:4px;position:relative}
+  .next-list{list-style:none;display:grid;gap:12px;margin-top:20px;position:relative}
+  .next-list li{display:flex;gap:12px;align-items:flex-start;color:var(--gray);font-size:.95rem}
+  .next-list li b{color:var(--white);font-weight:600}
+  .next-list li::before{content:"";width:8px;height:8px;background:var(--red);margin-top:7px;flex:none;transform:rotate(45deg)}
+  @media(max-width:760px){.next-grid{grid-template-columns:1fr}}
+
   /* CTA */
   .cta{background:var(--bg);text-align:center}
   .cta h2{font-size:clamp(2rem,6vw,3.4rem)}
@@ -157,6 +171,38 @@
   .socials a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--gray);transition:.2s}
   .socials a:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px var(--red-glow)}
 
+  /* ANNOUNCEMENT BAR */
+  .announce-bar{
+    background:var(--red);
+    color:#fff;
+    text-align:center;
+    padding:10px 24px;
+    font-family:'Oswald';
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.82rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    position:relative;
+    z-index:60;
+  }
+  .announce-bar .dot{
+    width:8px;height:8px;border-radius:50%;background:#fff;
+    box-shadow:0 0 0 0 rgba(255,255,255,.6);
+    animation:pulse-white 1.6s infinite;
+    flex:none;
+  }
+  @keyframes pulse-white{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}
+    70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+  }
+  .announce-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px;opacity:.85}
+  .announce-bar a:hover{opacity:1}
+
   @media(max-width:900px){
     .two,.board-main{grid-template-columns:1fr;gap:36px}
     .feat-grid{grid-template-columns:repeat(2,1fr)}
@@ -169,15 +215,23 @@
   @media(max-width:560px){
     .feat-grid{grid-template-columns:1fr 1fr}
     .stat-grid,.board-sub{grid-template-columns:1fr 1fr}
+    .announce-bar{font-size:.74rem;letter-spacing:.1em}
   }
 </style>
 </head>
 <body>
 
+<div class="announce-bar">
+  <span class="dot"></span>
+  V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href="#next">See what's changing</a>
+  <span class="dot"></span>
+</div>
+
 <nav>
   <div class="wrap nav-in">
     <a href="#top" class="logo">HELLZGATE <span class="c5">C5</span></a>
     <div class="nav-links">
+      <a href="#next">What's Next</a>
       <a href="#what">Platform</a>
       <a href="#board">The Board</a>
       <a href="#gallery">Gallery</a>
@@ -207,6 +261,45 @@
     <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
   </div>
 </header>
+
+<section class="whatsnext" id="next">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">What's Next</div>
+    <h2 style="text-align:center">v2 and the app are <span class="red">in development.</span></h2>
+    <p class="lead-p" style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">v1 proved the gate could open. Now the next hardware revision and the companion app are both actively being built — here's where it's headed.</p>
+    <div class="next-grid">
+
+      <div class="panel">
+        <div class="badge-dev">In Development</div>
+        <h3 class="next-h">HellzGate C5 <span class="red">v2</span></h3>
+        <p class="next-sub">The next board — built to go anywhere.</p>
+        <ul class="next-list">
+          <li><b>Onboard GPS</b> — built in, no add-on module</li>
+          <li><b>Battery + USB-C</b> — fully portable, charges while plugged in</li>
+          <li><b>Digital power control</b> — the master runs the nodes, no switches</li>
+          <li><b>Cleaner &amp; tighter</b> — no OLED or toggles, fewer moving parts</li>
+          <li><b>Smaller &amp; more discreet</b> — a squarer, field-ready package</li>
+          <li><b>Still red.</b> Always red.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="badge-dev">In Development</div>
+        <h3 class="next-h">Companion <span class="red">App</span></h3>
+        <p class="next-sub">Your gate, in your pocket.</p>
+        <ul class="next-list">
+          <li><b>iOS + Android</b> — one clean, native app</li>
+          <li><b>Live dashboard</b> — scan counts, node health, results in real time</li>
+          <li><b>Full control</b> — start/stop, presets, manage the whole node cluster</li>
+          <li><b>GPS tagging &amp; CSV export</b> — straight from your phone</li>
+          <li><b>Local &amp; private</b> — talks to the device directly, no cloud, no account</li>
+        </ul>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--dim);font-size:.9rem;margin-top:28px">Both are being built in the open — follow along on <a href="https://discord.com/users/370298706991251457" class="red" style="font-weight:600">Discord</a> and watch the gate evolve.</p>
+  </div>
+</section>
 
 <section id="what">
   <div class="wrap two">
@@ -353,15 +446,15 @@
       <div class="tl">
         <div class="when">Now</div>
         <div>
-          <h3>Real hardware, our own code</h3>
-          <p>The first boards are on my bench. On top of them runs clean-room firmware I'm writing from scratch for this exact hardware — plus a companion app, built from the ground up. My board, my code, my roadmap, shipped in phases as each piece is ready.</p>
+          <h3>Real hardware, firmware in motion</h3>
+          <p>The first boards are on my bench. Firmware is being written from scratch for this exact hardware — clean-room, purpose-built, nothing borrowed. The companion app is in active development and entering Phase 1. My board, my code, my roadmap — shipped in phases as each piece is ready and right.</p>
         </div>
       </div>
       <div class="tl">
         <div class="when">Next</div>
         <div>
-          <h3>Where it's going</h3>
-          <p>More nodes, smarter detections, tighter GPS logging, one-tap presets, and clean exports. The gate is only getting sharper from here — and I'm building it in the open enough that you can follow every step.</p>
+          <h3>v2 and the app</h3>
+          <p>v2 hardware is actively in development — embedded GPS, battery + USB-C, digital power control, smaller and field-ready. The companion app is in Phase 1. More nodes, smarter detections, one-tap presets, and clean exports on the way. The gate is only getting sharper — follow every step on Discord.</p>
         </div>
       </div>
     </div>
