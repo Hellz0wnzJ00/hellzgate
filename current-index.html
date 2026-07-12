@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HellzGate C5 — Multi-Node Passive Wireless Survey Array</title>
+<meta name="description" content="HellzGate C5 is a custom multi-node wireless survey platform. One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud. Built from a napkin sketch into real hardware.">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HellzGate C5">
+<meta property="og:title" content="HellzGate C5 — Multi-Node Passive Wireless Survey Array">
+<meta property="og:description" content="One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud. From napkin doodle to real hardware.">
+<meta property="og:url" content="https://hellzgate.com/">
+<meta property="og:image" content="https://hellzgate.com/board_persp.jpg">
+<meta property="og:image:width" content="1100">
+<meta property="og:image:height" content="756">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HellzGate C5 — Multi-Node Passive Wireless Survey Array">
+<meta name="twitter:description" content="One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud.">
+<meta name="twitter:image" content="https://hellzgate.com/board_persp.jpg">
+<meta name="theme-color" content="#080809">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080809; --bg2:#0f0f11; --card:#121214; --line:#1e1e22;
+    --red:#ff2233; --red-dim:#c81826; --red-glow:rgba(255,34,51,.35);
+    --white:#f4f4f5; --gray:#a1a1aa; --dim:#6b6b73; --green:#39d353;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.head{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .red{color:var(--red)}
+  section{padding:96px 0;position:relative}
+  .eyebrow{font-family:'Oswald';text-transform:uppercase;letter-spacing:.25em;color:var(--red);font-size:.82rem;font-weight:600;margin-bottom:14px}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(8,8,9,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:'Anton';font-size:1.5rem;letter-spacing:.03em;display:flex;align-items:center;gap:9px}
+  .logo .c5{color:var(--red)}
+  .logo .wv{color:var(--red);font-size:1.1rem;transform:translateY(-2px)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-family:'Oswald';text-transform:uppercase;font-size:.9rem;letter-spacing:.08em;color:var(--gray);transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .btn{display:inline-block;font-family:'Oswald';text-transform:uppercase;letter-spacing:.09em;font-weight:600;font-size:.92rem;padding:12px 26px;border-radius:4px;cursor:pointer;transition:.2s;border:1px solid transparent}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 0 0 var(--red-glow)}
+  .btn-red:hover{background:var(--red-dim);box-shadow:0 6px 26px var(--red-glow);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--white)}
+  .btn-ghost:hover{border-color:var(--red);color:var(--red)}
+  .nav-cta{padding:9px 20px}
+  .burger{display:none;background:none;border:0;color:var(--white);font-size:1.6rem;cursor:pointer}
+
+  /* HERO */
+  .hero{padding:118px 0 92px;text-align:center;position:relative;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 500px at 50% -8%, rgba(255,34,51,.13), transparent 62%),var(--bg)}
+  .hero h1{font-family:'Anton';font-size:clamp(3rem,11vw,7.4rem);letter-spacing:.01em}
+  .hero h1 .c5{color:var(--red);text-shadow:0 0 34px var(--red-glow)}
+  .hero .tag{font-family:'Oswald';text-transform:uppercase;letter-spacing:.32em;color:var(--gray);font-size:clamp(.72rem,2.4vw,1.05rem);margin-top:6px}
+  .hero p.lead{max-width:660px;margin:26px auto 0;color:var(--gray);font-size:1.08rem}
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .skull{color:var(--red);font-size:1.4rem;margin:0 6px}
+  .fangs{margin-top:38px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.18em;color:var(--dim);font-size:.9rem}
+
+  /* IMAGE FRAMES */
+  .shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#141416,#0b0b0d);position:relative}
+  .shot img{display:block;width:100%;height:auto}
+  .showcase .shot img{max-height:680px;object-fit:contain;background:var(--bg)}
+  .board-main .shot img{max-height:560px;object-fit:contain;background:var(--bg)}
+  .board-sub .shot img{max-height:420px;object-fit:cover}
+  .journey-shot .shot img{max-height:500px;object-fit:cover}
+  /* graceful placeholder if an image file isn't present yet */
+  .shot.imgph,.oled-card.imgph{min-height:300px;display:flex;align-items:center;justify-content:center}
+  .shot.imgph::before,.oled-card.imgph::before{content:"⬡  Render coming online";font-family:'Oswald';text-transform:uppercase;letter-spacing:.16em;color:var(--dim);font-size:.82rem}
+  .oled-card.imgph{background:linear-gradient(160deg,#141416,#0b0b0d)}
+  .oled-card.imgph::before{color:var(--dim)}
+  .shot .cap{position:absolute;left:0;bottom:0;width:100%;padding:14px 16px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.76rem;color:var(--gray);
+    background:linear-gradient(transparent,rgba(8,8,9,.86) 60%)}
+  .shot .cap b{color:var(--white);font-weight:600}
+
+  /* HERO SHOWCASE */
+  .showcase{margin-top:52px}
+  .showcase .shot{max-width:960px;margin:0 auto;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,34,51,.12)}
+
+  /* WHAT */
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  h2{font-size:clamp(1.8rem,4.5vw,2.9rem)}
+  .lead-p{color:var(--gray);font-size:1.06rem;margin-top:18px}
+  .spec-list{list-style:none;margin-top:26px;display:grid;gap:12px}
+  .spec-list li{display:flex;gap:12px;align-items:flex-start;color:var(--white)}
+  .spec-list li::before{content:"";width:8px;height:8px;background:var(--red);margin-top:9px;flex:none;transform:rotate(45deg)}
+  .panel{background:linear-gradient(160deg,var(--card),#0c0c0e);border:1px solid var(--line);border-radius:12px;padding:34px;position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 100% 0,rgba(255,34,51,.1),transparent 60%)}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative}
+  .stat b{font-family:'Anton';display:block;font-size:2.4rem;color:var(--red);line-height:1}
+  .stat span{font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;color:var(--gray);font-size:.82rem}
+
+  /* FEATURES STRIP */
+  .features{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .feat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center}
+  .feat{padding:22px 12px}
+  .feat .ic{width:46px;height:46px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--red)}
+  .feat h4{font-family:'Oswald';text-transform:uppercase;letter-spacing:.06em;font-size:1rem}
+  .feat p{color:var(--dim);font-size:.85rem;margin-top:4px}
+
+  /* THE BOARD */
+  .board{background:radial-gradient(900px 420px at 0% 0,rgba(255,34,51,.08),transparent 58%),var(--bg)}
+  .board .head-row{max-width:720px}
+  .board-main{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-top:48px}
+  .board-list{list-style:none;display:grid;gap:14px;margin-top:6px}
+  .board-list li{display:flex;gap:13px;align-items:flex-start;color:var(--gray);font-size:.98rem}
+  .board-list li b{color:var(--white);font-weight:600}
+  .board-list li::before{content:"";width:9px;height:9px;background:var(--red);margin-top:8px;flex:none;transform:rotate(45deg)}
+  .board-sub{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
+  .avail{margin-top:36px;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:20px 22px;background:var(--card)}
+  .avail .t{font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;color:var(--red);font-size:.82rem;font-weight:600}
+  .avail p{color:var(--gray);font-size:.96rem;margin-top:6px}
+
+  /* GALLERY */
+  .gallery{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .gal-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;margin-top:44px}
+  .gal-grid .tall{grid-row:span 1}
+  .oled-card{background:#f4f4f5;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .oled-card img{display:block;width:100%;height:auto}
+  .oled-card .cap{padding:14px 18px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:#5a5a63}
+  .oled-card .cap b{color:#111}
+
+  /* JOURNEY */
+  .journey .lead-p{max-width:760px}
+  .timeline{margin-top:52px;display:grid;gap:0;position:relative}
+  .tl{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:26px 0;border-top:1px solid var(--line)}
+  .tl:last-child{border-bottom:1px solid var(--line)}
+  .tl .when{font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;color:var(--red);font-size:.9rem;font-weight:600;padding-top:2px}
+  .tl h3{font-size:1.24rem;color:var(--white);margin-bottom:8px}
+  .tl p{color:var(--gray);font-size:.98rem}
+  .journey-shot{margin-top:52px}
+  .journey-shot .shot{max-width:900px;margin:0 auto}
+
+  /* WHAT'S NEXT */
+  .whatsnext{background:radial-gradient(900px 420px at 100% 0,rgba(255,34,51,.08),transparent 58%),var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .next-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .next-grid .panel{padding:30px}
+  .badge-dev{display:inline-flex;align-items:center;gap:7px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:600;color:var(--red);border:1px solid var(--red);border-radius:20px;padding:4px 12px;position:relative}
+  .badge-dev::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red)}
+  .next-h{font-family:'Oswald';text-transform:uppercase;font-size:1.7rem;margin-top:16px;position:relative}
+  .next-sub{color:var(--gray);font-size:.98rem;margin-top:4px;position:relative}
+  .next-list{list-style:none;display:grid;gap:12px;margin-top:20px;position:relative}
+  .next-list li{display:flex;gap:12px;align-items:flex-start;color:var(--gray);font-size:.95rem}
+  .next-list li b{color:var(--white);font-weight:600}
+  .next-list li::before{content:"";width:8px;height:8px;background:var(--red);margin-top:7px;flex:none;transform:rotate(45deg)}
+  @media(max-width:760px){.next-grid{grid-template-columns:1fr}}
+
+  /* CTA */
+  .cta{background:var(--bg);text-align:center}
+  .cta h2{font-size:clamp(2rem,6vw,3.4rem)}
+  .cta p{color:var(--gray);margin-top:14px;max-width:560px;margin-inline:auto}
+  .cta .btn{margin-top:30px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:48px 0 40px;text-align:center;background:var(--bg2)}
+  .foot-logo{font-family:'Anton';font-size:1.6rem;letter-spacing:.03em}
+  .foot-logo .c5{color:var(--red)}
+  .built-by{font-family:'Oswald';text-transform:uppercase;letter-spacing:.14em;color:var(--gray);font-size:.82rem;margin-top:12px}
+  .built-by .red{color:var(--red)}
+  .disclaimer{color:var(--dim);font-size:.82rem;max-width:580px;margin:20px auto 0}
+  .foot-meta{color:#4a4a52;font-size:.78rem;margin-top:22px;font-family:'Oswald';letter-spacing:.06em;text-transform:uppercase}
+  .socials{display:flex;gap:14px;justify-content:center;margin-top:22px}
+  .socials a{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--gray);transition:.2s}
+  .socials a:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px);box-shadow:0 6px 20px var(--red-glow)}
+
+  /* ANNOUNCEMENT BAR */
+  .announce-bar{
+    background:var(--red);
+    color:#fff;
+    text-align:center;
+    padding:10px 24px;
+    font-family:'Oswald';
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.82rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    position:relative;
+    z-index:60;
+  }
+  .announce-bar .dot{
+    width:8px;height:8px;border-radius:50%;background:#fff;
+    box-shadow:0 0 0 0 rgba(255,255,255,.6);
+    animation:pulse-white 1.6s infinite;
+    flex:none;
+  }
+  @keyframes pulse-white{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}
+    70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+  }
+  .announce-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px;opacity:.85}
+  .announce-bar a:hover{opacity:1}
+
+  @media(max-width:900px){
+    .two,.board-main{grid-template-columns:1fr;gap:36px}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .gal-grid{grid-template-columns:1fr}
+    .tl{grid-template-columns:1fr;gap:6px}
+    .nav-links{display:none}
+    .burger{display:block}
+    section{padding:72px 0}
+  }
+  @media(max-width:560px){
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .stat-grid,.board-sub{grid-template-columns:1fr 1fr}
+    .announce-bar{font-size:.74rem;letter-spacing:.1em}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce-bar">
+  <span class="dot"></span>
+  V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href="#next">See what's changing</a>
+  <span class="dot"></span>
+</div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">HELLZGATE <span class="c5">C5</span></a>
+    <div class="nav-links">
+      <a href="#next">What's Next</a>
+      <a href="#what">Platform</a>
+      <a href="#board">The Board</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#journey">Journey</a>
+      <a href="#notify" class="btn btn-red nav-cta">Follow the Build</a>
+    </div>
+    <button class="burger" onclick="document.querySelector('.nav-links').style.display='flex'">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Multi-Node Passive Wireless Survey Array</div>
+    <h1>HELLZGATE <span class="c5">C5</span></h1>
+    <div class="tag">One Master · Expandable Node Cluster · Wi-Fi + BLE</div>
+    <p class="lead">A custom multi-node wireless survey platform I built from a random idea into real hardware. One board, a wall of radios, local logging, GPS ready. No subscriptions. No cloud. Just raw data in your hands.</p>
+    <div class="cta-row">
+      <a href="#board" class="btn btn-red">See the Board</a>
+      <a href="#journey" class="btn btn-ghost">The Story</a>
+    </div>
+    <div class="showcase">
+      <div class="shot">
+        <img src="board_persp.jpg" alt="HellzGate C5 — the board next to an iPhone 16 Pro for scale, 155mm x 55mm, fully populated with 10 ESP32-C5 nodes">
+        <div class="cap"><b>HellzGate C5</b> — 10 nodes, one board. 155 × 55mm. Fits in your hand.</div>
+      </div>
+    </div>
+    <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
+  </div>
+</header>
+
+<section class="whatsnext" id="next">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">What's Next</div>
+    <h2 style="text-align:center">v2 and the app are <span class="red">in development.</span></h2>
+    <p class="lead-p" style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">v1 proved the gate could open. Now the next hardware revision and the companion app are both actively being built — here's where it's headed.</p>
+    <div class="next-grid">
+
+      <div class="panel">
+        <div class="badge-dev">In Development</div>
+        <h3 class="next-h">HellzGate C5 <span class="red">v2</span></h3>
+        <p class="next-sub">The next board — built to go anywhere.</p>
+        <ul class="next-list">
+          <li><b>Embedded GPS</b> — on-board chip + phone GPS as backup</li>
+          <li><b>Battery + USB-C</b> — fully portable, charges while plugged in</li>
+          <li><b>Digital power control</b> — the master runs the nodes, no switches</li>
+          <li><b>Cleaner &amp; tighter</b> — no OLED or toggles, fewer moving parts</li>
+          <li><b>Smaller &amp; more discreet</b> — a squarer, field-ready package</li>
+          <li><b>Still red.</b> Always red.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="badge-dev">In Development</div>
+        <h3 class="next-h">Companion <span class="red">App</span></h3>
+        <p class="next-sub">Your gate, in your pocket.</p>
+        <ul class="next-list">
+          <li><b>iOS + Android</b> — one clean, native app</li>
+          <li><b>Live dashboard</b> — scan counts, node health, results in real time</li>
+          <li><b>Full control</b> — start/stop, presets, manage the whole node cluster</li>
+          <li><b>GPS tagging &amp; CSV export</b> — straight from your phone</li>
+          <li><b>Local &amp; private</b> — talks to the device directly, no cloud, no account</li>
+        </ul>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--dim);font-size:.9rem;margin-top:28px">Both are being built in the open — follow along on <a href="https://discord.com/users/370298706991251457" class="red" style="font-weight:600">Discord</a> and watch the gate evolve.</p>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow">What it is</div>
+      <h2>A fully local, offline survey <span class="red">array</span>.</h2>
+      <p class="lead-p">HellzGate C5 is a passive, multi-node wireless survey platform. One master coordinates a cluster of ESP32-C5 scanner nodes that listen across Wi-Fi and Bluetooth, aggregate to the master, geo-tag, and log — all on your own local network. Start with a board's worth and scale the cluster from there. Nothing leaves the device unless you send it.</p>
+      <ul class="spec-list">
+        <li>Passive Wi-Fi (2.4 / 5 GHz) and BLE scanning across every node</li>
+        <li>GPS-tagged, timestamped records exported in WiGLE-ready format</li>
+        <li>Local dashboard + companion app — no cloud, no servers, no account</li>
+        <li>Dedicated wired I²C backplane keeps every radio free for the capture</li>
+        <li>Passive and listen-only, start to finish</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="stat-grid">
+        <div class="stat"><b>9+</b><span>Scanner nodes<br>expandable cluster</span></div>
+        <div class="stat"><b>3</b><span>Signals scanned<br>Wi-Fi 2.4 · 5 · BLE</span></div>
+        <div class="stat"><b>USB-C</b><span>Single-port<br>power</span></div>
+        <div class="stat"><b>0</b><span>Cloud<br>dependencies</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Built In</div>
+    <h2 style="text-align:center">Everything on board.</h2>
+    <div class="feat-grid" style="margin-top:44px">
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div>
+        <h4>USB-C Power</h4><p>Single-port. No batteries.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+        <h4>Dual-Band Wi-Fi</h4><p>2.4 &amp; 5 GHz.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></div>
+        <h4>BLE</h4><p>Bluetooth LE scanning.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h4>GPS Ready</h4><p>Per-record geo-tagging.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4M12 12l-5.2 5M12 12l5.2 5"/></svg></div>
+        <h4>Node Cluster</h4><p>A bank per board — and scaling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="board" id="board">
+  <div class="wrap">
+    <div class="head-row">
+      <div class="eyebrow">The Board</div>
+      <h2>One board. <span class="red">A wall of radios.</span></h2>
+      <p class="lead-p">The heart of HellzGate C5 is a custom multi-node carrier I designed from scratch in KiCad. It carries a master and a full bank of ESP32-C5 scanner nodes side by side, wires them together on a dedicated backplane, and powers the whole array from a single USB-C port. No rat's nest of jumper wires — just one clean board doing the job it was drawn to do, with room to scale the cluster past a single board.</p>
+    </div>
+
+    <div class="board-main">
+      <ul class="board-list">
+        <li><b>A master + a full bank of scanner nodes</b> on one PCB — every node an ESP32-C5 with dual-band 2.4 / 5 GHz Wi-Fi and Bluetooth LE, and the cluster scales past a single board.</li>
+        <li><b>Wired I²C backplane</b> so the nodes talk over dedicated traces and every radio stays free for capture instead of chatter.</li>
+        <li><b>microSD and an always-on OLED</b> for live status — hits, temps, node health — right on the device.</li>
+        <li><b>Single USB-C in</b> feeds power distribution across the whole array. One cable, ten radios awake.</li>
+        <li><b>Antenna ports broken out</b> along the edge and a custom enclosure designed around the board — cooling, ports, and screen all lined up.</li>
+        <li><b>Passive and listen-only</b> by design. It watches the air; it never transmits into it.</li>
+      </ul>
+      <div class="shot">
+        <img src="board_top.jpg" alt="HellzGate C5 red PCB fully populated — master node, ESP32-C5 scanner nodes, microSD and USB-C on one custom carrier">
+        <div class="cap"><b>Fully populated</b> — the master, the node bank, microSD and USB-C laid out on one carrier</div>
+      </div>
+    </div>
+
+    <div class="board-sub">
+      <div class="shot">
+        <img src="case_ext.jpg" alt="HellzGate C5 assembled top-down — all 10 ESP32-C5 nodes populated on the red PCB">
+        <div class="cap"><b>Fully loaded</b> — every node slot filled, board ready to scan</div>
+      </div>
+      <div class="avail" style="align-self:center">
+        <div class="t">Availability</div>
+        <p>The first production boards just landed on my bench. HellzGate C5 isn't for sale yet — I'm bringing up hardware, firmware, and the companion app in phases. Builds and availability will follow. Want first word? <a href="#notify" class="red" style="font-weight:600">Follow the build.</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Up Close</div>
+    <h2 style="text-align:center">The gate, from every angle.</h2>
+    <div class="gal-grid">
+      <div class="shot tall">
+        <img src="board_persp.jpg" alt="HellzGate C5 marketing render — board with iPhone 16 Pro for scale, HellzGate C5 branding, 10-node passive wireless survey array">
+        <div class="cap"><b>HellzGate C5</b> — 10-node passive wireless survey array. 155 × 55mm.</div>
+      </div>
+      <div class="oled-card">
+        <img src="oled.jpg" alt="The HellzGate C5 OLED status screen showing temperature, Wi-Fi and BLE hit counts, GPS and SD status, and node health dots">
+        <div class="cap"><b>Live at a glance</b> — Wi-Fi &amp; BLE counts, GPS / SD status, per-node health, always on</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <div class="eyebrow">The Journey</div>
+    <h2>From a random thought to <span class="red">boards in hand.</span></h2>
+    <p class="lead-p">HellzGate didn't start in a lab. It started as an itch — I wanted to actually see the wireless world around me, and one little radio was never going to be enough. So I sketched a box full of them and started building. Here's how it went.</p>
+
+    <div class="timeline">
+      <div class="tl">
+        <div class="when">The Spark</div>
+        <div>
+          <h3>A random thought</h3>
+          <p>What if instead of one radio sniffing the air, I had a whole cluster of them working together — each one on its own channel, all reporting back to one place? One radio shows you a keyhole. I wanted the whole door.</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="when">The Doodle</div>
+        <div>
+          <h3>A napkin sketch</h3>
+          <p>It started as a scribble — a rectangle, a row of little boxes for the nodes, arrows pointing to a "brain," and a screen on the front. That doodle is basically the layout the board still uses today. Sometimes the dumb-looking sketch is the whole plan.</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="when">The Mess</div>
+        <div>
+          <h3>The breadboard era</h3>
+          <p>Next came the sprawling prototype — a pile of modules, a spider-web of jumper wires, and way more nodes than any breadboard should hold. Ugly, held together by stubbornness, but it <em>worked</em>. It proved the whole idea: a master herding a bank of nodes really could scan wide and log clean.</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="when">The Board</div>
+        <div>
+          <h3>Turning the mess into a PCB</h3>
+          <p>I taught myself enough KiCad to turn that rat's nest into a real, custom board — power distribution, the I²C backplane, the node bank, microSD, and the OLED, all laid out on one carrier. Then I modeled a case around it so the ports, vents, and screen actually lined up.</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="when">Now</div>
+        <div>
+          <h3>Real hardware, firmware in motion</h3>
+          <p>The first boards are on my bench. Firmware is being written from scratch for this exact hardware — clean-room, purpose-built, nothing borrowed. The companion app is in active development and entering Phase 1. My board, my code, my roadmap — shipped in phases as each piece is ready and right.</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="when">Next</div>
+        <div>
+          <h3>v2 and the app</h3>
+          <p>v2 hardware is actively in development — embedded GPS, battery + USB-C, digital power control, smaller and field-ready. The companion app is in Phase 1. More nodes, smarter detections, one-tap presets, and clean exports on the way. The gate is only getting sharper — follow every step on Discord.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-shot">
+      <div class="shot">
+        <img src="case_ext.jpg" alt="HellzGate C5 assembled and fully populated — from napkin sketch to a real working board">
+        <div class="cap"><b>Where it landed</b> — from a napkin doodle to a board you can hold</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="notify">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center">Stay in the Loop</div>
+    <h2>Follow the build.</h2>
+    <p>Watch the repo for commits, firmware drops, and availability. Hit the Discord for the conversation.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-red" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a href="https://discord.com/users/370298706991251457" target="_blank" rel="noopener" class="btn" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#f4f4f5" onmouseover="this.style.borderColor='#ff2233';this.style.background='rgba(255,34,51,.06)'" onmouseout="this.style.borderColor='rgba(255,255,255,.18)';this.style.background='rgba(255,255,255,.06)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.9a.07.07 0 0 0-.08.03c-.2.38-.44.87-.6 1.25a18.3 18.3 0 0 0-5.46 0c-.16-.39-.4-.87-.61-1.25a.08.08 0 0 0-.08-.03 19.7 19.7 0 0 0-4.9 1.47.07.07 0 0 0-.03.03C.53 9.09-.32 13.68.1 18.22a.08.08 0 0 0 .03.05 19.9 19.9 0 0 0 5.99 3 .08.08 0 0 0 .08-.02c.46-.63.87-1.29 1.23-1.99a.08.08 0 0 0-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.92 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08 0l.37.3a.08.08 0 0 1-.01.13c-.6.34-1.22.64-1.87.89a.08.08 0 0 0-.04.11c.36.7.78 1.36 1.23 1.99a.08.08 0 0 0 .08.02 19.8 19.8 0 0 0 6-3 .08.08 0 0 0 .03-.05c.5-5.25-.84-9.8-3.55-13.82a.06.06 0 0 0-.03-.03ZM8.02 15.45c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+        Discord
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">HELLZGATE <span class="c5">C5</span></div>
+    <div class="built-by">Designed &amp; built by <span class="red">Hellz</span> · Sean Clossey</div>
+    <div class="socials">
+      <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a href="https://discord.com/users/370298706991251457" target="_blank" rel="noopener" aria-label="Discord" title="Discord">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.9a.07.07 0 0 0-.08.03c-.2.38-.44.87-.6 1.25a18.3 18.3 0 0 0-5.46 0c-.16-.39-.4-.87-.61-1.25a.08.08 0 0 0-.08-.03 19.7 19.7 0 0 0-4.9 1.47.07.07 0 0 0-.03.03C.53 9.09-.32 13.68.1 18.22a.08.08 0 0 0 .03.05 19.9 19.9 0 0 0 5.99 3 .08.08 0 0 0 .08-.02c.46-.63.87-1.29 1.23-1.99a.08.08 0 0 0-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.92 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08 0l.37.3a.08.08 0 0 1-.01.13c-.6.34-1.22.64-1.87.89a.08.08 0 0 0-.04.11c.36.7.78 1.36 1.23 1.99a.08.08 0 0 0 .08.02 19.8 19.8 0 0 0 6-3 .08.08 0 0 0 .03-.05c.5-5.25-.84-9.8-3.55-13.82a.06.06 0 0 0-.03-.03ZM8.02 15.45c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.08-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+      </a>
+    </div>
+    <p class="disclaimer">HellzGate C5 is for educational and research purposes only. Not for use in any illegal activities. Passive, listen-only. You are responsible for lawful operation and compliance with applicable privacy and data-protection laws.</p>
+    <div class="foot-meta">© 2026 HellzGate · Sean Clossey · The gate is getting fangs ☠</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.shot img,.oled-card img').forEach(function(im){
+    function fail(){var w=im.closest('.shot,.oled-card'); if(w){im.style.display='none'; w.classList.add('imgph');}}
+    im.addEventListener('error', fail);
+    if(im.complete && im.naturalWidth===0) fail();
+  });
+</script>
+</body>
+</html>
