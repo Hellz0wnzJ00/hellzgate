@@ -32,7 +32,7 @@ The C5's dual-band (2.4 + 5 GHz) radio paired with a true multi-node array makes
 
 ## Firmware
 
-Clean-room firmware, written from scratch for this hardware — **not** derived from any prior or third-party project. Built in phases:
+Original firmware, written from scratch for this hardware — **not** derived from any prior or third-party project. Built in phases:
 
 - **Phase 1** — multi-node core over **ESP-NOW**: node enrollment, aggregation, a gap-free record store, and a local HTTP API
 - **Phase 2** — wired **I²C backplane** transport
