@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HellzGate C5">
 <meta property="og:title" content="HellzGate C5 — Multi-Node Passive Wireless Survey Array">
-<meta property="og:description" content="One master coordinating an expandable cluster of ESP32-C5 scannerh nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud. From scrap paper doodle to real hardware.">
+<meta property="og:description" content="One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud. From scrap paper doodle to real hardware.">
 <meta property="og:url" content="https://hellzgate.com/">hh
 <meta property="og:image" content="https://hellzgate.com/board_persp.jpg">
 <meta property="og:image:width" content="1100">
@@ -309,8 +309,9 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <li><b>iOS + Android</b> — one clean, native app</li>
 <li><b>Live dashboard</b> — scan counts, node health, results in real time</li>
 <li><b>Full control</b> — start/stop, presets, manage the whole node cluster</li>
-<li><b>GPS tagging &amp; CSV export</b> — straight from your phone</li>
-<li><b>Local &amp; private</b> — talks to the device directly, no cloud, no account</li>
+<li><b>GPS tagging &amp; export</b> — phone GPS for v1, embedded for v2, logs to SD or phone</li>
+<li><b>Offline-first by default</b> — talks to the device directly, no cloud, no account required</li>
+<li><b>Optional connectivity</b> — remote monitoring and control if you want it, never forced</li>
 </ul>
 </div>
 
@@ -335,8 +336,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 </div>
 <div class="panel">
 <div class="stat-grid">
-<div class="stat"><b>9+</b><span>Scanner nodes
-br>expandable cluster</span></div>
+<div class="stat"><b>9+</b><span>Scanner nodes<br>expandable cluster</span></div>
 <div class="stat"><b>3</b><span>Signals scanned<br>Wi-Fi 2.4 · 5 · BLE</span></div>
 <div class="stat"><b>USB-C</b><span>Single-port<br>power</span></div>
 <div class="stat"><b>0</b><span>Cloud<br>dependencies</span></div>
@@ -392,7 +392,7 @@ br>expandable cluster</span></div>
 <li><b>Passive and listen-only</b> by design. It watches the air; it never transmits into it.</li>
 </ul>
 <div class="shot">
-<img src="board_top.jpg" alt="HellzGate C5 red PCB fully populated — iaster node, ESP32-C5 scanner nodes, GPS, microSD and USB-C on one custom carrier">
+<img src="board_top.jpg" alt="HellzGate C5 red PCB fully populated — master node, ESP32-C5 scanner nodes, GPS, microSD and USB-C on one custom carrier">
 <div class="cap"><b>Fully populated</b> — the master, the node bank, GPS, microSD and USB-C laid out on one carrier</div>
 </div>
 </div>
@@ -518,13 +518,14 @@ br>expandable cluster</span></div>
           <div class="store-status" style="margin-bottom:16px;">Details dropping with availability</div>
           <h3 class="store-product-name">HellzGate C5 <span class="red">v1</span></h3>
           <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The original board. Same passive wireless survey foundation at a more accessible price point. Full specs and availability details dropping on GitHub first.
+            The original board. 10 ESP32-C5 radios, one wired I²C backplane, onboard OLED. USB-C powered — run it off a power bank in the field. GPS optional via Neo-6M add-on header, or let the companion app pull location from your phone. Fully modular — start lean, add what you need.
           </p>
           <ul class="spec-list" style="margin-bottom:26px;">
-            <li>Passive Wi-Fi + BLE scanning</li>
-            <li>Local logging — no cloud, no accounts</li>
-            <li>More accessible price point</li>
-            <li>Full specs dropping with availability</li>
+            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
+            <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
+            <li>GPS via Neo-6M add-on header or phone fallback through app</li>
+            <li>Onboard OLED · USB-C power · power bank ready</li>
+            <li>Log to microSD or phone storage — no cloud, no accounts</li>
           </ul>
           <div class="store-links">
             <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
@@ -540,14 +541,14 @@ br>expandable cluster</span></div>
           <div class="store-status" style="margin-bottom:16px;">Finalizing v2 — orders coming</div>
           <h3 class="store-product-name">HellzGate C5 <span class="red">v2</span></h3>
           <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            10-node passive wireless survey array. Onboard GPS, battery, USB-C power.
-            Built for the field — no cloud, no subscriptions, no compromises.
+            The field-ready build. Same 10-node array, smaller and tighter. Embedded GPS so the device is fully self-contained — no phone, no add-ons required. Run on USB-C, a power bank, or stack up to three flat LiPo cells directly on the board and cut the cable entirely.
           </p>
           <ul class="spec-list" style="margin-bottom:26px;">
-            <li>10 ESP32-C5 scanner nodes, one master controller</li>
-            <li>Dual-band Wi-Fi + BLE passive scanning</li>
-            <li>Onboard GPS · Battery-backed · USB-C charge + data</li>
-            <li>Local logging only — no cloud, no accounts</li>
+            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
+            <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
+            <li>Embedded GPS + phone fallback · OLED optional via header</li>
+            <li>USB-C power + up to 3× LiPo via onboard battery headers</li>
+            <li>Log to microSD or phone storage — no cloud, no accounts</li>
           </ul>
           <div class="store-links">
             <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
@@ -590,10 +591,10 @@ br>expandable cluster</span></div>
         product:{
           styles:{
             product:{'font-family':"'Inter',sans-serif",'background':'#121214','border':'1px solid #1e1e22','border-radius':'12px','padding':'34px'},
-            title:{'font-family':"'Oswald',sans-serif",'font-size':'1.5rem','font-weight':'700',"text-transform':'uppercase','letter-spacing':'.04em','color':'#f4f4f5'},
+            title:{'font-family':"'Oswald',sans-serif",'font-size':'1.5rem','font-weight':'700','text-transform':'uppercase','letter-spacing':'.04em','color':'#f4f4f5'},
             price:{'font-family':"'Anton',sans-serif",'font-size':'2rem','color':'#ff2233'},
             description:{'font-family':"'Inter',sans-serif",'color':'#a1a1aa','font-size':'.95rem','line-height':'1.7'},
-            button:{'font-family':"'Oswald',sans-serif",'font-size':'.9rem','font-weight':'700','letter-spacing':'.12em','text-transform':'uppercase','padding-top':'13px','padding-bottom':'13px','background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}
+            button:{'font-family':"'Oswald',sans-serif",'font-size':'.9rem','font-weight':'700','letter-spacing':'.12em',"text-transform':'uppercase','padding-top':'13px','padding-bottom':'13px','background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}
           },
           text:{button:'Add to Cart'}
         },
@@ -645,7 +646,7 @@ Discord
 </a>
 </div>
 <p class="disclaimer">HellzGate C5 is for educational and research purposes only. Not for use in any illegal activities. Passive, listen-only. You are responsible for lawful operation and compliance with applicable privacy and data-protection laws.</p>
-<div class="foot-meta">© 2026 HellzGate · Sean Clossey · The gate is getting fangs ☠</div>
+<div class="foot-meta">© 2026 HellzGate · Sean Clossey �� The gate is getting fangs ☠</div>
 </div>
 </footer>
 
