@@ -170,6 +170,44 @@ h2{font-size:clamp(1.8rem,4.5vw,2.9rem)}
 .store-card-tier{font-family:'Oswald';font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
 @media(max-width:680px){.store-cards-grid{grid-template-columns:1fr}}
 
+/* NATIVE STOREFRONT */
+.store-intro{max-width:720px;margin:0 auto;text-align:center}
+.store-shell{margin-top:48px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0b0b0d;box-shadow:0 34px 90px rgba(0,0,0,.42)}
+.store-rail{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
+.store-rail-label,.store-rail-state{font-family:'Oswald';font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.store-rail-label{color:var(--gray)}
+.store-rail-state{display:flex;align-items:center;gap:8px;color:var(--red)}
+.store-rail-state::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 9px var(--red)}
+.store-grid{display:grid;grid-template-columns:1.16fr .84fr;min-height:560px}
+.store-feature{position:relative;display:flex;align-items:flex-end;min-height:560px;padding:36px;overflow:hidden;background:linear-gradient(180deg,transparent 28%,rgba(8,8,9,.96) 88%),url('board_persp.jpg') center/cover no-repeat}
+.store-feature::after{content:"";position:absolute;inset:0;border-right:1px solid var(--line);background:linear-gradient(110deg,rgba(255,34,51,.05),transparent 48%);pointer-events:none}
+.store-feature-copy{position:relative;z-index:1;max-width:620px}
+.store-kicker{font-family:'Oswald';font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.store-family-name{font-family:'Anton';font-size:clamp(2.6rem,6vw,4.8rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin-top:9px}
+.store-family-name small{display:block;margin-top:10px;font-family:'Oswald';font-size:.9rem;letter-spacing:.16em;color:var(--gray);font-weight:500}
+.store-product-copy{max-width:560px;color:var(--gray);font-size:.98rem;line-height:1.75;margin-top:18px}
+.store-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+.store-side{display:flex;flex-direction:column;padding:34px;background:linear-gradient(160deg,#131316,#0c0c0e)}
+.store-side h3{font-size:1.55rem}
+.store-checks{list-style:none;display:grid;gap:15px;margin-top:24px}
+.store-checks li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;color:var(--gray);font-size:.91rem}
+.store-checks b{display:block;color:var(--white);font-weight:600;margin-bottom:2px}
+.store-checks .n{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,34,51,.34);border-radius:7px;color:var(--red);font-family:'Anton';font-size:.84rem}
+.store-note{margin-top:auto;padding-top:30px;color:var(--dim);font-size:.8rem;line-height:1.65}
+.store-products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:24px}
+.store-product-card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+.store-product-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.store-product-card-body{padding:20px}
+.store-product-card h3{font-size:1.28rem}
+.store-product-card p{color:var(--gray);font-size:.88rem;margin-top:8px}
+.store-price{font-family:'Anton';font-size:1.65rem;color:var(--red);margin-top:10px}
+.store-product-card .btn{width:100%;text-align:center;margin-top:16px}
+.store-error{display:none;margin-top:20px;padding:14px 16px;border:1px solid rgba(255,34,51,.35);border-radius:8px;color:var(--gray);font-size:.88rem}
+.store-products[hidden],.store-grid[hidden]{display:none!important}
+.store-product-card .btn:disabled{cursor:not-allowed;opacity:.45;transform:none;box-shadow:none}
+@media(max-width:860px){.store-grid{grid-template-columns:1fr}.store-feature{min-height:500px}.store-feature::after{border-right:0;border-bottom:1px solid var(--line)}.store-products{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.store-shell{border-radius:12px}.store-rail{align-items:flex-start;flex-direction:column}.store-feature{min-height:470px;padding:24px}.store-side{padding:26px}.store-products{grid-template-columns:1fr}}
+
 /* CTA */
 .cta{background:var(--bg);text-align:center}
 .cta h2{font-size:clamp(2rem,6vw,3.4rem)}
@@ -487,133 +525,46 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     STORE SECTION
-     When products go live: replace the store-card block
-     with your Shopify Buy Button embed snippet.
-     Get it from: Shopify Admin → Sales Channels → Buy Button
-     ══════════════════════════════════════════════════ -->
 <section class="store" id="store">
 <div class="wrap">
-  <div class="eyebrow" style="text-align:center">The Store</div>
-  <h2 style="text-align:center">HellzGate <span class="red">Hardware.</span></h2>
-  <p class="lead-p" style="text-align:center;max-width:620px;margin-left:auto;margin-right:auto">
-    We're finalizing v2 before we open orders. When the boards are ready to ship, this is where you get one — direct, no middlemen.
-  </p>
-
-  <!-- ═══ Shopify Buy Button mounts here when active ═══ -->
-  <div id="hz-buy-active" style="display:none;margin-top:52px;">
-    <div id="product-component-hellzgate" style="max-width:900px;margin:0 auto;"></div>
+  <div class="store-intro">
+    <div class="eyebrow">HellzGate Store</div>
+    <h2>Built for the <span class="red">field.</span></h2>
+    <p class="lead-p">HellzGate is the platform. C5 is the current hardware family. Shop production hardware and future accessories here when each release is verified and ready to ship.</p>
   </div>
-
-  <!-- ═══ Coming-soon state (visible until Buy Button activates) ═══ -->
-  <div id="hz-coming-soon">
-    <div class="store-cards-grid">
-
-      <!-- ── v1 card ── -->
-      <div class="panel">
-        <div class="store-release-badge">Releasing Soon</div>
-        <div class="store-product-info">
-          <div class="store-card-tier">Entry Level</div>
-          <div class="store-status" style="margin-bottom:16px;">Details dropping with availability</div>
-          <h3 class="store-product-name">HellzGate C5 <span class="red">v1</span></h3>
-          <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The original board. 10 ESP32-C5 radios, one wired I²C backplane, onboard OLED. USB-C powered — run it off a power bank in the field. GPS optional via Neo-6M add-on header, or let the companion app pull location from your phone. Fully modular — start lean, add what you need.
-          </p>
-          <ul class="spec-list" style="margin-bottom:26px;">
-            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
-            <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
-            <li>GPS via Neo-6M add-on header or phone fallback through app</li>
-            <li>Onboard OLED · USB-C power · power bank ready</li>
-            <li>Log to microSD or phone storage — no cloud, no accounts</li>
-          </ul>
-          <div class="store-links">
-            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── v2 card ── -->
-      <div class="panel">
-        <div class="store-release-badge">Releasing Soon</div>
-        <div class="store-product-info">
-          <div class="store-card-tier">Premium</div>
-          <div class="store-status" style="margin-bottom:16px;">Finalizing v2 — orders coming</div>
-          <h3 class="store-product-name">HellzGate C5 <span class="red">v2</span></h3>
-          <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The field-ready build. Same 10-node array, smaller and tighter. Embedded GPS so the device is fully self-contained — no phone, no add-ons required. Run on USB-C, a power bank, or stack up to three flat LiPo cells directly on the board and cut the cable entirely.
-          </p>
-          <ul class="spec-list" style="margin-bottom:26px;">
-            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
-            <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
-            <li>Embedded GPS + phone fallback · OLED optional via header</li>
-            <li>USB-C power + up to 3× LiPo via onboard battery headers</li>
-            <li>Log to microSD or phone storage — no cloud, no accounts</li>
-          </ul>
-          <div class="store-links">
-            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
-            <a href="https://discord.com/users/370298706991251457" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Join Discord →</a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /store-cards-grid -->
-
-    <div style="margin-top:20px;text-align:center;color:var(--dim);font-size:.84rem;font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;">
-      No preorders &nbsp;·&nbsp; No waitlists &nbsp;·&nbsp; Drop announced on GitHub + Discord first
+  <div class="store-shell" id="hellzgate-store">
+    <div class="store-rail">
+      <span class="store-rail-label">Direct from HellzGate</span>
+      <span class="store-rail-state" id="store-state">Coming online</span>
     </div>
-  </div><!-- /hz-coming-soon -->
-
+    <div class="store-grid" id="store-coming-soon">
+      <div class="store-feature">
+        <div class="store-feature-copy">
+          <div class="store-kicker">Current hardware family</div>
+          <div class="store-family-name">HellzGate <span class="red">C5</span><small>Multi-node wireless survey platform</small></div>
+          <p class="store-product-copy">The current C5 family is still being finalized. Confirmed specifications, configurations, pricing, and availability will appear here only after hardware and firmware validation.</p>
+          <div class="store-actions">
+            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-red">Follow the build</a>
+            <a href="#what" class="btn btn-ghost">Explore C5</a>
+          </div>
+        </div>
+      </div>
+      <aside class="store-side">
+        <div class="store-kicker">Store principles</div>
+        <h3>Ready means ready.</h3>
+        <ul class="store-checks">
+          <li><span class="n">01</span><span><b>Verified configurations</b>Product listings will reflect tested hardware, not planning assumptions.</span></li>
+          <li><span class="n">02</span><span><b>Local-first by design</b>No required cloud account for normal HellzGate operation.</span></li>
+          <li><span class="n">03</span><span><b>Secure checkout</b>Shopify will handle inventory, payment, and checkout when sales open.</span></li>
+        </ul>
+        <p class="store-note">No active preorder or waitlist is being offered here today. Availability will be announced through the official HellzGate channels.</p>
+      </aside>
+    </div>
+    <div class="store-products" id="store-products" hidden aria-live="polite"></div>
+  </div>
+  <div class="store-error" id="store-error" role="status"></div>
 </div>
 </section>
-
-<!--
-════════════════════════════════════════════════════════════════
-  SHOPIFY BUY BUTTON EMBED — uncomment when you have a product
-
-  Setup:
-  1. Shopify admin → Sales Channels → Buy Button → Create Buy Button
-  2. Pick your product → copy "Storefront Access Token" from Apps
-  3. Fill in storefrontAccessToken + product id below
-  4. Uncomment the <script> block and remove this comment wrapper
-
-<script type="text/javascript">
-(function(){
-  var s='https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  function go(){ShopifyBuy.UI.onReady(ShopifyBuy.buildClient({
-    domain:'nusbtt-vx.myshopify.com',
-    storefrontAccessToken:'YOUR_TOKEN_HERE'
-  })).then(function(ui){
-    ui.createComponent('product',{
-      id:'YOUR_PRODUCT_ID',
-      node:document.getElementById('product-component-hellzgate'),
-      options:{
-        product:{
-          styles:{
-            product:{'font-family':"'Inter',sans-serif",'background':'#121214','border':'1px solid #1e1e22','border-radius':'12px','padding':'34px'},
-            title:{'font-family':"'Oswald',sans-serif",'font-size':'1.5rem','font-weight':'700','text-transform':'uppercase','letter-spacing':'.04em','color':'#f4f4f5'},
-            price:{'font-family':"'Anton',sans-serif",'font-size':'2rem','color':'#ff2233'},
-            description:{'font-family':"'Inter',sans-serif",'color':'#a1a1aa','font-size':'.95rem','line-height':'1.7'},
-            button:{'font-family':"'Oswald',sans-serif",'font-size':'.9rem','font-weight':'700','letter-spacing':'.12em',"text-transform':'uppercase','padding-top':'13px','padding-bottom':'13px','background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}
-          },
-          text:{button:'Add to Cart'}
-        },
-        cart:{
-          styles:{button:{'font-family':"'Oswald',sans-serif",'background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}},
-          text:{title:'HellzGate Cart',button:'Checkout'}
-        },
-        toggle:{styles:{toggle:{'background-color':'#ff2233',':hover':{'background-color':'#c81826'}}}}
-      }
-    });
-    document.getElementById('hz-buy-active').style.display='block';
-    document.getElementById('hz-coming-soon').style.display='none';
-  });}
-  if(window.ShopifyBuy){if(window.ShopifyBuy.UI){go();}else{var t=document.createElement('script');t.src=s;t.onload=go;document.head.appendChild(t);}}
-  else{var t=document.createElement('script');t.src=s;t.onload=go;document.head.appendChild(t);}
-})();
-</script>
-════════════════════════════════════════════════════════════════
--->
 
 <section class="cta" id="notify">
 <div class="wrap">
@@ -657,5 +608,7 @@ im.addEventListener('error', fail);
 if(im.complete && im.naturalWidth===0) fail();
 });
 </script>
+<script src="store-config.js"></script>
+<script src="storefront.js"></script>
 </body>
 </html>

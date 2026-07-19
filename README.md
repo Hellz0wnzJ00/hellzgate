@@ -54,6 +54,25 @@ A dedicated **Flutter** (iOS + Android) companion app is in development. It talk
 | Web | HTML / CSS / JavaScript |
 | Tooling | Python (device emulator) · JSON / HTTP local API |
 
+## Storefront
+
+The website includes a native HellzGate-styled storefront with Shopify as the
+commerce backend. The public site owns the product presentation; Shopify owns
+catalog availability, pricing, cart creation, payment, and checkout.
+
+The store is fail-closed and displays a coming-soon state until it is explicitly
+enabled in `store-config.js`. To activate it:
+
+1. Create and verify the public products in Shopify.
+2. Create Storefront API access with product and cart permissions.
+3. Add only the public Storefront access token and confirmed product handles to
+   `store-config.js`.
+4. Set `enabled` to `true`, then test product loading and checkout before release.
+
+Never add a Shopify Admin token, private app secret, account password, firmware
+credential, or other private key to this repository. Product copy published in
+Shopify should be checked against the latest verified hardware documentation.
+
 ## Status
 
 🚧 **In active development.** Hardware is fabricated; firmware and app are building in phases. Follow the website and Discord for drops, build updates, and availability.
