@@ -11,14 +11,10 @@
 <meta property="og:site_name" content="HellzGate C5">
 <meta property="og:title" content="HellzGate C5 — Multi-Node Passive Wireless Survey Array">
 <meta property="og:description" content="One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud. From scrap paper doodle to real hardware.">
-<meta property="og:url" content="https://hellzgate.com/">hh
-<meta property="og:image" content="https://hellzgate.com/board_persp.jpg">
-<meta property="og:image:width" content="1100">
-<meta property="og:image:height" content="756">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://hellzgate.com/">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HellzGate C5 — Multi-Node Passive Wireless Survey Array">
 <meta name="twitter:description" content="One master coordinating an expandable cluster of ESP32-C5 scanner nodes. Dual-band Wi-Fi + BLE, GPS-tagged, local logging. No cloud.">
-<meta name="twitter:image" content="https://hellzgate.com/board_persp.jpg">
 <meta name="theme-color" content="#080809">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,8 +246,6 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <div class="nav-links">
 <a href="#next">What's Next</a>
 <a href="#what">Platform</a>
-<a href="#board">The Board</a>
-<a href="#gallery">Gallery</a>
 <a href="#journey">Journey</a>
 <a href="#store">Store</a>
 <a href="#notify" class="btn btn-red nav-cta">Follow the Build</a>
@@ -267,14 +261,8 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <div class="tag">One Master · Expandable Node Cluster · Wi-Fi + BLE</div>
 <p class="lead">A custom multi-node wireless survey platform I built from a random idea into real hardware. One board, a wall of radios, local logging, GPS ready. No subscriptions. No cloud. Just raw data in your hands.</p>
 <div class="cta-row">
-<a href="#board" class="btn btn-red">See the Board</a>
+<a href="#next" class="btn btn-red">See What's Next</a>
 <a href="#journey" class="btn btn-ghost">The Story</a>
-</div>
-<div class="showcase">
-<div class="shot">
-<img src="board_persp.jpg" alt="HellzGate C5 — the board next to an iPhone 16 Pro for scale, 155mm x 55mm, fully populated with 10 ESP32-C5 nodes">
-<div class="cap"><b>HellzGate C5</b> — 10 nodes, one board. 155 × 55mm. Fits in your hand.</div>
-</div>
 </div>
 <div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
 </div>
@@ -284,7 +272,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <div class="wrap">
 <div class="eyebrow" style="text-align:center">What's Next</div>
 <h2 style="text-align:center">v2 and the app are <span class="red">in development.</span></h2>
-<p class="lead-p" style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">v1 proved the gate could open. Now the next hardware revision and the companion app are both actively being built — here's where it's headed.</p>
+<p class="lead-p" style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">The production hardware and companion app are both actively being built. The design shown previously has been retired while the new platform is completed and validated.</p>
 <div class="next-grid">
 
 <div class="panel">
@@ -293,7 +281,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <p class="next-sub">The next board — built to go anywhere.</p>
 <ul class="next-list">
 <li><b>Onboard GPS</b> — built in, no add-on module</li>
-<li><b>Battery + USB-C</b> — fully portable, charges while plugged in</li>
+<li><b>USB-C PD</b> — full-performance power from a qualified wall supply or external power bank</li>
 <li><b>Digital power control</b> — the master runs the nodes, no switches</li>
 <li><b>Cleaner &amp; tighter</b> — no OLED or toggles, fewer moving parts</li>
 <li><b>Smaller &amp; more discreet</b> — a squarer, field-ready package</li>
@@ -309,7 +297,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <li><b>iOS + Android</b> — one clean, native app</li>
 <li><b>Live dashboard</b> — scan counts, node health, results in real time</li>
 <li><b>Full control</b> — start/stop, presets, manage the whole node cluster</li>
-<li><b>GPS tagging &amp; export</b> — phone GPS for v1, embedded for v2, logs to SD or phone</li>
+<li><b>GPS tagging &amp; export</b> — embedded device GPS with app support, logs to SD or phone</li>
 <li><b>Offline-first by default</b> — talks to the device directly, no cloud, no account required</li>
 <li><b>Optional connectivity</b> — remote monitoring and control if you want it, never forced</li>
 </ul>
@@ -330,7 +318,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <li>Passive Wi-Fi (2.4 / 5 GHz) and BLE scanning across every node</li>
 <li>GPS-tagged, timestamped records exported in WiGLE-ready format</li>
 <li>Local dashboard + companion app — no cloud, no servers, no account</li>
-<li>Dedicated wired I²C backplane keeps every radio free for the capture</li>
+<li>GateLink-compatible device communication with ESP-NOW now and transport-neutral expansion planned</li>
 <li>Passive and listen-only, start to finish</li>
 </ul>
 </div>
@@ -374,59 +362,6 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 </div>
 </section>
 
-<section class="board" id="board">
-<div class="wrap">
-<div class="head-row">
-<div class="eyebrow">The Board</div>
-<h2>One board. <span class="red">A wall of radios.</span></h2>
-<p class="lead-p">The heart of HellzGate C5 is a custom multi-node carrier I designed from scratch in KiCad. It carries a master and a full bank of ESP32-C5 scanner nodes side by side, wires them together on a dedicated backplane, and powers the whole array from a single USB-C port. No rat's nest of jumper wires — just one clean board doing the job it was drawn to do, with room to scale the cluster past a single board.</p>
-</div>
-
-<div class="board-main">
-<ul class="board-list">
-<li><b>A master + a full bank of scanner nodes</b> on one PCB — every node an ESP32-C5 with dual-band 2.4 / 5 GHz Wi-Fi and Bluetooth LE, and the cluster scales past a single board.</li>
-<li><b>Wired I²C backplane</b> so the nodes talk over dedicated traces and every radio stays free for capture instead of chatter.</li>
-<li><b>Onboard GPS, microSD, and an always-on OLED</b> for live status — hits, temps, node health — right on the device.</li>
-<li><b>Single USB-C in</b> feeds power distribution across the whole array. One cable, ten radios awake.</li>
-<li><b>Antenna ports broken out</b> along the edge and a custom enclosure designed around the board — cooling, ports, and screen all lined up.</li>
-<li><b>Passive and listen-only</b> by design. It watches the air; it never transmits into it.</li>
-</ul>
-<div class="shot">
-<img src="board_top.jpg" alt="HellzGate C5 red PCB fully populated — master node, ESP32-C5 scanner nodes, GPS, microSD and USB-C on one custom carrier">
-<div class="cap"><b>Fully populated</b> — the master, the node bank, GPS, microSD and USB-C laid out on one carrier</div>
-</div>
-</div>
-
-<div class="board-sub">
-<div class="shot">
-<img src="case_ext.jpg" alt="HellzGate C5 assembled top-down — all 10 ESP32-C5 nodes populated on the red PCB">
-<div class="cap"><b>Fully loaded</b> — every node slot filled, board ready to scan</div>
-</div>
-<div class="avail" style="align-self:center">
-<div class="t">Availability</div>
-<p>The first production boards just landed on my bench. HellzGate C5 isn't for sale yet — I'm bringing up hardware, firmware, and the companion app in phases. Builds and availability will follow. Want first word? <a href="#notify" class="red" style="font-weight:600">Follow the build.</a></p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="gallery" id="gallery">
-<div class="wrap">
-<div class="eyebrow" style="text-align:center">Up Close</div>
-<h2 style="text-align:center">The gate, from every angle.</h2>
-<div class="gal-grid">
-<div class="shot tall">
-<img src="board_persp.jpg" alt="HellzGate C5 marketing render — board with iPhone 16 Pro for scale, HellzGate C5 branding, 10-node passive wireless survey array">
-<div class="cap"><b>HellzGate C5</b> — 10-node passive wireless survey array. 155 × 55mm.</div>
-</div>
-<div class="oled-card">
-<img src="oled.jpg" alt="The HellzGate C5 OLED status screen showing temperature, Wi-Fi and BLE hit counts, GPS and SD status, and node health dots">
-<div class="cap"><b>Live at a glance</b> — Wi-Fi &amp; BLE counts, GPS / SD status, per-node health, always on</div>
-</div>
-</div>
-</div>
-</section>
-
 <section class="journey" id="journey">
 <div class="wrap">
 <div class="eyebrow">The Journey</div>
@@ -459,7 +394,7 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <div class="when">The Board</div>
 <div>
 <h3>Turning the mess into a PCB</h3>
-<p>I taught myself enough KiCad to turn that rat's nest into a real, custom board — power distribution, the I²C backplane, the node bank, GPS, microSD, and the OLED, all laid out on one carrier. Then I modeled a case around it so the ports, vents, and screen actually lined up.</p>
+<p>The first custom carrier turned the prototype into real hardware and exposed the engineering work the production platform needed. That original design is now retired; the lessons from it are feeding the current board.</p>
 </div>
 </div>
 <div class="tl">
@@ -473,17 +408,11 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
 <div class="when">Next</div>
 <div>
 <h3>v2 and the app</h3>
-<p>v2 hardware is actively in development — embedded GPS, battery + USB-C, digital power control, smaller and field-ready. The companion app is in Phase 1. More nodes, smarter detections, one-tap presets, and clean exports on the way. The gate is only getting sharper — follow every step on Discord.</p>
+<p>v2 hardware is actively in development — embedded GPS, qualified USB-C PD power, digital node control, and a smaller field-ready design. The companion app is in active development alongside GateLink. The gate is only getting sharper — follow every step on Discord.</p>
 </div>
 </div>
 </div>
 
-<div class="journey-shot">
-<div class="shot">
-<img src="case_ext.jpg" alt="HellzGate C5 assembled and fully populated — from scrap paper sketch to a real working board">
-<div class="cap"><b>Where it landed</b> — from a scrap paper doodle to a board you can hold</div>
-</div>
-</div>
 </div>
 </section>
 
@@ -510,29 +439,6 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
   <div id="hz-coming-soon">
     <div class="store-cards-grid">
 
-      <!-- ── v1 card ── -->
-      <div class="panel">
-        <div class="store-release-badge">Releasing Soon</div>
-        <div class="store-product-info">
-          <div class="store-card-tier">Entry Level</div>
-          <div class="store-status" style="margin-bottom:16px;">Details dropping with availability</div>
-          <h3 class="store-product-name">HellzGate C5 <span class="red">v1</span></h3>
-          <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The original board. 10 ESP32-C5 radios, one wired I²C backplane, onboard OLED. USB-C powered — run it off a power bank in the field. GPS optional via Neo-6M add-on header, or let the companion app pull location from your phone. Fully modular — start lean, add what you need.
-          </p>
-          <ul class="spec-list" style="margin-bottom:26px;">
-            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
-            <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
-            <li>GPS via Neo-6M add-on header or phone fallback through app</li>
-            <li>Onboard OLED · USB-C power · power bank ready</li>
-            <li>Log to microSD or phone storage — no cloud, no accounts</li>
-          </ul>
-          <div class="store-links">
-            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
       <!-- ── v2 card ── -->
       <div class="panel">
         <div class="store-release-badge">Releasing Soon</div>
@@ -541,13 +447,14 @@ V2 is in development &nbsp;·&nbsp; Companion app coming &nbsp;·&nbsp; <a href=
           <div class="store-status" style="margin-bottom:16px;">Finalizing v2 — orders coming</div>
           <h3 class="store-product-name">HellzGate C5 <span class="red">v2</span></h3>
           <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The field-ready build. Same 10-node array, smaller and tighter. Embedded GPS so the device is fully self-contained — no phone, no add-ons required. Run on USB-C, a power bank, or stack up to three flat LiPo cells directly on the board and cut the cable entirely.
+            The full-performance build: a ten-C5 survey array with embedded GPS, protected digital node power and qualified USB-C PD input. Use a compatible wall supply or external PD power bank.
           </p>
           <ul class="spec-list" style="margin-bottom:26px;">
-            <li>10 ESP32-C5 total — 1 master + 9 nodes over I²C · ESP-NOW scales to 20+ nodes</li>
+            <li>10 ESP32-C5 total — 1 coordinator + 9 scanner nodes</li>
             <li>Dual-band Wi-Fi 2.4 / 5 GHz + BLE passive scanning</li>
-            <li>Embedded GPS + phone fallback · OLED optional via header</li>
-            <li>USB-C power + up to 3× LiPo via onboard battery headers</li>
+            <li>Embedded GPS + phone fallback</li>
+            <li>USB-C PD power · 12 V / 3 A or 15 V / 3 A qualified source target</li>
+            <li>GateLink-compatible firmware and companion app</li>
             <li>Log to microSD or phone storage — no cloud, no accounts</li>
           </ul>
           <div class="store-links">
