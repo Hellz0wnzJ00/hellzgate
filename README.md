@@ -10,7 +10,7 @@
 **An independent, multi-node ESP32-C5 passive wireless survey array.**
 One master, up to nine scanner nodes. Wi-Fi + BLE, GPS-tagged, local logging — no cloud.
 
-🌐 **[hellzgate.com](https://hellzgate.com)**  ·  💬 **[Discord](https://discord.com/users/370298706991251457)**
+🌐 **[hellzgate.com](https://hellzgate.com)**  ·  💬 **[Discord](https://discord.gg/w6UdX6cutV)**
 
 ---
 
@@ -61,7 +61,7 @@ A dedicated **Flutter** (iOS + Android) companion app is in development. It talk
 ## Links
 
 🌐 Website — **[hellzgate.com](https://hellzgate.com)**
-💬 Community — **[Discord](https://discord.com/users/370298706991251457)**
+💬 Community — **[Discord](https://discord.gg/w6UdX6cutV)**
 
 ---
 
