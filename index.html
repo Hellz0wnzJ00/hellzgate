@@ -137,6 +137,16 @@ h2{font-size:clamp(1.8rem,4.5vw,2.9rem)}
 .tl p{color:var(--gray);font-size:.98rem}
 .journey-shot{margin-top:52px}
 .journey-shot .shot{max-width:900px;margin:0 auto}
+.prototype-proof{margin-top:52px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.75fr);gap:24px;align-items:stretch}
+.prototype-photo{margin:0;background:#0c0c0e;border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative}
+.prototype-photo img{display:block;width:100%;height:100%;min-height:420px;object-fit:cover}
+.prototype-photo figcaption{position:absolute;left:18px;right:18px;bottom:18px;padding:12px 15px;background:rgba(8,8,10,.84);border:1px solid rgba(255,255,255,.12);border-radius:8px;backdrop-filter:blur(8px);font-family:'Oswald';font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--white)}
+.prototype-copy{padding:30px;background:linear-gradient(145deg,rgba(255,34,51,.08),transparent 44%),var(--bg2);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;justify-content:center}
+.prototype-copy .proof-tag{font-family:'Oswald';font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.prototype-copy h3{font-size:1.55rem;color:var(--white);margin-bottom:13px}
+.prototype-copy p{color:var(--gray);font-size:.96rem}
+.prototype-copy .not-sale{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-family:'Oswald';font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+@media(max-width:820px){.prototype-proof{grid-template-columns:1fr}.prototype-photo img{min-height:300px}.prototype-copy{padding:24px}}
 
 /* WHAT'S NEXT */
 .whatsnext{background:radial-gradient(900px 420px at 100% 0,rgba(255,34,51,.08),transparent 58%),var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -406,6 +416,19 @@ C5 FullGate is releasing first &nbsp;·&nbsp; PCB layout underway &nbsp;·&nbsp;
 <h3>FullGate, then MiniGate</h3>
 <p>The lessons from the field prototypes are now locked into FullGate, the first official HellzGate C5 release. PCB layout and firmware development are moving forward now. MiniGate is planned as a future compact C5 platform after FullGate is fully validated.</p>
 </div>
+</div>
+</div>
+
+<div class="prototype-proof">
+<figure class="prototype-photo">
+<img src="prototype-v1-v2-field-tested.png" alt="Actual HellzGate V1 and V2 field-tested prototype circuit boards" loading="lazy">
+<figcaption>Actual V1 + V2 engineering hardware — photographed during development</figcaption>
+</figure>
+<div class="prototype-copy">
+<div class="proof-tag">Real Hardware · Field Tested</div>
+<h3>Prototypes that earned the final design.</h3>
+<p>V1 and V2 were working engineering platforms used to prove the multi-node concept and uncover the power, communication, integration and mechanical lessons now built into HellzGate C5 FullGate. These are the real boards that helped move the project from an idea to a finalized production design.</p>
+<div class="not-sale">Development prototypes · Retired · Not products for sale</div>
 </div>
 </div>
 
