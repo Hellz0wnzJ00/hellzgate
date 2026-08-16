@@ -291,7 +291,8 @@ C5 FullGate is releasing first &nbsp;·&nbsp; PCB layout underway &nbsp;·&nbsp;
 <li><b>Ten removable modules</b> — one master and nine scanner nodes</li>
 <li><b>Phase 1 firmware</b> — dual-band Wi-Fi and BLE passive observation</li>
 <li><b>Local records</b> — onboard GNSS support and microSD logging</li>
-<li><b>Two communication paths</b> — I²C primary and ESP-NOW secondary</li>
+<li><b>Two communication paths</b> — nine-slot I²C production backbone plus ESP-NOW wireless scaling</li>
+<li><b>Scalability testing</b> — ESP-NOW target of up to 20 scanner nodes per master</li>
 <li><b>Flexible field power</b> — qualified USB-C PD or a removable, externally charged 4S battery</li>
 <li><b>Built deliberately</b> — monitored and protected power architecture</li>
 </ul>
@@ -322,9 +323,10 @@ C5 FullGate is releasing first &nbsp;·&nbsp; PCB layout underway &nbsp;·&nbsp;
 <p class="lead-p">HellzGate C5 FullGate is a flexible, multi-node wireless research platform. One master coordinates nine removable ESP32-C5 nodes, with local GNSS support and microSD logging. The initial HellzGate firmware centers on passive Wi-Fi and Bluetooth observation while the hardware provides a foundation for education, research and authorized testing. No required cloud account and no required subscription.</p>
 <ul class="spec-list">
 <li>Current firmware baseline: passive Wi-Fi (2.4 / 5 GHz) and BLE scanning across every node</li>
-<li>I²C primary inter-node backbone with ESP-NOW as a secondary wireless path</li>
+<li>I²C primary inter-node backbone for the nine physical FullGate scanner slots</li>
+<li>ESP-NOW secondary wireless path with scalability testing targeting up to 20 scanner nodes per master</li>
 <li>Onboard GNSS support and local microSD logging</li>
-<li>Standalone operation planned; companion app and OTA management remain in development</li>
+<li>Standalone operation planned; companion app and OTA firmware management remain separate features in development</li>
 <li>Designed for educational use, wireless research and authorized testing</li>
 </ul>
 </div>
@@ -471,12 +473,13 @@ C5 FullGate is releasing first &nbsp;·&nbsp; PCB layout underway &nbsp;·&nbsp;
           <ul class="spec-list" style="margin-bottom:26px;">
             <li>10 removable XIAO ESP32-C5 modules — 1 master + 9 scanner nodes</li>
             <li>Phase 1 firmware: dual-band Wi-Fi 2.4 / 5 GHz + BLE passive observation</li>
-            <li>I²C primary backbone + ESP-NOW secondary wireless communication</li>
+            <li>I²C primary backbone for 9 physical scanner slots</li>
+            <li>ESP-NOW secondary path targeting up to 20 wireless scanner nodes per master through scalability testing</li>
             <li>Onboard GNSS support + local microSD logging</li>
             <li>15 V / 2 A USB-C PD input + removable, externally charged 4S battery support</li>
             <li>Battery monitoring, reverse-polarity and system-level protection</li>
             <li>Optional Qwiic/OLED display + 5 V fan or blower support</li>
-            <li>Standalone operation planned; companion app and OTA management in development</li>
+            <li>Standalone operation planned; companion app and OTA firmware management in development</li>
           </ul>
           <div class="store-links">
             <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
