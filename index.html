@@ -518,54 +518,7 @@ C5 FullGate is releasing first &nbsp;·&nbsp; PCB layout underway &nbsp;·&nbsp;
 </div>
 </section>
 
-<!--
-════════════════════════════════════════════════════════════════
-  SHOPIFY BUY BUTTON EMBED — uncomment when you have a product
-
-  Setup:
-  1. Shopify admin → Sales Channels → Buy Button → Create Buy Button
-  2. Pick your product → copy "Storefront Access Token" from Apps
-  3. Fill in storefrontAccessToken + product id below
-  4. Uncomment the <script> block and remove this comment wrapper
-
-<script type="text/javascript">
-(function(){
-  var s='https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  function go(){ShopifyBuy.UI.onReady(ShopifyBuy.buildClient({
-    domain:'nusbtt-vx.myshopify.com',
-    storefrontAccessToken:'YOUR_TOKEN_HERE'
-  })).then(function(ui){
-    ui.createComponent('product',{
-      id:'YOUR_PRODUCT_ID',
-      node:document.getElementById('product-component-hellzgate'),
-      options:{
-        product:{
-          styles:{
-            product:{'font-family':"'Inter',sans-serif",'background':'#121214','border':'1px solid #1e1e22','border-radius':'12px','padding':'34px'},
-            title:{'font-family':"'Oswald',sans-serif",'font-size':'1.5rem','font-weight':'700','text-transform':'uppercase','letter-spacing':'.04em','color':'#f4f4f5'},
-            price:{'font-family':"'Anton',sans-serif",'font-size':'2rem','color':'#ff2233'},
-            description:{'font-family':"'Inter',sans-serif",'color':'#a1a1aa','font-size':'.95rem','line-height':'1.7'},
-            button:{'font-family':"'Oswald',sans-serif",'font-size':'.9rem','font-weight':'700','letter-spacing':'.12em',"text-transform':'uppercase','padding-top':'13px','padding-bottom':'13px','background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}
-          },
-          text:{button:'Add to Cart'}
-        },
-        cart:{
-          styles:{button:{'font-family':"'Oswald',sans-serif",'background-color':'#ff2233','color':'#fff','border-radius':'4px',':hover':{'background-color':'#c81826'}}},
-          text:{title:'HellzGate Cart',button:'Checkout'}
-        },
-        toggle:{styles:{toggle:{'background-color':'#ff2233',':hover':{'background-color':'#c81826'}}}}
-      }
-    });
-    document.getElementById('hz-buy-active').style.display='block';
-    document.getElementById('hz-coming-soon').style.display='none';
-  });}
-  if(window.ShopifyBuy){if(window.ShopifyBuy.UI){go();}else{var t=document.createElement('script');t.src=s;t.onload=go;document.head.appendChild(t);}}
-  else{var t=document.createElement('script');t.src=s;t.onload=go;document.head.appendChild(t);}
-})();
-</script>
-════════════════════════════════════════════════════════════════
--->
-
+<!-- Retired storefront integration removed until sales infrastructure is ready. -->
 <section class="cta" id="notify">
 <div class="wrap">
 <div class="eyebrow" style="text-align:center">Stay in the Loop</div>

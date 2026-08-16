@@ -1,70 +1,95 @@
-# HellzGate C5
+# HellzGate
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
-![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20C%2B%2B-00599C)
+![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
 ![App](https://img.shields.io/badge/App-Flutter%20%2F%20Dart-02569B)
 ![Radio](https://img.shields.io/badge/Radio-Wi--Fi%20%2B%20BLE-7A3FF2)
-![Status](https://img.shields.io/badge/status-in%20active%20development-orange)
+![Status](https://img.shields.io/badge/FullGate-PCB%20layout%20underway-orange)
 ![License](https://img.shields.io/badge/license-Proprietary-lightgrey)
 
-**An independent, multi-node ESP32-C5 passive wireless survey array.**
-One master, up to nine scanner nodes. Wi-Fi + BLE, GPS-tagged, local logging — no cloud.
+**An independent, multi-node wireless research platform built around ESP32-C5 hardware.**
 
-🌐 **[hellzgate.com](https://hellzgate.com)**  ·  💬 **[Discord](https://discord.gg/w6UdX6cutV)**
+HellzGate is the platform. **C5 FullGate** is the first planned public product, with **C5 MiniGate** planned as a later direction.
+
+🌐 **[hellzgate.com](https://hellzgate.com)** · 💬 **[Discord](https://discord.gg/dhMhEgHwXe)**
 
 ---
 
-## What it is
+## From working prototypes to FullGate
 
-HellzGate C5 is a custom-built wireless survey / wardriving platform. A single master coordinates up to nine ESP32-C5 scanner nodes that listen across Wi-Fi (2.4 / 5 GHz) and Bluetooth LE, aggregate to the master, geo-tag, and log — all on your own local network. Passive and listen-only, start to finish. No subscriptions, no servers, no account.
+HellzGate was developed through two working engineering platforms. V1 and V2 were used to prove the multi-node concept and uncover practical lessons in power, communication, integration, firmware, and mechanical design. They are retired field-test prototypes and are not products for sale.
 
-The C5's dual-band (2.4 + 5 GHz) radio paired with a true multi-node array makes it something a single-radio wardriver can't be: more channels watched at once, and coverage that scales with the number of nodes.
+![HellzGate V1 and V2 field-tested prototypes](prototype-v1-v2-field-tested.png)
 
-## Hardware
+The lessons from those boards informed C5 FullGate, the first planned public HellzGate product.
 
-> 📷 First production boards arrive soon — photos coming.
+## C5 FullGate
 
-- Custom multi-node PCB carrying **1 master + up to 9 ESP32-C5 scanner nodes**
-- Dual-band Wi-Fi (2.4 / 5 GHz) + Bluetooth LE on every node
-- Onboard GPS, microSD, OLED status readout, single **USB-C** power
-- Dedicated wired **I²C backplane** so every radio stays free for capture
-- Designed in KiCad
+- Ten removable XIAO ESP32-C5 modules: one master and nine scanner nodes
+- Primary I²C production backbone for nine physical scanner slots
+- Secondary ESP-NOW wireless communication path
+- ESP-NOW scalability work targeting up to 20 scanner nodes per master; validation remains in progress
+- Current Phase 1 firmware baseline focused on passive 2.4/5 GHz Wi-Fi and BLE observation
+- Onboard GNSS support and local microSD logging
+- Qualified USB-C PD input and removable, externally charged 4S battery support
+- Battery monitoring and protected system-level power handling
+- Optional OLED display and cooling support
+- Standalone operation, with companion-app and OTA firmware-management work continuing separately
 
 ## Firmware
 
-Original firmware, written from scratch for this hardware — **not** derived from any prior or third-party project. Built in phases:
+The embedded firmware is written in **C using Espressif ESP-IDF**, with a **FreeRTOS task-based architecture**.
 
-- **Phase 1** — multi-node core over **ESP-NOW**: node enrollment, aggregation, a gap-free record store, and a local HTTP API
-- **Phase 2** — wired **I²C backplane** transport
-- **Phase 3** — JSON API, onboard GPS, surveillance detections, WiGLE / WDGW upload, and one-tap presets
+Phase 1 has run on real ESP32-C5 hardware with a master and multiple scanner nodes exchanging live observation records through ESP-NOW. Hardware testing has been used to identify, correct, and retest timing and queue-management behavior.
 
-The firmware is **proprietary and closed-source** — this repository does not contain it.
+The production I²C backbone, ESP-NOW scaling, local services, companion-app integration, and OTA firmware management are separate workstreams with their own validation requirements.
+
+ESP-NOW and OTA are different features: ESP-NOW carries wireless data between nodes, while OTA refers specifically to updating firmware over the air.
+
+The HellzGate firmware is proprietary and is not published in this repository.
 
 ## Companion app
 
-A dedicated **Flutter** (iOS + Android) companion app is in development. It talks to the device over local Wi-Fi to view live scans, manage nodes, and export data. Coming soon.
+The companion-app foundation uses **Flutter and Dart** for Android and iOS. App development and alignment with the firmware remain in progress.
 
-## Tech stack
+FullGate is being designed to operate as a standalone platform; the app is an additional management and workflow layer rather than a requirement for basic device operation.
 
-| Layer | Tech |
+## Public technology stack
+
+| Layer | Technology |
 |---|---|
-| Hardware | Custom PCB · ESP32-C5 · KiCad |
-| Firmware | C / C++ (ESP-IDF / Arduino) · ESP-NOW · I²C |
-| App | Flutter (Dart) — iOS + Android |
-| Web | HTML / CSS / JavaScript |
-| Tooling | Python (device emulator) · JSON / HTTP local API |
+| Target hardware | ESP32-C5 · XIAO ESP32-C5 |
+| Firmware | C · Espressif ESP-IDF · FreeRTOS |
+| Communication | I²C · ESP-NOW |
+| Data | Integrity-checked records · WiGLE-compatible CSV |
+| App foundation | Flutter · Dart · Android · iOS |
+| Website | HTML · CSS · JavaScript |
+| Flashing and diagnostics | ESP-IDF · esptool-compatible workflows |
 
-## Status
+## Current status
 
-🚧 **In active development.** Hardware is fabricated; firmware and app are building in phases. Follow the website and Discord for drops, build updates, and availability.
+| Area | Status |
+|---|---|
+| V1 field prototype | Retired after development testing |
+| V2 field prototype | Retired after development testing |
+| FullGate schematic | Complete |
+| FullGate PCB layout | Underway |
+| Phase 1 firmware | Completed and tested on real ESP32-C5 hardware |
+| Nine-slot I²C backbone | Development and hardware validation planned |
+| ESP-NOW scaling | Targeting up to 20 scanner nodes per master; validation in progress |
+| Companion app | In development |
+| MiniGate | Future product direction |
 
-## Links
+## Responsible use
 
-🌐 Website — **[hellzgate.com](https://hellzgate.com)**
-💬 Community — **[Discord](https://discord.gg/w6UdX6cutV)**
+HellzGate is intended for education, research, and authorized security testing. Use it only with systems, devices, and environments you own or have explicit permission to test. Illegal or unauthorized activity is prohibited.
+
+## Repository boundary
+
+This repository is the public home of the project website and public development history. It does not publish proprietary firmware, schematics, PCB source, Gerbers, manufacturing files, component-level design details, credentials, private logs, or confidential project records.
 
 ---
 
-**Designed & developed by Hellz (Sean Clossey).**
+**Designed and developed by Hellz (Sean Clossey).**
 
-© 2026 Sean Clossey (HellzGate). All rights reserved. The HellzGate C5 firmware, hardware design, and companion app are proprietary. This repository is the public home for the project — product info, updates, and links only.
+© 2026 Sean Clossey / HellzGate. All rights reserved.
