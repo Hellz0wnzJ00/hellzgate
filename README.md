@@ -64,7 +64,11 @@ FullGate is being designed to operate as a standalone platform; the app is an ad
 | Data | Integrity-checked records · WiGLE-compatible CSV |
 | App foundation | Flutter · Dart · Android · iOS |
 | Website | HTML · CSS · JavaScript |
-| Flashing and diagnostics | ESP-IDF · esptool-compatible workflows |
+| Prototype and diagnostics | Arduino · ESP-IDF · esptool-compatible workflows |
+
+## Public code examples
+
+The [`examples/`](examples/) directory contains small, standalone Arduino, ESP-IDF/C, and Dart references that demonstrate the project toolchains without exposing production firmware, private protocols, or companion-app internals. Arduino was used during early prototype work; the current production firmware direction uses C with ESP-IDF.
 
 ## Current status
 
