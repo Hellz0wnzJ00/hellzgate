@@ -45,6 +45,7 @@ The planned sale item is the **HellzGate C5 FullGate Core Board**, not a complet
 The latest adapter-corrected, antenna-equipped test kept **all 20 scanners UP throughout an approximately ten-minute timed window**, with one additional master coordinating them.
 
 - **23,580 additional observation records** across **13,782 frames**.
+- **Approximately 39 observation records per second across all 20 scanners combined**, averaged over the timed window—not per scanner, unique devices, or a maximum-throughput rating.
 - **No new reported lost frames, overflow, dropouts, or restarts** during the timed window.
 - **One new duplicate indication**.
 - **Zero bad-CRC, bad-field, or table-full errors**.
