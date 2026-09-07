@@ -1,5 +1,7 @@
 # HellzGate
 
+> **Physical FullGate PCB photos coming in the next few days.** The validation boards are awaiting arrival; photos will follow once they are in hand.
+
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
 ![App](https://img.shields.io/badge/App-Flutter%20%2F%20Dart-02569B)
