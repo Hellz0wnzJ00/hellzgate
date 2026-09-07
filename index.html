@@ -33,324 +33,101 @@
 </head>
 <body>
 
-<div class="announce-bar">
-<span class="dot"></span>
-<strong>Physical FullGate PCB photos coming in the next few days.</strong> &nbsp;·&nbsp; Boards awaiting arrival &nbsp;·&nbsp; <a href="#progress">Follow the progress</a>
-<span class="dot"></span>
-</div>
-
-<nav>
+<a class="skip-link" href="#what">Skip to content</a>
+<div class="announce-bar"><span>Physical FullGate PCB photos coming in the next few days · Boards awaiting arrival</span><a href="#progress">See progress</a></div>
+<nav aria-label="Main navigation">
 <div class="wrap nav-in">
 <a href="#top" class="logo">HELLZGATE</a>
-<div class="nav-links">
-<a href="#next">What's Next</a>
-<a href="#progress">Progress</a>
-<a href="#what">Platform</a>
-<a href="#journey">Journey</a>
-<a href="#store">Store</a>
+<button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Open navigation">☰</button>
+<div class="nav-links" id="main-menu">
+<a href="#what">Platform</a><a href="#progress">Progress</a><a href="#next">Next Steps</a><a href="#store">Hardware</a><a href="#journey">Story</a>
 <a href="#notify" class="btn btn-red nav-cta">Follow the Build</a>
-</div>
-<button class="burger" onclick="document.querySelector('.nav-links').style.display='flex'">☰</button>
-</div>
-</nav>
-
+</div></div></nav>
+<main>
 <header class="hero" id="top">
-<div class="wrap">
+<div class="wrap hero-grid">
+<div>
 <div class="eyebrow">Multi-Node Wireless Research Platform</div>
 <h1>HELLZGATE <span class="c5">C5 FULLGATE</span></h1>
-<div class="tag">One Master · Nine Scanner Nodes · Wi-Fi + BLE</div>
-<p class="lead">A purpose-built, standalone wireless survey platform developed from real field prototypes. Ten removable ESP32-C5 modules, local logging and onboard GNSS support—no required subscriptions, cloud service or account.</p>
-<div class="cta-row">
-<a href="#next" class="btn btn-red">See What's Next</a>
-<a href="#journey" class="btn btn-ghost">The Story</a>
+<div class="tag">One master · Nine scanners · Wi-Fi + BLE</div>
+<p class="lead">A standalone platform for observing the wireless world around you. Ten removable ESP32-C5 modules, with a design built around local logging and onboard positioning—no required cloud account or subscription.</p>
+<p class="hero-status"><strong>In development.</strong> Design complete; physical FullGate testing is next.</p>
+<div class="cta-row"><a href="#progress" class="btn btn-red">View Progress</a><a href="#store" class="btn btn-ghost">Hardware</a></div>
+<div class="fangs">☠ The gate is getting fangs</div>
 </div>
-<div class="fangs"><span class="skull">☠</span> The gate is getting fangs <span class="skull">☠</span></div>
-</div>
-</header>
-
-<section class="whatsnext" id="next">
+<figure id="fullgate-render" class="core-render">
+<a href="fullgate-core-board-cad.jpg"><img src="fullgate-core-board-cad.jpg" alt="FullGate Core Board CAD render with empty XIAO headers" fetchpriority="high"></a>
+<figcaption><strong>FullGate Core Board CAD render — XIAO modules not installed.</strong> Design preview, not a photograph of manufactured hardware.</figcaption>
+</figure>
+</div></header>
+<section id="what">
 <div class="wrap">
-<div class="eyebrow" style="text-align:center">What's Next</div>
-<h2 style="text-align:center">FullGate comes <span class="red">first.</span></h2>
-<p class="lead-p" style="text-align:center;max-width:700px;margin-left:auto;margin-right:auto">FullGate is the first planned HellzGate product. The schematic, PCB layout, routing, and manufacturing preparation are complete. Five validation boards are awaiting arrival. Standalone firmware testing and production-board integration are next.</p>
-<div class="next-grid">
-
-<div class="panel">
-<div class="badge-dev">Releasing First</div>
-<h3 class="next-h">HellzGate C5 <span class="red">FullGate</span></h3>
-<p class="next-sub">The full ten-module platform.</p>
-<ul class="next-list">
-<li><b>Ten removable modules</b> — one master and nine scanner nodes</li>
-<li><b>Phase 1 firmware</b> — dual-band Wi-Fi and BLE passive observation</li>
-<li><b>Local records</b> — onboard GNSS support and microSD logging</li>
-<li><b>Two communication paths</b> — nine-slot I²C production backbone plus ESP-NOW wireless scaling</li>
-<li><b>Scalability testing</b> — one master plus 20 scanners demonstrated in an antenna-equipped, ten-minute ESP-NOW bench test</li>
-<li><b>Flexible field power</b> — USB-C PD and externally charged 4S lithium-ion battery inputs; production-board power testing is pending</li>
-<li><b>Next checkpoint</b> — verify power, all nine scanner slots, and complete subsystem operation</li>
-</ul>
+<div class="eyebrow">The Platform</div>
+<h2>Observe. Locate. <span class="red">Log locally.</span></h2>
+<p class="lead-p section-intro">FullGate brings multiple radios together for wireless research, education, and authorized testing. Its firmware foundation observes Wi-Fi and Bluetooth LE; complete standalone operation is still being verified.</p>
+<div class="capability-grid">
+<article class="panel"><h3>Wireless observation</h3><p>Passive Wi-Fi observation on 2.4 and 5 GHz, plus Bluetooth LE. One master coordinates nine removable scanner modules.</p></article>
+<article class="panel"><h3>Local records</h3><p>Onboard GNSS positioning support and microSD logging are part of the design. Session, saved-file, and export testing remain ahead.</p></article>
+<article class="panel"><h3>Connected locally</h3><p>I²C is the primary communication backbone within FullGate. ESP-NOW provides a secondary wireless path, tested separately on a larger bench setup.</p></article>
 </div>
-
-<div class="panel">
-<div class="badge-dev">Future Platform</div>
-<h3 class="next-h">HellzGate C5 <span class="red">MiniGate</span></h3>
-<p class="next-sub">A smaller platform planned after FullGate.</p>
-<ul class="next-list">
-<li><b>FullGate first</b> — hardware and firmware validation stay the priority</li>
-<li><b>Compact direction</b> — intended as a smaller HellzGate C5 option</li>
-<li><b>Specifications later</b> — features and timing will be announced only after validation</li>
-<li><b>Same standard</b> — no release before it is tested and ready</li>
-</ul>
-</div>
-
-</div>
-<p style="text-align:center;color:var(--dim);font-size:.9rem;margin-top:28px">App work is paused while the standalone firmware baseline is stabilized. FullGate is intended to remain useful without the app. Follow the build on <a href="https://discord.gg/dhMhEgHwXe" class="red" style="font-weight:600">Discord</a>.</p>
-</div>
-</section>
-
-
-<section id="progress">
+</div></section>
+<section id="progress" class="features">
 <div class="wrap">
 <div class="eyebrow">Progress · September 7, 2026</div>
-<h2>Built. Tested. <span class="red">Next steps.</span></h2>
-<div class="next-grid">
-<div class="panel"><h3 class="next-h">Completed</h3><ul class="next-list">
-<li>✓ V1 and V2 field-tested engineering prototypes; both retired</li>
-<li>✓ FullGate schematic, layout, routing, and manufacturing preparation</li>
-<li>✓ Schematic and PCB design checks; production placement confirmed</li>
-<li>✓ Five validation boards ordered; arrival pending</li>
-<li>✓ Wi-Fi/BLE observation foundation, record integrity, counting, and deduplication tested on real hardware</li>
-<li>✓ Native I²C bench communication carrying live observation records</li>
-<li>✓ One master plus 20 scanners reporting throughout an antenna-equipped ESP-NOW bench soak</li>
-</ul></div>
-<div class="panel"><h3 class="next-h">Remaining</h3><ul class="next-list">
-<li>○ Verify complete standalone firmware: GNSS, microSD sessions, WiGLE 1.6 CSV, web status, JSON, OLED, and fan</li>
-<li>○ Inspect FullGate boards and validate power before installing modules</li>
-<li>○ Test one module at a time, then the full system on external power</li>
-<li>○ Validate battery operation and measure runtime</li>
-<li>○ Complete sustained-load, field, saved-file, and upload tests</li>
-<li>○ Prototype the enclosure and verify fit and cooling</li>
-<li>○ Finalize the app interface, resume app work, and complete release-readiness checks</li>
-</ul></div>
-</div>
-<div class="panel" style="margin-top:24px">
-<h3 class="next-h">20-scanner ESP-NOW checkpoint</h3>
-<p class="lead-p">All 20 scanners stayed UP during the latest approximately ten-minute timed bench window: <b>23,580 additional observation records</b> across <b>13,782 frames</b>. There were no new reported lost frames, overflow, dropouts, or restarts; one new duplicate indication; and zero bad-CRC, bad-field, or table-full errors.</p>
-<p class="lead-p"><b>Approximately 39 observation records per second across all 20 scanners combined.</b> This is the measured average for that timed bench window—not a per-scanner rate, a count of unique devices, or a maximum-throughput rating.</p>
-<p class="lead-p">These are timed-window results, not cumulative startup counters or unique-device counts. Different antenna types and unequal observation loads were used. This demonstrates the bench setup—not maximum RF capacity or complete field validation. <b>FullGate still has nine physical scanner slots.</b></p>
-</div>
-<p class="lead-p" style="margin-top:24px"><b>Future exploration:</b> Multigating would link independently powered FullGates wirelessly through their local masters to a central collector. This is exploratory, not an implemented feature. MiniGate remains a later direction.</p>
-</div>
-</section>
-
-<section id="what">
-<div class="wrap two">
-<div>
-<div class="eyebrow">What it is</div>
-<h2>A fully local, offline wireless research <span class="red">array</span>.</h2>
-<p class="lead-p">HellzGate C5 FullGate is a flexible, multi-node wireless research platform. One master coordinates nine removable ESP32-C5 nodes, with local GNSS support and microSD logging. The initial HellzGate firmware centers on passive Wi-Fi and Bluetooth observation while the hardware provides a foundation for education, research and authorized testing. No required cloud account and no required subscription.</p>
-<ul class="spec-list">
-<li>Current firmware baseline: passive Wi-Fi (2.4 / 5 GHz) and BLE scanning across every node</li>
-<li>I²C primary inter-node backbone for the nine physical FullGate scanner slots</li>
-<li>ESP-NOW secondary wireless path; 20-scanner bench research is separate from FullGate’s nine physical slots</li>
-<li>Onboard GNSS support and local microSD logging</li>
-<li>Standalone firmware testing is next; the production app interface and app integration remain separate work</li>
-<li>Designed for educational use, wireless research and authorized testing</li>
+<h2>A working foundation. <span class="red">More to prove.</span></h2>
+<ul class="milestones">
+<li><strong>Design complete</strong><span>Schematic, layout, routing, design checks, and manufacturing preparation complete. Five validation boards ordered; arrival pending.</span></li>
+<li><strong>Observation foundation tested</strong><span>Wi-Fi/BLE observation, record integrity, counting, and deduplication tested on real hardware.</span></li>
+<li><strong>Local bus demonstrated</strong><span>Native I²C bench communication carried live observation records.</span></li>
 </ul>
+<div class="panel bench-result">
+<div class="eyebrow">Separate ESP-NOW bench test</div>
+<h3>20 scanners online for approximately 10 minutes.</h3>
+<div class="results-grid"><div><strong>20/20</strong><span>scanners stayed UP</span></div><div><strong>23,580</strong><span>observation records</span></div><div><strong>≈39/sec</strong><span>combined record average</span></div></div>
+<p>This is a separate one-master, 20-scanner setup—not FullGate's nine physical scanner slots. The rate is a measured bench average, not unique devices, a per-scanner rate, or a maximum-throughput rating.</p>
+<details><summary>Test counters and limitations</summary>
+<p>The timed window recorded 13,782 frames, no new reported lost frames, overflow, dropouts, or restarts, one new duplicate indication, and zero bad-CRC, bad-field, or table-full errors.</p>
+<p>These are timed-window deltas, not cumulative startup counters. All scanners had antennas, but antenna types and observation loads differed. This does not establish maximum RF capacity or complete field performance.</p>
+</details>
 </div>
-<div class="panel">
-<div class="stat-grid">
-<div class="stat"><b>9</b><span>Scanner nodes<br>plus one master</span></div>
-<div class="stat"><b>3</b><span>Signals scanned<br>Wi-Fi 2.4 · 5 · BLE</span></div>
-<div class="stat"><b>USB-C</b><span>PD power<br>input</span></div>
-<div class="stat"><b>0</b><span>Cloud<br>dependencies</span></div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="features" id="features">
+</div></section>
+<section id="next">
 <div class="wrap">
-<div class="eyebrow" style="text-align:center">Built In</div>
-<h2 style="text-align:center">Built for local research.</h2>
-<div class="feat-grid" style="margin-top:44px">
-<div class="feat">
-<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 6h2"/></svg></div>
-<h4>Flexible Power</h4><p>USB-C PD and external 4S lithium-ion battery inputs. Power validation is pending.</p>
-</div>
-<div class="feat">
-<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></div>
-<h4>Dual-Band Wi-Fi</h4><p>2.4 &amp; 5 GHz.</p>
-</div>
-<div class="feat">
-<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></div>
-<h4>BLE</h4><p>Bluetooth LE scanning.</p>
-</div>
-<div class="feat">
-<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-<h4>GNSS Ready</h4><p>Onboard positioning support.</p>
-</div>
-<div class="feat">
-<div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4M12 12l-5.2 5M12 12l5.2 5"/></svg></div>
-<h4>Ten Modules</h4><p>One master and nine removable scanner nodes.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="journey" id="journey">
-<div class="wrap">
-<div class="eyebrow">The Journey</div>
-<h2>From a random thought to <span class="red">boards in hand.</span></h2>
-<p class="lead-p">HellzGate didn't start in a lab. It started as an itch — I wanted to actually see the wireless world around me, and one little radio was never going to be enough. So I sketched a box full of them and started building. Here's how it went.</p>
-
-<div class="timeline">
-<div class="tl">
-<div class="when">The Spark</div>
-<div>
-<h3>A random thought</h3>
-<p>What if instead of one radio sniffing the air, I had a whole cluster of them working together — each one on its own channel, all reporting back to one place? One radio shows you a keyhole. I wanted the whole door.</p>
-</div>
-</div>
-<div class="tl">
-<div class="when">The Doodle</div>
-<div>
-<h3>A scrap paper sketch</h3>
-<p>It started as a scribble — a rectangle, a row of little boxes for the nodes, arrows pointing to a "brain," and a screen on the front. That doodle is basically the layout the board still uses today. Sometimes the dumb-looking sketch is the whole plan.</p>
-</div>
-</div>
-<div class="tl">
-<div class="when">The Mess</div>
-<div>
-<h3>The breadboard era</h3>
-<p>Next came the sprawling prototype — a pile of modules, a spider-web of jumper wires, and way more nodes than any breadboard should hold. Ugly, held together by stubbornness, but it <em>worked</em>. It proved the whole idea: a master herding a bank of nodes really could scan wide and log clean.</p>
-</div>
-</div>
-<div class="tl">
-<div class="when">The Board</div>
-<div>
-<h3>Turning the mess into a PCB</h3>
-<p>The first custom carrier turned the prototype into real hardware and exposed the engineering work the production platform needed. That original design is now retired; the lessons from it are feeding the current board.</p>
-</div>
-</div>
-<div class="tl">
-<div class="when">Now</div>
-<div>
-<h3>FullGate takes shape</h3>
-<p>The firmware foundation runs on real ESP32-C5 hardware. Native I²C has carried live observation records in bench tests. FullGate design and routing are complete, and five validation boards are awaiting arrival.</p>
-</div>
-</div>
-<div class="tl">
-<div class="when">Next</div>
-<div>
-<h3>FullGate, then MiniGate</h3>
-<p>Next comes standalone firmware verification, PCB inspection and power checks, full-system testing on external power, battery testing, and field validation. MiniGate remains a future compact direction after FullGate is established.</p>
-</div>
-</div>
-</div>
-
-<figure id="fullgate-render" style="margin:40px auto;max-width:560px;background:#0c0c0e;border:1px solid var(--line);border-radius:16px;overflow:hidden">
-<a href="fullgate-core-board-cad.jpg"><img src="fullgate-core-board-cad.jpg" alt="FullGate Core Board CAD render with empty XIAO headers" loading="lazy" style="display:block;width:100%;height:auto"></a>
-<figcaption style="padding:20px;font-size:1rem;line-height:1.6"><strong>FullGate Core Board CAD render — XIAO modules not installed.</strong> Design preview, not a photograph of manufactured hardware. Physical board photos will follow after arrival.</figcaption>
-</figure>
-
-<div class="prototype-proof">
-<figure class="prototype-photo">
-<img src="prototype-v1-v2-field-tested.png" alt="Actual HellzGate V1 and V2 field-tested prototype circuit boards" loading="lazy">
-<figcaption>Actual V1 + V2 engineering hardware — photographed during development</figcaption>
-</figure>
-<div class="prototype-copy">
-<div class="proof-tag">Real Hardware · Field Tested</div>
-<h3>Prototypes that earned the final design.</h3>
-<p>V1 and V2 were working engineering platforms used to prove the multi-node concept and uncover the power, communication, integration and mechanical lessons informing HellzGate C5 FullGate. These are the real boards that helped move the project from an idea toward a production-ready design.</p>
-<div class="not-sale">Development prototypes · Retired · Not products for sale</div>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════
-     STORE SECTION
-     When products go live: replace the store-card block
-     with your Shopify Buy Button embed snippet.
-     Get it from: Shopify Admin → Sales Channels → Buy Button
-     ══════════════════════════════════════════════════ -->
+<div class="eyebrow">Next Steps</div><h2>From bench tests to <span class="red">FullGate in the field.</span></h2>
+<ol class="roadmap">
+<li><strong>Finish standalone firmware testing</strong><span>GNSS, microSD sessions, WiGLE 1.6 CSV, web status, JSON, OLED, and fan.</span></li>
+<li><strong>Bring up the physical PCB</strong><span>Inspect the boards and verify power before fitting modules. Test one module at a time, then the full system on external power.</span></li>
+<li><strong>Verify battery and field operation</strong><span>Measure battery runtime; complete sustained-load, field, saved-file, and upload tests.</span></li>
+<li><strong>Complete the release preparation</strong><span>Verify enclosure fit and cooling, finalize the app interface, then resume app work and complete release-readiness checks.</span></li>
+</ol>
+<p class="note">App work is paused until the standalone baseline is stable. FullGate is intended to remain useful without the app.</p>
+</div></section>
 <section class="store" id="store">
 <div class="wrap">
-  <div class="eyebrow" style="text-align:center">The Store</div>
-  <h2 style="text-align:center">HellzGate <span class="red">Hardware.</span></h2>
-  <p class="lead-p" style="text-align:center;max-width:620px;margin-left:auto;margin-right:auto">
-    FullGate is our first official HellzGate C5 release. Earlier boards were field-testing prototypes and will not be sold. When FullGate is validated and ready to ship, this is where you will find it.
-  </p>
-
-  <!-- ═══ Shopify Buy Button mounts here when active ═══ -->
-  <div id="hz-buy-active" style="display:none;margin-top:52px;">
-    <div id="product-component-hellzgate" style="max-width:900px;margin:0 auto;"></div>
-  </div>
-
-  <!-- ═══ Coming-soon state (visible until Buy Button activates) ═══ -->
-  <div id="hz-coming-soon">
-    <div class="store-cards-grid">
-
-      <!-- ── FullGate card ── -->
-      <div class="panel">
-        <div class="store-release-badge">In Development</div>
-        <div class="store-product-info">
-          <div class="store-card-tier">First Official Release</div>
-          <div class="store-status" style="margin-bottom:16px;">Design complete · Validation boards awaiting arrival</div>
-          <h3 class="store-product-name">HellzGate C5 <span class="red">FullGate Core Board</span></h3>
-          <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            The Core Board is the foundation for a ten-module wireless research system—not a complete ready-to-use kit. XIAO modules, antennas, display, fan, power supply, battery, and enclosure are separate. The standalone firmware focuses on observation and local logging; full production-board testing remains ahead.
-          </p>
-          <ul class="spec-list" style="margin-bottom:26px;">
-            <li>Supports 10 removable XIAO ESP32-C5 modules — 1 master + 9 scanners; modules not included</li>
-            <li>Phase 1 firmware: dual-band Wi-Fi 2.4 / 5 GHz + BLE passive observation</li>
-            <li>I²C primary backbone for 9 physical scanner slots</li>
-            <li>ESP-NOW secondary path; separate bench research demonstrated 20 reporting scanners plus one master</li>
-            <li>Onboard GNSS support + local microSD logging</li>
-            <li>USB-C PD input + externally charged 4S lithium-ion battery input through XT60</li>
-            <li>Production-board power behavior and battery runtime still require measurement</li>
-            <li>3.3 V I²C display connector and cooling-fan support</li>
-            <li>Standalone firmware verification next; app work paused pending a stable baseline</li>
-          </ul>
-          <div class="store-links">
-            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow on GitHub →</a>
-            <a href="https://discord.gg/dhMhEgHwXe" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Join Discord →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MiniGate future card ── -->
-      <div class="panel">
-        <div class="store-product-info">
-          <div class="store-card-tier">Future Development</div>
-          <div class="store-status" style="margin-bottom:16px;">Planned after FullGate</div>
-          <h3 class="store-product-name">HellzGate C5 <span class="red">MiniGate</span></h3>
-          <p style="color:var(--gray);font-size:.97rem;line-height:1.7;margin:14px 0 22px;">
-            A smaller HellzGate C5 platform planned for future development. Final features, specifications and release timing will be announced after FullGate hardware and firmware validation.
-          </p>
-          <ul class="spec-list" style="margin-bottom:26px;">
-            <li>Compact HellzGate C5 direction</li>
-            <li>FullGate remains the current development and release priority</li>
-            <li>No orders or release date announced</li>
-          </ul>
-          <div class="store-links">
-            <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.85rem;padding:9px 20px">Follow Development →</a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /store-cards-grid -->
-
-    <div style="margin-top:20px;text-align:center;color:var(--dim);font-size:.84rem;font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;">
-      No preorders &nbsp;·&nbsp; No waitlists &nbsp;·&nbsp; Drop announced on GitHub + Discord first
-    </div>
-  </div><!-- /hz-coming-soon -->
-
+<div class="eyebrow">Hardware · Planned Release</div><h2>The FullGate <span class="red">Core Board.</span></h2>
+<p class="lead-p section-intro">The first planned HellzGate product is a core board, not a complete ready-to-use kit. No orders or release date announced.</p>
+<div id="hz-buy-active" hidden><div id="product-component-hellzgate"></div></div>
+<div id="hz-coming-soon" class="hardware-grid">
+<div class="panel"><h3>Board design</h3><ul class="spec-list">
+<li>Ten removable XIAO ESP32-C5 module positions: one master and nine scanners</li>
+<li>Onboard GNSS support and microSD logging</li>
+<li>USB-C PD input and externally charged 4S lithium-ion battery input through XT60</li>
+<li>3.3 V I²C display connector and cooling-fan support</li>
+</ul><p class="note">Production-board power behavior, subsystem operation, and battery runtime still need verification.</p></div>
+<div class="panel"><h3>Separate accessories</h3><p>XIAO modules, antennas, display, fan, power supply, battery, and enclosure are not included with the planned Core Board.</p><p class="note">No preorders or waitlists. Availability will be announced on GitHub and Discord after testing.</p><a class="btn btn-ghost" href="#notify">Follow the Build</a></div>
 </div>
-</section>
-
-<!-- Retired storefront integration removed until sales infrastructure is ready. -->
+<details class="future"><summary>Later exploration: MiniGate and Multigating</summary><p>MiniGate is a future compact platform, with specifications and timing to follow after FullGate validation.</p><p>Multigating would link independently powered FullGates wirelessly through their local masters to a central collector. It is exploratory, not an implemented feature.</p></details>
+</div></section>
+<section class="journey" id="journey">
+<div class="wrap">
+<div class="eyebrow">The Story</div><h2>One radio was <span class="red">never enough.</span></h2>
+<p class="lead-p section-intro">HellzGate started with a question: what if a whole cluster of radios could work together and report to one place? A sketch became a breadboard, then custom engineering boards, and now the FullGate design.</p>
+<div class="prototype-proof">
+<figure class="prototype-photo"><img src="prototype-v1-v2-field-tested.png" alt="Actual HellzGate V1 and V2 field-tested prototype circuit boards" loading="lazy"><figcaption>Actual V1 + V2 engineering hardware — photographed during development</figcaption></figure>
+<div class="prototype-copy"><div class="proof-tag">V1 and V2 · Retired prototypes</div><h3>Real boards. Real lessons.</h3><p>These working engineering platforms helped prove the multi-node concept and expose the power, communication, integration, and mechanical work needed for FullGate.</p><div class="not-sale">Development prototypes · Not products for sale</div></div>
+</div>
+</div></section>
+</main>
 <section class="cta" id="notify">
 <div class="wrap">
 <div class="eyebrow" style="text-align:center">Stay in the Loop</div>
