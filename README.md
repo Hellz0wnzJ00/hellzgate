@@ -27,6 +27,10 @@ The lessons from those boards informed C5 FullGate, the first planned public Hel
 
 ## C5 FullGate
 
+<img src="fullgate-core-board-cad.jpg" alt="FullGate Core Board CAD render with empty XIAO headers" width="560">
+
+**FullGate Core Board CAD render — XIAO modules not installed.** This is a design preview, not a photograph of manufactured hardware. Physical board photos will follow after arrival.
+
 - Ten removable XIAO ESP32-C5 modules: one master and nine scanner nodes
 - Primary I²C production backbone for nine physical scanner slots
 - Secondary ESP-NOW wireless communication path
