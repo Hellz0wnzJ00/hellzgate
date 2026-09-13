@@ -34,7 +34,7 @@
 <body>
 
 <a class="skip-link" href="#what">Skip to content</a>
-<div class="announce-bar"><span>Physical FullGate PCB photos coming in the next few days · Boards awaiting arrival</span><a href="#progress">See progress</a></div>
+<div class="announce-bar"><span>FullGate boards on the bench · Nine-scanner ESP-NOW and I²C soak tests complete</span><a href="#progress">See progress</a></div>
 <nav aria-label="Main navigation">
 <div class="wrap nav-in">
 <a href="#top" class="logo">HELLZGATE</a>
@@ -51,13 +51,13 @@
 <h1>HELLZGATE <span class="c5">C5 FULLGATE</span></h1>
 <div class="tag">One master · Nine scanners · Wi-Fi + BLE</div>
 <p class="lead">A standalone platform for observing the wireless world around you. Ten removable ESP32-C5 modules, with a design built around local logging and onboard positioning—no required cloud account or subscription.</p>
-<p class="hero-status"><strong>In development.</strong> Design complete; physical FullGate testing is next.</p>
-<div class="cta-row"><a href="#progress" class="btn btn-red">View Progress</a><a href="#store" class="btn btn-ghost">Hardware</a></div>
+<p class="hero-status"><strong>In development.</strong> Physical FullGate testing underway; SD files and upload tests verified.</p>
+<div class="cta-row"><a href="#progress" class="btn btn-red">View Progress</a><a href="#hotspot" class="btn btn-ghost">Connect / Wi-Fi Help</a></div>
 <div class="fangs">☠ The gate is getting fangs</div>
 </div>
 <figure id="fullgate-render" class="core-render">
-<a href="fullgate-core-board-cad.jpg"><img src="fullgate-core-board-cad.jpg" alt="FullGate Core Board CAD render with empty XIAO headers" fetchpriority="high"></a>
-<figcaption><strong>FullGate Core Board CAD render — XIAO modules not installed.</strong> Design preview, not a photograph of manufactured hardware.</figcaption>
+<a href="fullgate-display.png"><img src="fullgate-display.png" alt="FullGate boards in a black and red presentation graphic" fetchpriority="high"></a>
+<figcaption><strong>FullGate · Stylized presentation.</strong> <a href="fullgate-development.jpg">View the original board photo for actual hardware details.</a> <a href="fullgate-core-board-cad.jpg">View the CAD render.</a></figcaption>
 </figure>
 </div></header>
 <section id="what">
@@ -67,19 +67,52 @@
 <p class="lead-p section-intro">FullGate brings multiple radios together for wireless research, education, and authorized testing. Its firmware foundation observes Wi-Fi and Bluetooth LE; complete standalone operation is still being verified.</p>
 <div class="capability-grid">
 <article class="panel"><h3>Wireless observation</h3><p>Passive Wi-Fi observation on 2.4 and 5 GHz, plus Bluetooth LE. One master coordinates nine removable scanner modules.</p></article>
-<article class="panel"><h3>Local records</h3><p>Onboard GNSS positioning support and microSD logging are part of the design. Session, saved-file, and export testing remain ahead.</p></article>
-<article class="panel"><h3>Connected locally</h3><p>I²C is the primary communication backbone within FullGate. ESP-NOW provides a secondary wireless path, tested separately on a larger bench setup.</p></article>
+<article class="panel"><h3>Local records</h3><p>GNSS-tagged microSD records verified in separate nine-scanner ESP-NOW and I²C tests. Both saved CSV files were retrieved, checked and accepted in upload tests.</p></article>
+<article class="panel"><h3>Connected locally</h3><p>I²C is the primary communication backbone within FullGate. ESP-NOW provides a secondary wireless path. Both transports completed separate nine-scanner FullGate soaks; the earlier 20-scanner bench result is documented below.</p></article>
 </div>
+</div></section>
+<section id="hotspot">
+<div class="wrap">
+<div class="eyebrow">Setup &amp; Troubleshooting</div>
+<h2>Hotspot on demand. <span class="red">One button.</span></h2>
+<p class="lead-p section-intro">Can't see the HellzGate Wi-Fi network? The hotspot is off after startup in the tested firmware. While the master is running, hold <strong>M1's BOOT button for about one second, then release</strong> to enable it. Repeat to disable it.</p>
+<div class="hardware-grid">
+<article class="panel"><h3>Connect to the dashboard</h3><ul class="spec-list">
+<li>Wi-Fi network / SSID: <strong>hellzgate</strong></li>
+<li>Default password: <strong>hellzgate</strong></li>
+<li>Open <strong>http://192.168.4.1</strong> in your browser</li>
+<li>No internet is expected. Stay connected to use the local dashboard.</li>
+</ul></article>
+<article class="panel"><h3>Toggle without resetting</h3><ul class="spec-list">
+<li>Use the master's BOOT button, not a scanner's.</li>
+<li>Do not press RESET or hold BOOT during power-up for this action. BOOT at reset is used for flashing.</li>
+<li>Hotspot off disconnects the dashboard; scanning and SD logging continue.</li>
+<li>A restart returns the hotspot to off in the tested builds.</li>
+</ul></article>
+</div>
+<p class="note">If the SSID is missing, let the master finish booting, hold and release BOOT once, then refresh your Wi-Fi list. Each hold toggles the state; repeated holds can turn it back off. Disabling the hotspot does not disable ESP-NOW or make the device radio-silent. Use Stop on the dashboard to close a logging session before powering down.</p>
 </div></section>
 <section id="progress" class="features">
 <div class="wrap">
-<div class="eyebrow">Progress · September 7, 2026</div>
+<div class="eyebrow">Progress · September 13, 2026</div>
 <h2>A working foundation. <span class="red">More to prove.</span></h2>
 <ul class="milestones">
-<li><strong>Design complete</strong><span>Schematic, layout, routing, design checks, and manufacturing preparation complete. Five validation boards ordered; arrival pending.</span></li>
+<li><strong>Design complete</strong><span>Schematic, layout, routing, design checks, and manufacturing preparation complete. Physical FullGate hardware has completed separate nine-scanner transport tests.</span></li>
 <li><strong>Observation foundation tested</strong><span>Wi-Fi/BLE observation, record integrity, counting, and deduplication tested on real hardware.</span></li>
-<li><strong>Local bus demonstrated</strong><span>Native I²C bench communication carried live observation records.</span></li>
+<li><strong>Local bus demonstrated</strong><span>All nine FullGate scanners stayed online during a ten-minute wired soak, with zero I²C read errors.</span></li>
 </ul>
+<div class="panel bench-result">
+<div class="eyebrow">FullGate · One master + nine scanners · September 13</div>
+<h3>Two transports. Real SD files. Successful uploads.</h3>
+<div class="results-grid"><div><strong>9/9</strong><span>scanners online in both soaks</span></div><div><strong>10 min</strong><span>separate test for each transport</span></div><div><strong>0</strong><span>reported SD write errors</span></div></div>
+<p><strong>ESP-NOW:</strong> 22,645 additional rows reported written, with zero reported lost frames, overflows or restarts. One duplicate frame was detected and discarded.</p>
+<p><strong>Wired I²C:</strong> 20,550 additional rows reported written across 105,867 additional polls, with zero read errors or wrong IDs. Initial overflow counts did not increase.</p>
+<p>Both runs collected BLE and 2.4/5 GHz Wi-Fi observations and held a GNSS fix throughout. Both retrieved SD files had metadata and column headers, and every record had the expected 14 columns.</p>
+<details><summary>Saved files, upload results and remaining checks</summary>
+<p>The ESP-NOW file contained 47,273 records, all accepted by the tested upload service. The I²C file contained 29,102 records; an upload copy removed 63 placeholder timestamps, and all remaining 29,039 records were accepted. File totals include recording outside the timed soak windows. This verifies the tested upload path, not every service.</p>
+<p>Display initialization and startup timestamps remain open issues. Complete charging validation and measured field runtime are still pending. Bench results do not establish production readiness or long-term reliability.</p>
+</details>
+</div>
 <div class="panel bench-result">
 <div class="eyebrow">Separate ESP-NOW bench test</div>
 <h3>20 scanners online for approximately 10 minutes.</h3>
@@ -95,12 +128,12 @@
 <div class="wrap">
 <div class="eyebrow">Next Steps</div><h2>From bench tests to <span class="red">FullGate in the field.</span></h2>
 <ol class="roadmap">
-<li><strong>Finish standalone firmware testing</strong><span>GNSS, microSD sessions, WiGLE 1.6 CSV, web status, JSON, OLED, and fan.</span></li>
-<li><strong>Bring up the physical PCB</strong><span>Inspect the boards and verify power before fitting modules. Test one module at a time, then the full system on external power.</span></li>
-<li><strong>Verify battery and field operation</strong><span>Measure battery runtime; complete sustained-load, field, saved-file, and upload tests.</span></li>
-<li><strong>Complete the release preparation</strong><span>Verify enclosure fit and cooling, finalize the app interface, then resume app work and complete release-readiness checks.</span></li>
+<li><strong>Finish standalone firmware testing</strong><span>Extend the completed GNSS, SD and transport checks; resolve display initialization and startup timestamps, then finish remaining subsystem checks.</span></li>
+<li><strong>Extend full-array testing</strong><span>Build on the completed ten-minute runs with longer sessions and repeatable setup checks across all ten modules.</span></li>
+<li><strong>Verify battery and field operation</strong><span>Finish battery charging validation, measure runtime and complete field tests. Bench saved-file and upload tests are complete.</span></li>
+<li><strong>Complete the release preparation</strong><span>Verify enclosure fit and cooling, finalize the app interface, then complete device integration and release-readiness checks.</span></li>
 </ol>
-<p class="note">App work is paused until the standalone baseline is stable. FullGate is intended to remain useful without the app.</p>
+<p class="note">The app foundation exists; real-device integration and release preparation remain in development. FullGate is intended to remain useful without the app.</p>
 </div></section>
 <section class="store" id="store">
 <div class="wrap">
@@ -113,7 +146,7 @@
 <li>Onboard GNSS support and microSD logging</li>
 <li>USB-C PD input and externally charged 4S lithium-ion battery input through XT60</li>
 <li>3.3 V I²C display connector and cooling-fan support</li>
-</ul><p class="note">Production-board power behavior, subsystem operation, and battery runtime still need verification.</p></div>
+</ul><p class="note">Extended subsystem checks and measured battery runtime remain in progress.</p></div>
 <div class="panel"><h3>Separate accessories</h3><p>XIAO modules, antennas, display, fan, power supply, battery, and enclosure are not included with the planned Core Board.</p><p class="note">No preorders or waitlists. Availability will be announced on GitHub and Discord after testing.</p><a class="btn btn-ghost" href="#notify">Follow the Build</a></div>
 </div>
 <details class="future"><summary>Later exploration: MiniGate and Multigating</summary><p>MiniGate is a future compact platform, with specifications and timing to follow after FullGate validation.</p><p>Multigating would link independently powered FullGates wirelessly through their local masters to a central collector. It is exploratory, not an implemented feature.</p></details>
@@ -149,7 +182,7 @@ Discord
 <footer>
 <div class="wrap">
 <div class="foot-logo">HELLZGATE</div>
-<div class="built-by">Designed &amp; built by <span class="red">Hellz</span> · Sean Clossey</div>
+<div class="built-by">A project by <span class="red">Hellz</span></div>
 <div class="socials">
 <a href="https://github.com/Hellz0wnzJ00" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.05.78 2.12v3.15c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
@@ -159,7 +192,7 @@ Discord
 </a>
 </div>
 <p class="disclaimer">HellzGate is intended for education, research and authorized security testing only. Use it only with systems, devices and environments you own or have explicit permission to test. Illegal or unauthorized activity is prohibited. You are responsible for lawful operation and compliance with applicable privacy, radio, computer-misuse and data-protection laws.</p>
-<div class="foot-meta">© 2026 HellzGate · Sean Clossey · The gate is getting fangs ☠</div>
+<div class="foot-meta">© 2026 HellzGate · Hellz · The gate is getting fangs ☠</div>
 </div>
 </footer>
 
