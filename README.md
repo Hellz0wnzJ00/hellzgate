@@ -1,6 +1,6 @@
 # HellzGate
 
-> **September 13: physical FullGate testing underway.** Separate nine-scanner ESP-NOW and I²C soaks completed, with verified SD files and successful upload tests.
+> **September 29: FullGate field logging verified on both transports.** Four nine-scanner field runs saved 423,592 observations across wired I²C and ESP-NOW. Hardware and firmware validation continue.
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
@@ -33,7 +33,28 @@ Turning the hotspot off disconnects the dashboard while scanning and SD logging 
 
 This behavior applies to the tested FullGate master configurations for both ESP-NOW and wired I²C.
 
-## FullGate nine-scanner validation — September 13, 2026
+## Field logging results — September 29, 2026
+
+One master and nine scanners completed field logging with both wired I²C and ESP-NOW configurations. Saved CSVs were retrieved and checked after each run.
+
+| Transport | Date | Run | Recorded observation span | Saved observations |
+|---|---|---|---|---:|
+| Wired I²C | September 24 | 1 | 38m05s | 174,166 |
+| Wired I²C | September 24 | 2 | 19m38s | 47,446 |
+| ESP-NOW | September 29 | 1 | 23m09s | 105,564 |
+| ESP-NOW | September 29 | 2, different route | 26m30s | 96,416 |
+
+**221,612 I²C observations and 201,980 ESP-NOW observations: 423,592 saved observations total.** These are observation records, not unique devices. Durations are the first-to-last record spans, not battery endurance measurements. The runs used different firmware builds and routes; these totals are not a transport performance comparison.
+
+All four files have the expected 14-column structure, populated parseable timestamps, and complete final newlines. Each contains BLE plus 2.4 GHz and 5 GHz Wi-Fi observations. The first September 29 ESP-NOW file's 105,564 rows exactly match the stopped-session display; an independent Stop-count comparison was not available for the second run.
+
+Startup rows with zero coordinates remain in the original files: 2,069 and 339 in the I²C runs, and 1,043 and 503 in the ESP-NOW runs. Later records contain nonzero coordinates. Startup placeholders are not valid locations. Raw captures, addresses and route coordinates are not published here.
+
+The September 29 ESP-NOW bench run also saved **34,780 observations over 17m04s**, with the CSV count matching the logged close. A controlled scanner reset showed recovery from nine nodes to eight and back to nine while the other scanners continued delivering records. The phone dashboard operated alongside scanning and logging.
+
+These results verify field collection and the saved files in the observed conditions. CSVs alone do not prove zero radio loss or uninterrupted node uptime. Current-firmware **20-scanner ESP-NOW validation remains pending**, as do targeted startup, buffered-write/overflow and SD-save recovery checks before firmware freeze. New production hardware requires separate qualification.
+
+## Earlier nine-scanner bench validation — September 13, 2026
 
 Separate ten-minute runs used one master and nine scanners. Both maintained a GNSS fix and collected BLE and 2.4/5 GHz Wi-Fi observations.
 
@@ -48,7 +69,7 @@ Separate ten-minute runs used one master and nine scanners. Both maintained a GN
 
 Both saved files contained metadata and column headers; all rows had 14 columns. File totals include recording outside the timed windows. The ESP-NOW file included startup placeholder dates and zero coordinates; the I²C file had 63 placeholder dates and no zero coordinates. Originals were preserved. Filtering happened in a separate upload copy, not in firmware. Acceptance is confirmed for the tested service only.
 
-Display initialization and startup timestamps remain open issues. Complete charging validation and measured field runtime remain pending. This is bench validation, not a production release or maximum-throughput rating.
+These earlier bench results are retained as history. Subsequent field results are above; neither establishes production readiness or maximum throughput. Battery endurance and charging validation remain separate checks.
 
 ## From working prototypes to FullGate
 
@@ -77,9 +98,9 @@ The lessons from those boards informed C5 FullGate, the first planned public Hel
 
 The planned sale item is the **HellzGate C5 FullGate Core Board**, not a complete ready-to-use system. XIAO modules, antennas, display, fan, power supply, battery, and enclosure are separate. Modules are removable but are not designed for powered hot swapping.
 
-## ESP-NOW scalability checkpoint
+## Historical ESP-NOW scalability checkpoint
 
-The latest adapter-corrected, antenna-equipped test kept **all 20 scanners UP throughout an approximately ten-minute timed window**, with one additional master coordinating them.
+An earlier adapter-corrected, antenna-equipped test kept **all 20 scanners UP throughout an approximately ten-minute timed window**, with one additional master coordinating them.
 
 - **23,580 additional observation records** across **13,782 frames**.
 - **Approximately 39 observation records per second across all 20 scanners combined**, averaged over the timed window—not per scanner, unique devices, or a maximum-throughput rating.
@@ -90,6 +111,8 @@ The latest adapter-corrected, antenna-equipped test kept **all 20 scanners UP th
 
 These are timed-window results, not cumulative startup counters or unique-device counts. The result demonstrates this bench setup—not maximum RF capacity, a universal node limit, or complete field validation.
 
+**This historical result does not validate the current firmware at 20 scanners; that test remains pending.**
+
 **FullGate remains one master plus nine physical scanner slots.** Tests above nine scanners are ESP-NOW scalability research, not extra slots on a FullGate board.
 
 ## Firmware
@@ -98,7 +121,7 @@ The embedded firmware is written in **C using Espressif ESP-IDF**, with a **Free
 
 Phase 1 has run on real ESP32-C5 hardware with a master and multiple scanner nodes exchanging live observation records through ESP-NOW. Hardware testing has been used to identify, correct, and retest timing and queue-management behavior.
 
-FullGate completed separate nine-scanner I²C and ESP-NOW bench soaks with GNSS tagging and microSD logging. Saved files and upload tests were verified. Display initialization and startup timestamps remain open; complete subsystem and field validation continue.
+FullGate has completed nine-scanner bench and field logging on both I²C and ESP-NOW, with saved CSVs checked. OLED display operation and refresh have been observed; startup reliability, buffered-write/overflow handling and SD-save recovery remain under review. Firmware freeze and companion-app integration remain ahead.
 
 ESP-NOW and OTA are different features: ESP-NOW carries wireless data between nodes, while OTA refers specifically to updating firmware over the air.
 
@@ -126,19 +149,19 @@ FullGate is being designed to operate as a standalone platform; the app is an ad
 
 The [`examples/`](examples/) directory contains small, standalone Arduino, ESP-IDF/C, and Dart references that demonstrate the project toolchains without exposing production firmware, private protocols, or companion-app internals. Arduino was used during early prototype work; the current production firmware direction uses C with ESP-IDF.
 
-## Current status — September 13, 2026
+## Current status — September 29, 2026
 
 | Area | Status |
 |---|---|
 | V1 field prototype | Retired after development testing |
 | V2 field prototype | Retired after development testing |
 | FullGate schematic | Complete |
-| FullGate layout, routing, and manufacturing preparation | Complete; design checks passed and production placement confirmed |
-| FullGate validation hardware | Boards on the bench; nine-scanner transport tests complete |
+| FullGate layout, routing, and manufacturing preparation | Prior design checks complete; final connector compatibility and manufacturing review pending |
+| FullGate validation hardware | Nine-scanner bench and field logging completed on both transports |
 | Phase 1 firmware | Completed and tested on real ESP32-C5 hardware |
-| I²C communication | Nine-scanner FullGate soak complete; zero read errors in the ten-minute window |
-| ESP-NOW scaling | One master + 20 scanners demonstrated in a ten-minute bench window; not maximum-load validation |
-| Standalone Base firmware | GNSS, SD files and both transport soaks verified; remaining subsystem and field checks pending |
+| I²C communication | Nine-scanner bench and field logging complete; 221,612 field observations saved |
+| ESP-NOW scaling | Historical 20-scanner bench result retained; current-firmware 20-scanner validation pending |
+| Standalone Base firmware | Field CSVs verified; targeted startup, overflow and save-recovery checks remain before freeze |
 | Companion app | Foundation exists; device integration and release preparation pending |
 | MiniGate | Future product direction |
 
@@ -155,12 +178,13 @@ The [`examples/`](examples/) directory contains small, standalone Arduino, ESP-I
 - [ ] Extend full-array testing with longer sessions and repeatable setup checks.
 - [x] Complete separate nine-scanner ESP-NOW and I²C ten-minute soaks, retrieve SD files and test uploads.
 - [ ] Complete battery charging validation and measure consumption and field runtime.
-- [ ] Complete sustained-load and field tests, extending the completed bench saved-file and upload checks.
+- [x] Complete nine-scanner field logging with wired I²C and ESP-NOW; inspect all four saved CSVs.
+- [ ] Validate 20 ESP-NOW scanners on the current firmware and complete targeted reliability retests.
 - [ ] Build and test the enclosure for fit, access, cooling, and field use.
 - [ ] Finalize the production app interface and complete device integration against the verified baseline.
 - [ ] Complete documentation, repeatable board checks, beta testing, and applicable compliance work before release.
 
-Successful bench tests do not replace production-board or field validation. Release timing will follow verified readiness.
+Successful bench and field runs do not replace production-board qualification or targeted reliability checks. Release timing will follow verified readiness.
 
 ## Future exploration
 

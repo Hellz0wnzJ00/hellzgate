@@ -34,7 +34,7 @@
 <body>
 
 <a class="skip-link" href="#what">Skip to content</a>
-<div class="announce-bar"><span>FullGate boards on the bench · Nine-scanner ESP-NOW and I²C soak tests complete</span><a href="#progress">See progress</a></div>
+<div class="announce-bar"><span>FullGate field logging · I²C + ESP-NOW · 423,592 saved observations</span><a href="#progress">See progress</a></div>
 <nav aria-label="Main navigation">
 <div class="wrap nav-in">
 <a href="#top" class="logo">HELLZGATE</a>
@@ -51,7 +51,7 @@
 <h1>HELLZGATE <span class="c5">C5 FULLGATE</span></h1>
 <div class="tag">One master · Nine scanners · Wi-Fi + BLE</div>
 <p class="lead">A standalone platform for observing the wireless world around you. Ten removable ESP32-C5 modules, with a design built around local logging and onboard positioning—no required cloud account or subscription.</p>
-<p class="hero-status"><strong>In development.</strong> Physical FullGate testing underway; SD files and upload tests verified.</p>
+<p class="hero-status"><strong>In development.</strong> Nine-scanner I²C and ESP-NOW field logs verified; reliability testing continues.</p>
 <div class="cta-row"><a href="#progress" class="btn btn-red">View Progress</a><a href="#hotspot" class="btn btn-ghost">Connect / Wi-Fi Help</a></div>
 <div class="fangs">☠ The gate is getting fangs</div>
 </div>
@@ -67,8 +67,8 @@
 <p class="lead-p section-intro">FullGate brings multiple radios together for wireless research, education, and authorized testing. Its firmware foundation observes Wi-Fi and Bluetooth LE; complete standalone operation is still being verified.</p>
 <div class="capability-grid">
 <article class="panel"><h3>Wireless observation</h3><p>Passive Wi-Fi observation on 2.4 and 5 GHz, plus Bluetooth LE. One master coordinates nine removable scanner modules.</p></article>
-<article class="panel"><h3>Local records</h3><p>GNSS-tagged microSD records verified in separate nine-scanner ESP-NOW and I²C tests. Both saved CSV files were retrieved, checked and accepted in upload tests.</p></article>
-<article class="panel"><h3>Connected locally</h3><p>I²C is the primary communication backbone within FullGate. ESP-NOW provides a secondary wireless path. Both transports completed separate nine-scanner FullGate soaks; the earlier 20-scanner bench result is documented below.</p></article>
+<article class="panel"><h3>Local records</h3><p>Four nine-scanner field runs saved 423,592 observations across I²C and ESP-NOW. CSV structure and timestamps checked; startup rows without valid coordinates remain identified.</p></article>
+<article class="panel"><h3>Connected locally</h3><p>I²C is the primary communication backbone within FullGate. ESP-NOW provides a secondary wireless path. Both transports completed nine-scanner bench and field logging. A historical 20-scanner bench result is documented below; current-firmware scale testing remains pending.</p></article>
 </div>
 </div></section>
 <section id="hotspot">
@@ -94,15 +94,28 @@
 </div></section>
 <section id="progress" class="features">
 <div class="wrap">
-<div class="eyebrow">Progress · September 13, 2026</div>
+<div class="eyebrow">Progress · September 29, 2026</div>
 <h2>A working foundation. <span class="red">More to prove.</span></h2>
 <ul class="milestones">
-<li><strong>Design complete</strong><span>Schematic, layout, routing, design checks, and manufacturing preparation complete. Physical FullGate hardware has completed separate nine-scanner transport tests.</span></li>
+<li><strong>Hardware validation</strong><span>Nine-scanner bench and field logging completed on both transports. Final connector compatibility and manufacturing review remain before the next fabrication run.</span></li>
 <li><strong>Observation foundation tested</strong><span>Wi-Fi/BLE observation, record integrity, counting, and deduplication tested on real hardware.</span></li>
 <li><strong>Local bus demonstrated</strong><span>All nine FullGate scanners stayed online during a ten-minute wired soak, with zero I²C read errors.</span></li>
 </ul>
 <div class="panel bench-result">
-<div class="eyebrow">FullGate · One master + nine scanners · September 13</div>
+<div class="eyebrow">Field logging · One master + nine scanners · September 24–29</div>
+<h3>Four runs. Two transports. Saved files checked.</h3>
+<div class="results-grid"><div><strong>423,592</strong><span>saved observations across four runs</span></div><div><strong>2 transports</strong><span>wired I²C and ESP-NOW</span></div><div><strong>4 CSVs</strong><span>structure and timestamps checked</span></div></div>
+<p><strong>Wired I²C · September 24:</strong> 174,166 observations over 38m05s and 47,446 over 19m38s — <strong>221,612 total</strong>.</p>
+<p><strong>ESP-NOW · September 29:</strong> 105,564 observations over 23m09s and 96,416 over 26m30s on different routes — <strong>201,980 total</strong>.</p>
+<p>Each file contains BLE plus 2.4 GHz and 5 GHz Wi-Fi observations, with 14 columns per record, populated timestamps and a complete final newline. The first ESP-NOW run's saved count exactly matches its stopped-session display.</p>
+<details><summary>GPS startup, bench recovery and what these results establish</summary>
+<p>Initial rows have zero coordinates: 2,069 and 339 in the I²C files; 1,043 and 503 in the ESP-NOW files. Later records have nonzero coordinates. Those startup placeholders are not valid locations. Raw logs, addresses and route coordinates remain private.</p>
+<p>A separate September 29 ESP-NOW bench run saved 34,780 observations over 17m04s, matching its logged close. A controlled scanner reset showed nine-to-eight-to-nine recovery while the other scanners continued delivering records; the phone dashboard operated alongside logging.</p>
+<p>Counts are observations, not unique devices. Durations span the first and last saved records, not battery endurance. Different routes and firmware builds prevent treating these totals as a transport benchmark. CSVs alone do not prove zero radio loss or uninterrupted node uptime; no independent Stop count was available for the second ESP-NOW field run.</p>
+</details>
+</div>
+<div class="panel bench-result">
+<div class="eyebrow">Earlier bench results · One master + nine scanners · September 13</div>
 <h3>Two transports. Real SD files. Successful uploads.</h3>
 <div class="results-grid"><div><strong>9/9</strong><span>scanners online in both soaks</span></div><div><strong>10 min</strong><span>separate test for each transport</span></div><div><strong>0</strong><span>reported SD write errors</span></div></div>
 <p><strong>ESP-NOW:</strong> 22,645 additional rows reported written, with zero reported lost frames, overflows or restarts. One duplicate frame was detected and discarded.</p>
@@ -110,14 +123,14 @@
 <p>Both runs collected BLE and 2.4/5 GHz Wi-Fi observations and held a GNSS fix throughout. Both retrieved SD files had metadata and column headers, and every record had the expected 14 columns.</p>
 <details><summary>Saved files, upload results and remaining checks</summary>
 <p>The ESP-NOW file contained 47,273 records, all accepted by the tested upload service. The I²C file contained 29,102 records; an upload copy removed 63 placeholder timestamps, and all remaining 29,039 records were accepted. File totals include recording outside the timed soak windows. This verifies the tested upload path, not every service.</p>
-<p>Display initialization and startup timestamps remain open issues. Complete charging validation and measured field runtime are still pending. Bench results do not establish production readiness or long-term reliability.</p>
+<p>These September 13 results are retained as history. Field results are above; battery endurance and charging validation remain separate checks. Neither bench nor field runs alone establish production readiness.</p>
 </details>
 </div>
 <div class="panel bench-result">
-<div class="eyebrow">Separate ESP-NOW bench test</div>
+<div class="eyebrow">Historical ESP-NOW bench test</div>
 <h3>20 scanners online for approximately 10 minutes.</h3>
 <div class="results-grid"><div><strong>20/20</strong><span>scanners stayed UP</span></div><div><strong>23,580</strong><span>observation records</span></div><div><strong>≈39/sec</strong><span>combined record average</span></div></div>
-<p>This is a separate one-master, 20-scanner setup—not FullGate's nine physical scanner slots. The rate is a measured bench average, not unique devices, a per-scanner rate, or a maximum-throughput rating.</p>
+<p>This earlier test used a separate one-master, 20-scanner setup. Validation of 20 scanners on the current firmware is still pending. FullGate has nine physical scanner slots. The rate is a measured bench average, not unique devices, a per-scanner rate, or a maximum-throughput rating.</p>
 <details><summary>Test counters and limitations</summary>
 <p>The timed window recorded 13,782 frames, no new reported lost frames, overflow, dropouts, or restarts, one new duplicate indication, and zero bad-CRC, bad-field, or table-full errors.</p>
 <p>These are timed-window deltas, not cumulative startup counters. All scanners had antennas, but antenna types and observation loads differed. This does not establish maximum RF capacity or complete field performance.</p>
@@ -126,11 +139,11 @@
 </div></section>
 <section id="next">
 <div class="wrap">
-<div class="eyebrow">Next Steps</div><h2>From bench tests to <span class="red">FullGate in the field.</span></h2>
+<div class="eyebrow">Next Steps</div><h2>Field results in. <span class="red">Next checks ahead.</span></h2>
 <ol class="roadmap">
-<li><strong>Finish standalone firmware testing</strong><span>Extend the completed GNSS, SD and transport checks; resolve display initialization and startup timestamps, then finish remaining subsystem checks.</span></li>
-<li><strong>Extend full-array testing</strong><span>Build on the completed ten-minute runs with longer sessions and repeatable setup checks across all ten modules.</span></li>
-<li><strong>Verify battery and field operation</strong><span>Finish battery charging validation, measure runtime and complete field tests. Bench saved-file and upload tests are complete.</span></li>
+<li><strong>Finish standalone firmware testing</strong><span>Complete targeted startup, buffered-write/overflow and SD-save recovery checks before firmware freeze. OLED operation and refresh have been observed; startup reliability remains under review.</span></li>
+<li><strong>Extend full-array testing</strong><span>Validate 20 scanners enrolled to one ESP-NOW master on the current firmware, building on the completed nine-scanner bench and field runs.</span></li>
+<li><strong>Qualify power and production hardware</strong><span>Complete charging validation, measure battery endurance and qualify the revised production board. Field logging spans do not establish full-charge runtime.</span></li>
 <li><strong>Complete the release preparation</strong><span>Verify enclosure fit and cooling, finalize the app interface, then complete device integration and release-readiness checks.</span></li>
 </ol>
 <p class="note">The app foundation exists; real-device integration and release preparation remain in development. FullGate is intended to remain useful without the app.</p>
