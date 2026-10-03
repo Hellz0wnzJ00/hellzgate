@@ -1,6 +1,6 @@
 # HellzGate
 
-> **October 2: ESP-NOW open-source beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Experimental community firmware, not a final production release.
+> **October 2: HellzGate ESP-NOW Cluster Firmware — Open-Source Beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Experimental community firmware, not a final production release.
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
@@ -17,9 +17,11 @@ HellzGate is the platform. **C5 FullGate** is the first planned public product, 
 
 ---
 
-## ESP-NOW open-source beta — October 2, 2026
+## HellzGate ESP-NOW Cluster Firmware — Open-Source Beta
 
-The **HellzGate Project by Hellz (Sean Clossey)** has released its ESP-NOW community beta under MIT. Explore the code, fork it, adapt it to your hardware and share what you learn.
+**Released October 2, 2026 · Master + scanner/node firmware for ESP32-C5.**
+
+The **HellzGate Project by Hellz (Sean Clossey)** has released its ESP-NOW Cluster Firmware beta under MIT. Explore the code, fork it, adapt it to your hardware and share what you learn.
 
 - [Source, build instructions and known limitations](https://github.com/Hellz0wnzJ00/hellzgate-espnow)
 - [v0.1.0-beta.1 source download and release notes](https://github.com/Hellz0wnzJ00/hellzgate-espnow/releases/tag/v0.1.0-beta.1)
