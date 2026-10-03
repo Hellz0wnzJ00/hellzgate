@@ -34,13 +34,13 @@
 <body>
 
 <a class="skip-link" href="#what">Skip to content</a>
-<div class="announce-bar"><span>FullGate field logging · I²C + ESP-NOW · 423,592 saved observations</span><a href="#progress">See progress</a></div>
+<div class="announce-bar"><span>Out now · ESP-NOW open-source beta · MIT licensed</span><a href="#espnow-beta">Explore the beta</a></div>
 <nav aria-label="Main navigation">
 <div class="wrap nav-in">
 <a href="#top" class="logo">HELLZGATE</a>
 <button class="burger" aria-controls="main-menu" aria-expanded="false" aria-label="Open navigation">☰</button>
 <div class="nav-links" id="main-menu">
-<a href="#what">Platform</a><a href="#progress">Progress</a><a href="#next">Next Steps</a><a href="#store">Hardware</a><a href="#journey">Story</a>
+<a href="#what">Platform</a><a href="#espnow-beta">ESP-NOW Beta</a><a href="#progress">Progress</a><a href="#next">Next Steps</a><a href="#store">Hardware</a><a href="#journey">Story</a>
 <a href="#notify" class="btn btn-red nav-cta">Follow the Build</a>
 </div></div></nav>
 <main>
@@ -52,7 +52,7 @@
 <div class="tag">One master · Nine scanners · Wi-Fi + BLE</div>
 <p class="lead">A standalone platform for observing the wireless world around you. Ten removable ESP32-C5 modules, with a design built around local logging and onboard positioning—no required cloud account or subscription.</p>
 <p class="hero-status"><strong>In development.</strong> Nine-scanner I²C and ESP-NOW field logs verified; reliability testing continues.</p>
-<div class="cta-row"><a href="#progress" class="btn btn-red">View Progress</a><a href="#hotspot" class="btn btn-ghost">Connect / Wi-Fi Help</a></div>
+<div class="cta-row"><a href="#espnow-beta" class="btn btn-red">Explore ESP-NOW Beta</a><a href="#hotspot" class="btn btn-ghost">Connect / Wi-Fi Help</a></div>
 <div class="fangs">☠ The gate is getting fangs</div>
 </div>
 <figure id="fullgate-render" class="core-render">
@@ -60,6 +60,18 @@
 <figcaption><strong>FullGate · Stylized presentation.</strong> <a href="fullgate-development.jpg">View the original board photo for actual hardware details.</a> <a href="fullgate-core-board-cad.jpg">View the CAD render.</a></figcaption>
 </figure>
 </div></header>
+<section id="espnow-beta" class="beta-release" aria-labelledby="beta-title">
+<div class="wrap">
+<div class="eyebrow">Open-source release · October 2, 2026 · v0.1.0-beta.1</div>
+<h2 id="beta-title">ESP-NOW beta. <span class="red">Yours to build on.</span></h2>
+<p class="lead-p section-intro">Our ESP-NOW community beta is now open source under MIT. Explore the code, fork it, adapt it to your hardware, and help move it forward. From the <strong>HellzGate Project by Hellz (Sean Clossey)</strong>.</p>
+<div class="hardware-grid">
+<article class="panel"><h3>Fork it. Build it. Share what you learn.</h3><p>Source, build instructions and tests for an ESP32-C5 master and scanner nodes collecting passive Wi-Fi and Bluetooth LE observations. XIAO ESP32-C5 boards and custom builds are welcome; the FullGate PCB is not required for the ESP-NOW transport. Check the hardware adaptation guide before using other pin layouts.</p><a class="btn btn-red" href="https://github.com/Hellz0wnzJ00/hellzgate-espnow">Browse &amp; fork the source</a></article>
+<article class="panel"><h3>Experimental. Not a final release.</h3><p>The supplied builds are configured for up to 20 scanners. Earlier firmware demonstrated 20-scanner operation; this beta still needs its own 20-scanner field validation. Limited master/one-scanner bench testing passed before the final changes, which were rebuilt but not reflashed.</p><p>This is a source-only ESP-NOW beta, separate from the production firmware and app integration. Read the known limitations and share test results or issues on GitHub.</p><a class="btn btn-ghost" href="https://github.com/Hellz0wnzJ00/hellzgate-espnow/releases/tag/v0.1.0-beta.1">Beta download &amp; release notes</a></article>
+</div>
+<p class="note">Some people spoon, we fork. Have fun and be safe! — Hellz</p>
+<p class="note">For education, research and authorized testing. Provided as-is under MIT. Please credit the HellzGate Project by Hellz (Sean Clossey) and link back when you build on it.</p>
+</div></section>
 <section id="what">
 <div class="wrap">
 <div class="eyebrow">The Platform</div>

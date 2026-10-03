@@ -1,13 +1,13 @@
 # HellzGate
 
-> **September 29: FullGate field logging verified on both transports.** Four nine-scanner field runs saved 423,592 observations across wired I²C and ESP-NOW. Hardware and firmware validation continue.
+> **October 2: ESP-NOW open-source beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Experimental community firmware, not a final production release.
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
 ![App](https://img.shields.io/badge/App-Flutter%20%2F%20Dart-02569B)
 ![Radio](https://img.shields.io/badge/Radio-Wi--Fi%20%2B%20BLE-7A3FF2)
 ![Status](https://img.shields.io/badge/FullGate-hardware%20validation%20underway-orange)
-![License](https://img.shields.io/badge/license-Proprietary-lightgrey)
+![ESP-NOW beta license](https://img.shields.io/badge/ESP--NOW_beta-MIT-green)
 
 **An independent, multi-node wireless research platform built around ESP32-C5 hardware.**
 
@@ -16,6 +16,21 @@ HellzGate is the platform. **C5 FullGate** is the first planned public product, 
 🌐 **[hellzgate.com](https://hellzgate.com)** · 💬 **[Discord](https://discord.gg/dhMhEgHwXe)**
 
 ---
+
+## ESP-NOW open-source beta — October 2, 2026
+
+The **HellzGate Project by Hellz (Sean Clossey)** has released its ESP-NOW community beta under MIT. Explore the code, fork it, adapt it to your hardware and share what you learn.
+
+- [Source, build instructions and known limitations](https://github.com/Hellz0wnzJ00/hellzgate-espnow)
+- [v0.1.0-beta.1 source download and release notes](https://github.com/Hellz0wnzJ00/hellzgate-espnow/releases/tag/v0.1.0-beta.1)
+
+The source includes ESP32-C5 master and scanner configurations for passive Wi-Fi/BLE observation. The ESP-NOW transport does not require the FullGate PCB; review the adaptation instructions for XIAO ESP32-C5 boards and custom hardware.
+
+**Experimental, not final:** the supplied builds are configured for up to 20 scanners. Earlier firmware demonstrated 20-scanner operation; this beta's 20-scanner field validation remains pending. Limited master/one-scanner bench testing predates the final source changes, which were rebuilt but not reflashed. This release is separate from production firmware and app integration.
+
+> Some people spoon, we fork. Have fun and be safe! - Hellz
+
+For education, research and authorized testing. Provided as-is under MIT. Please credit the HellzGate Project by Hellz (Sean Clossey) and link back when you build on it. The MIT license applies to the separate ESP-NOW repository; it does not relicense this website or private project material.
 
 ## Start here: enable or disable the setup hotspot
 
@@ -125,7 +140,7 @@ FullGate has completed nine-scanner bench and field logging on both I²C and ESP
 
 ESP-NOW and OTA are different features: ESP-NOW carries wireless data between nodes, while OTA refers specifically to updating firmware over the air.
 
-The HellzGate firmware is proprietary and is not published in this repository.
+The experimental ESP-NOW source is published under MIT in the separate [hellzgate-espnow repository](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Production firmware and private project material are not published in this website repository.
 
 ## Companion app
 

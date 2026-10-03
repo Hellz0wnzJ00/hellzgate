@@ -240,6 +240,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .core-render figcaption{padding:16px;font-size:.875rem;line-height:1.6;color:var(--gray)}
 .core-render figcaption strong{display:block;color:var(--white);margin-bottom:6px}
 .section-intro{max-width:760px}
+.beta-release{background:var(--bg2);border-bottom:1px solid var(--line);scroll-margin-top:80px}
 .capability-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:32px}
 .panel h3,.bench-result h3{font-size:1.5rem;line-height:1.25;position:relative}
 .panel p{color:var(--gray);margin-top:16px;font-size:1rem;position:relative}
