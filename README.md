@@ -1,6 +1,6 @@
 # HellzGate
 
-> **October 2: HellzGate ESP-NOW Cluster Firmware — Open-Source Beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Experimental community firmware, not a final production release.
+> **October 2: HellzGate ESP-NOW Cluster Firmware — Open-Source Beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster). Experimental community firmware, not a final production release.
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
@@ -23,8 +23,8 @@ HellzGate is the platform. **C5 FullGate** is the first planned public product, 
 
 The **HellzGate Project by Hellz (Sean Clossey)** has released its ESP-NOW Cluster Firmware beta under MIT. Explore the code, fork it, adapt it to your hardware and share what you learn.
 
-- [Source, build instructions and known limitations](https://github.com/Hellz0wnzJ00/hellzgate-espnow)
-- [v0.1.0-beta.1 source download and release notes](https://github.com/Hellz0wnzJ00/hellzgate-espnow/releases/tag/v0.1.0-beta.1)
+- [Source, build instructions and known limitations](https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster)
+- [v0.1.0-beta.1 source download and release notes](https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster/releases/tag/v0.1.0-beta.1)
 
 The source includes ESP32-C5 master and scanner configurations for passive Wi-Fi/BLE observation. The ESP-NOW transport does not require the FullGate PCB; review the adaptation instructions for XIAO ESP32-C5 boards and custom hardware.
 
@@ -142,7 +142,7 @@ FullGate has completed nine-scanner bench and field logging on both I²C and ESP
 
 ESP-NOW and OTA are different features: ESP-NOW carries wireless data between nodes, while OTA refers specifically to updating firmware over the air.
 
-The experimental ESP-NOW source is published under MIT in the separate [hellzgate-espnow repository](https://github.com/Hellz0wnzJ00/hellzgate-espnow). Production firmware and private project material are not published in this website repository.
+The experimental ESP-NOW source is published under MIT in the separate [hellzgate-espnow-cluster repository](https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster). Production firmware and private project material are not published in this website repository.
 
 ## Companion app
 
