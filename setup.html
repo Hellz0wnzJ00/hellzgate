@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FullGate Setup Guide | HellzGate</title><meta name="description" content="Hotspot and local dashboard instructions for the tested FullGate firmware builds."><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b0c0e"><link rel="stylesheet" href="styles.css"><script defer src="app.js"></script></head><body><a class="skip" href="#main">Skip to content</a><div class="draft">DESIGN PREVIEW <span>Draft for review · October 2026</span></div><header class="site-header"><a class="brand" href="index.html">HELLZ<span>GATE</span><small>BUILD. TEST. UNDERSTAND.</small></a><button class="menu-button" aria-expanded="false" aria-controls="navigation">Menu <span>+</span></button><nav id="navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="hellzgate.html">HellzGate</a><a href="penetration-testing.html">Penetration Testing</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></header><main id="main"><section class="hero text-hero"><span class="eyebrow">HELLZGATE / SUPPORT</span><h1>Connect locally.<br><span>Get to your data.</span></h1><p class="intro">These instructions describe the firmware builds documented on the existing site. Check your build’s README for changed behavior.</p></section><section id="hotspot">
+<div class="wrap">
+<div class="eyebrow">Setup &amp; Troubleshooting</div>
+<h2>Hotspot on demand. <span class="red">One button.</span></h2>
+<p class="lead-p section-intro">Can't see the HellzGate Wi-Fi network? The hotspot is off after startup in the tested firmware. While the master is running, hold <strong>M1's BOOT button for about one second, then release</strong> to enable it. Repeat to disable it.</p>
+<div class="hardware-grid">
+<article class="panel"><h3>Connect to the dashboard</h3><ul class="spec-list">
+<li>Wi-Fi network / SSID: <strong>hellzgate</strong></li>
+<li>Default password: <strong>hellzgate</strong></li>
+<li>Open <strong>http://192.168.4.1</strong> in your browser</li>
+<li>No internet is expected. Stay connected to use the local dashboard.</li>
+</ul></article>
+<article class="panel"><h3>Toggle without resetting</h3><ul class="spec-list">
+<li>Use the master's BOOT button, not a scanner's.</li>
+<li>Do not press RESET or hold BOOT during power-up for this action. BOOT at reset is used for flashing.</li>
+<li>Hotspot off disconnects the dashboard; scanning and SD logging continue.</li>
+<li>A restart returns the hotspot to off in the tested builds.</li>
+</ul></article>
+</div>
+<p class="note">If the SSID is missing, let the master finish booting, hold and release BOOT once, then refresh your Wi-Fi list. Each hold toggles the state; repeated holds can turn it back off. Disabling the hotspot does not disable ESP-NOW or make the device radio-silent. Use Stop on the dashboard to close a logging session before powering down.</p>
+</div></section><section class="note-band"><h3>Working with another build?</h3><p>Use the <a href="https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster">public firmware documentation</a> for configuration and hardware adaptation, or <a href="contact.html">get in touch</a>.</p></section></main><footer><div class="footer-top"><a class="brand" href="index.html">HELLZ<span>GATE</span></a><p>Wireless survey hardware.<br>Physical &amp; network penetration testing.</p><a href="mailto:Hellz@hellzgate.com">Hellz@hellzgate.com ↗</a></div><div class="footer-bottom"><span>© 2026 HellzGate · Sean Clossey</span><div><a href="https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster">GitHub ↗</a><a href="https://discord.gg/dhMhEgHwXe">Discord ↗</a></div></div></footer></body></html>

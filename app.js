@@ -1,25 +1,35 @@
-document.documentElement.classList.add('js');
-var menuButton=document.querySelector('.burger');
-var menu=document.querySelector('#main-menu');
-if(menuButton && menu){
- function closeMenu(){
-  menu.classList.remove('is-open');
-  menuButton.setAttribute('aria-expanded','false');
-  menuButton.setAttribute('aria-label','Open navigation');
- }
- menuButton.addEventListener('click',function(){
-  var open=menu.classList.toggle('is-open');
-  menuButton.setAttribute('aria-expanded',String(open));
-  menuButton.setAttribute('aria-label',open?'Close navigation':'Open navigation');
- });
- menu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',closeMenu);});
- document.addEventListener('keydown',function(event){
-  if(event.key==='Escape' && menu.classList.contains('is-open')){closeMenu();menuButton.focus();}
- });
- window.matchMedia('(min-width:901px)').addEventListener('change',closeMenu);
-}
-document.querySelectorAll('.shot img,.oled-card img').forEach(function(im){
-function fail(){var w=im.closest('.shot,.oled-card'); if(w){im.style.display='none'; w.classList.add('imgph');}}
-im.addEventListener('error', fail);
-if(im.complete && im.naturalWidth===0) fail();
+const menuButton = document.querySelector('.menu-button');
+const nav = document.querySelector('#navigation');
+menuButton.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') !== 'true';
+  menuButton.setAttribute('aria-expanded', String(open));
+  nav.classList.toggle('open', open);
 });
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    menuButton.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+    menuButton.focus();
+  }
+});
+const form = document.querySelector('#inquiry');
+if (form) {
+  const topic = document.querySelector('#topic');
+  const requested = new URLSearchParams(location.search).get('topic');
+  if (['testing','hardware','project'].includes(requested)) topic.value = requested;
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const subject = 'HellzGate inquiry: ' + topic.options[topic.selectedIndex].text;
+    const body = document.querySelector('#message').value.trim();
+    if (!body) { document.querySelector('#message').focus(); return; }
+    location.href = 'mailto:Hellz@hellzgate.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.querySelector('#email-status').textContent = 'If your email app did not open, email Hellz@hellzgate.com directly. Nothing has been sent by this website.';
+  });
+}
+
+// Preserve links to sections of the previous single-page website.
+if (location.pathname.endsWith('/') || location.pathname.endsWith('/index.html')) {
+  const routes = {what:'hellzgate.html#what',store:'hellzgate.html#store','espnow-beta':'hellzgate.html#espnow-beta',hotspot:'setup.html#hotspot',progress:'updates.html#progress',next:'updates.html#next',journey:'about.html',notify:'contact.html'};
+  const destination = routes[location.hash.slice(1)];
+  if (destination) location.replace(destination);
+}
