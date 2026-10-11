@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://hellzgate.com/</loc></url>
+  <url><loc>https://hellzgate.com/development.html</loc></url>
+  <url><loc>https://hellzgate.com/firmware.html</loc></url>
+  <url><loc>https://hellzgate.com/shop.html</loc></url>
+  <url><loc>https://hellzgate.com/contact.html</loc></url>
+  <url><loc>https://hellzgate.com/privacy.html</loc></url>
 </urlset>
