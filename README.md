@@ -13,7 +13,7 @@
 
 HellzGate is the platform. **C5 FullGate** is the first planned public product, with **C5 MiniGate** planned as a later direction.
 
-🌐 **[hellzgate.com](https://hellzgate.com)** · 💬 **[Discord](https://discord.gg/dhMhEgHwXe)**
+🌐 **[hellzgate.com](https://hellzgate.com)** · 💬 **[Discord](https://discord.gg/hellzgate)**
 
 ---
 
