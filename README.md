@@ -1,6 +1,6 @@
 # HellzGate
 
-> **October 2: HellzGate ESP-NOW Cluster Firmware — Open-Source Beta released.** [Browse and fork the MIT-licensed source](https://github.com/Hellz0wnzJ00/hellzgate-espnow-cluster). Experimental community firmware, not a final production release.
+> **November 20: The first C5 FullGate boards are here.** Board 001 passed initial bench checks; beta field testing comes next. [See the board update](#c5-beta-update).
 
 ![MCU](https://img.shields.io/badge/MCU-ESP32--C5-ff2233)
 ![Firmware](https://img.shields.io/badge/Firmware-C%20%2F%20ESP--IDF-00599C)
@@ -14,6 +14,20 @@
 HellzGate is the platform. **C5 FullGate** is the first planned public product, with **C5 MiniGate** planned as a later direction.
 
 🌐 **[hellzgate.com](https://hellzgate.com)** · 💬 **[Discord](https://discord.gg/hellzgate)**
+
+---
+
+<a id="c5-beta-update"></a>
+
+## November 20, 2026 · First C5 boards and initial bench QA
+
+![HellzGate C5 board powered on at the bench with one master and nine scanner modules](hellzgate-c5-live-board.jpg)
+
+The first five C5 FullGate boards have arrived. We tested board 001 with one master, nine scanner modules, a GPS antenna, display, fan and microSD card. All nine nodes reported up, GPS acquired a fix, the web controls started and stopped a run, and we recovered its CSV from the card. A five-minute standalone recording run on USB-C PD power stayed responsive.
+
+We have invited **@fin000**, **@valleytechsolutions**, **@frostbyte9987** and **@mtbjake44** to the next four beta spots. Board 001 stays with us. Their field feedback will guide the next firmware and app changes.
+
+This is an initial hardware and workflow checkpoint. Longer field sessions, run controls, portable runtime and companion-app integration are still under development. Public sales are not open.
 
 ---
 
@@ -98,9 +112,7 @@ The lessons from those boards informed C5 FullGate, the first planned public Hel
 
 ## C5 FullGate
 
-<img src="fullgate-display.png" alt="FullGate boards in a black and red presentation graphic" width="700">
-
-**FullGate · Stylized presentation.** [View the original board photo for actual hardware details](fullgate-development.jpg). [CAD render](fullgate-core-board-cad.jpg).
+**FullGate · [Board 001 powered on the bench](hellzgate-c5-live-board.jpg).** [Earlier development photo](fullgate-development.jpg) · [CAD render](fullgate-core-board-cad.jpg) · [Stylized presentation](fullgate-display.png).
 
 - Ten removable XIAO ESP32-C5 modules: one master and nine scanner nodes
 - Primary I²C production backbone for nine physical scanner slots
@@ -108,12 +120,12 @@ The lessons from those boards informed C5 FullGate, the first planned public Hel
 - One master plus 20 scanners demonstrated in an antenna-equipped, ten-minute ESP-NOW bench test; broader load and field validation remain
 - Current Phase 1 firmware baseline focused on passive 2.4/5 GHz Wi-Fi and BLE observation
 - Onboard GNSS support and local microSD logging
-- USB-C PD input and externally charged 4S lithium-ion battery input through XT60
-- Power consumption, battery runtime, and complete production-board behavior still to be measured
+- USB-C PD input for a compatible adapter or portable power bank
+- Power consumption, portable runtime, and complete production-board behavior still to be measured
 - Optional OLED display and cooling support
 - Standalone transport, GNSS and SD bench tests completed; remaining subsystem validation continues; the production app interface and app integration remain separate work
 
-The planned sale item is the **HellzGate C5 FullGate Core Board**, not a complete ready-to-use system. XIAO modules, antennas, display, fan, power supply, battery, and enclosure are separate. Modules are removable but are not designed for powered hot swapping.
+The planned sale item is the **HellzGate C5 FullGate Core Board**, not a complete ready-to-use system. XIAO modules, antennas, display, fan, USB-C PD power source, and enclosure are separate. Modules are removable but are not designed for powered hot swapping.
 
 ## Historical ESP-NOW scalability checkpoint
 
@@ -166,19 +178,19 @@ FullGate is being designed to operate as a standalone platform; the app is an ad
 
 The [`examples/`](examples/) directory contains small, standalone Arduino, ESP-IDF/C, and Dart references that demonstrate the project toolchains without exposing production firmware, private protocols, or companion-app internals. Arduino was used during early prototype work; the current production firmware direction uses C with ESP-IDF.
 
-## Current status — September 29, 2026
+## Current status — November 20, 2026
 
 | Area | Status |
 |---|---|
 | V1 field prototype | Retired after development testing |
 | V2 field prototype | Retired after development testing |
 | FullGate schematic | Complete |
-| FullGate layout, routing, and manufacturing preparation | Prior design checks complete; final connector compatibility and manufacturing review pending |
-| FullGate validation hardware | Nine-scanner bench and field logging completed on both transports |
+| FullGate layout, routing, and manufacturing preparation | First five C5 boards received; board 001 passed initial bench checks |
+| FullGate validation hardware | Nine-scanner bench and field logging completed on earlier setups; new board passed an initial five-minute standalone run |
 | Phase 1 firmware | Completed and tested on real ESP32-C5 hardware |
 | I²C communication | Nine-scanner bench and field logging complete; 221,612 field observations saved |
 | ESP-NOW scaling | Historical 20-scanner bench result retained; current-firmware 20-scanner validation pending |
-| Standalone Base firmware | Field CSVs verified; targeted startup, overflow and save-recovery checks remain before freeze |
+| Standalone Base firmware | Earlier field CSVs verified; new-board SD CSV recovered; targeted startup, run-control, overflow and save-recovery checks remain before freeze |
 | Companion app | Foundation exists; device integration and release preparation pending |
 | MiniGate | Future product direction |
 
@@ -192,9 +204,10 @@ The [`examples/`](examples/) directory contains small, standalone Arduino, ESP-I
 - [x] Demonstrate one master plus 20 reporting ESP-NOW scanners in the documented bench window.
 - [ ] Verify the complete standalone firmware: GNSS, microSD sessions, WiGLE 1.6 CSV, web status, JSON, OLED, and fan.
 - [x] Bring up the physical FullGate test array with one master and nine scanners.
+- [x] Receive the first five C5 boards and pass initial bench QA on board 001.
 - [ ] Extend full-array testing with longer sessions and repeatable setup checks.
 - [x] Complete separate nine-scanner ESP-NOW and I²C ten-minute soaks, retrieve SD files and test uploads.
-- [ ] Complete battery charging validation and measure consumption and field runtime.
+- [ ] Measure USB-C PD power-bank consumption and field runtime.
 - [x] Complete nine-scanner field logging with wired I²C and ESP-NOW; inspect all four saved CSVs.
 - [ ] Validate 20 ESP-NOW scanners on the current firmware and complete targeted reliability retests.
 - [ ] Build and test the enclosure for fit, access, cooling, and field use.
@@ -221,3 +234,5 @@ This repository is the public home of the project website and public development
 **A project by Hellz.**
 
 © 2026 HellzGate. All rights reserved.
+
+
