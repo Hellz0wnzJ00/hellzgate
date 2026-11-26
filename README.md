@@ -17,6 +17,14 @@ HellzGate is the platform. **C5 FullGate** is the first planned public product, 
 
 ---
 
+## November 26, 2026 · FullGate C5 Web Flasher v0.8.0
+
+The [HellzGate Project Web Flasher](https://hellzgate.com/flash.html) uses desktop Chrome or Edge to flash a loose XIAO ESP32-C5 over USB. Beta testers receive the firmware package separately. Select your verified binary ZIP, choose **Master** or **Node**, and verify the connected module before writing. The browser checks the ZIP and each image against the expected checksums. The package stays in the browser.
+
+The bootloader, partition table and application writes passed verification on the bench. The Wired I²C M2 package is for beta testing, with firmware startup and field validation still in progress.
+
+The `v0.8.0` label identifies the web flasher. Each firmware update uses a dedicated binary-only ZIP. Review its contents and readable strings for sensitive data and attribution before updating the flasher's accepted checksums.
+
 ## November 26, 2026 · C5 prototype enclosure release
 
 The fit-tested prototype gives the community a starting point for custom cases. The **v0.1.0** package includes editable STEP files and Bambu P2S print projects for magnetic and screw-lid variants, released under CERN-OHL-P-2.0.
