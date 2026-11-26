@@ -24,6 +24,24 @@ The fit-tested prototype gives the community a starting point for custom cases. 
 - [Download the enclosure files and read the print notes](https://github.com/Hellz0wnzJ00/hellzgate/releases/tag/enclosure-v0.1.0)
 - [Watch the prototype demo](https://hellzgate.com/#enclosure)
 
+### Enclosure CAD views
+
+The embedded-magnet version shown with the lid beside the base. Select a view to see it at full size.
+
+<table align="center">
+  <tr>
+    <th>Front three-quarter</th>
+    <th>Rear three-quarter</th>
+    <th>Top-down</th>
+  </tr>
+  <tr>
+    <td><a href="media/enclosure/hellzgate-c5-cad-front.png"><img src="media/enclosure/hellzgate-c5-cad-front.png" width="300" alt="Open C5 enclosure showing the front ports, intake holes, and OLED lid beside the base"></a></td>
+    <td><a href="media/enclosure/hellzgate-c5-cad-rear.png"><img src="media/enclosure/hellzgate-c5-cad-rear.png" width="300" alt="Open C5 enclosure showing the rear fan grille, brass bulkheads, and underside of the OLED lid"></a></td>
+    <td><a href="media/enclosure/hellzgate-c5-cad-top.png"><img src="media/enclosure/hellzgate-c5-cad-top.png" width="300" alt="Top-down CAD view of the populated C5 board, fan, and detached magnetic lid"></a></td>
+  </tr>
+</table>
+
+
 ---
 
 <a id="c5-beta-update"></a>
