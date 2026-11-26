@@ -17,6 +17,15 @@ HellzGate is the platform. **C5 FullGate** is the first planned public product, 
 
 ---
 
+## November 26, 2026 · C5 prototype enclosure release
+
+The fit-tested prototype gives the community a starting point for custom cases. The **v0.1.0** package includes editable STEP files and Bambu P2S print projects for magnetic and screw-lid variants, released under CERN-OHL-P-2.0.
+
+- [Download the enclosure files and read the print notes](https://github.com/Hellz0wnzJ00/hellzgate/releases/tag/enclosure-v0.1.0)
+- [Watch the prototype demo](https://hellzgate.com/#enclosure)
+
+---
+
 <a id="c5-beta-update"></a>
 
 ## November 20, 2026 · First C5 boards and initial bench QA
