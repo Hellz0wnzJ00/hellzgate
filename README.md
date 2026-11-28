@@ -32,6 +32,16 @@ The fit-tested prototype gives the community a starting point for custom cases. 
 - [Download the enclosure files and read the print notes](https://github.com/Hellz0wnzJ00/hellzgate/releases/tag/enclosure-v0.1.0)
 - [Watch the prototype demo](https://hellzgate.com/#enclosure)
 
+### C5 prototype gallery
+
+AI-styled images of the open enclosure, the powered board, and the assembled prototype.
+
+<p align="center">
+  <a href="media/enclosure/hellzgate-c5-promo-open-case.jpg"><img src="media/enclosure/hellzgate-c5-promo-open-case.jpg" width="230" alt="Open C5 enclosure showing the PCB and OLED lid"></a>
+  <a href="media/enclosure/hellzgate-c5-promo-powered-board.jpg"><img src="media/enclosure/hellzgate-c5-promo-powered-board.jpg" width="230" alt="Powered C5 board with ten XIAO modules"></a>
+  <a href="media/enclosure/hellzgate-c5-promo-assembled.jpg"><img src="media/enclosure/hellzgate-c5-promo-assembled.jpg" width="230" alt="Assembled C5 prototype with its antennas and OLED"></a>
+</p>
+
 ### Enclosure CAD views
 
 The embedded-magnet version shown with the lid beside the base. Select a view to see it at full size.
